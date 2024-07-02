@@ -21,7 +21,7 @@ class Header extends Component {
                     
                     <div className="userOptions">
                         <div className='language'>
-                            <FontAwesomeIcon icon={faGlobe} size='lg' />
+                            <FontAwesomeIcon icon={faGlobe} size='lg' className='animatedIcon'/>
                         </div>
                     </div>
                 </div>

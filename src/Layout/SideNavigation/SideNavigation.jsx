@@ -9,12 +9,12 @@ import { faComments, faPeopleGroup, faRightToBracket, faGear } from "@fortawesom
 const SideNavTop = [
     {
         title: "Bot",
-        icon: <FontAwesomeIcon icon={faComments} size='2x'/>,
+        icon: <FontAwesomeIcon icon={faComments} size='2x' className='animatedIcon'/>,
         url: "/chat",
     },
     {
         title: "Community",
-        icon: <FontAwesomeIcon icon={faPeopleGroup} size='2x'/>,
+        icon: <FontAwesomeIcon icon={faPeopleGroup} size='2x' className='animatedIcon'/>,
         url: "/community",
     },
 ];
@@ -22,12 +22,12 @@ const SideNavTop = [
 const SideNavBottom = [
     {
         title: "Login",
-        icon: <FontAwesomeIcon icon={faRightToBracket} size='2x'/>,
+        icon: <FontAwesomeIcon icon={faRightToBracket} size='2x' className='animatedIcon'/>,
         url: "/login",
     },
     {
         title: "Settings",
-        icon: <FontAwesomeIcon icon={faGear} size='2x'/>,
+        icon: <FontAwesomeIcon icon={faGear} size='2x' className='animatedIcon'/>,
         url: "/#관리자 화면",
     },
 ];
