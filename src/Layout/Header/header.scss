@@ -1,0 +1,52 @@
+@import "../../Assets/colors.scss";
+@import "../../Assets/fonts.scss";
+@import "../../Assets/layout.scss";
+
+
+/* Header Area */
+header {
+    font-weight: 900;
+    font-size: var(--font-size-3);
+    display: flex;
+    justify-content: center;
+
+}
+
+.headerInner {
+    display:flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--padding-3) var(--container-padding);
+}
+
+.headerInner div{
+    margin: auto 0px;
+}
+.headerInner a{
+    margin: auto 0px;
+    text-decoration-line: none;
+}
+
+/* Logo Area */
+.logo {
+    display: flex;
+    color: var(--clr-highlight);
+}
+
+.logo div {
+    margin: auto 0px;
+    font-size: var(--font-size-3);
+}
+
+
+/* User Options Area */
+
+.userOptions {
+    display: flex;
+    justify-content: space-evenly;
+    color: var(--clr-dark);
+}
+
+div.language {
+    padding-right: var(--padding-3);
+}

@@ -1,0 +1,48 @@
+@import "../../Assets/colors.scss";
+@import "../../Assets/fonts.scss";
+@import "../../Assets/layout.scss";
+
+
+.sideNav {
+    font-weight: 900;
+    font-size: var(--font-size-1);
+
+    background-color: var(--clr-lightgray);
+    width: 96px;
+    position: fixed;
+    height: 100%;
+    
+}
+
+.sideNavInner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+    height: -webkit-fill-available;
+    padding: var(--padding-3) 0px;
+}
+
+
+/* Menu */
+.menu ul {
+    display: flex;
+    align-items: center;
+    gap: var(--padding-3);
+    flex-direction: column;
+    padding: 0px;
+}
+
+.menu li {
+    display: inline;
+}
+
+.menu li a {
+    color: var(--clr-dark);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-decoration-line: none;
+    gap: var(--padding-1);
+}

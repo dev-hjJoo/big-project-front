@@ -1,0 +1,17 @@
+@import "../Assets/colors.scss";
+
+* {
+    font-family: "IBM Plex Sans KR", serif;
+}
+
+main {
+    padding-left: 96px;
+}
+
+body {
+    margin: 0px;
+}
+
+.container {
+    padding: var(--padding-3) var(--container-padding);
+}
