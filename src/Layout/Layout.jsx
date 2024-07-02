@@ -7,7 +7,7 @@ import "./layout.scss";
 
 const Layout = (props: children) => {
     return (
-        <div>
+        <div className="display">
             <SideNavigation />
 
             <main>

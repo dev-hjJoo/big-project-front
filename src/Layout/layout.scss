@@ -4,8 +4,17 @@
     font-family: "IBM Plex Sans KR", serif;
 }
 
+.display {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
 main {
-    padding-left: 96px;
+    width: -webkit-fill-available;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 body {
@@ -14,4 +23,8 @@ body {
 
 .container {
     padding: var(--padding-3) var(--container-padding);
+    height: -webkit-fill-available;
+    display: flex;
+    flex-direction: column;
 }
+
