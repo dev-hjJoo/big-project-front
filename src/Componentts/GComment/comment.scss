@@ -1,0 +1,31 @@
+@import "../../Assets/colors.scss";
+@import "../../Assets/fonts.scss";
+@import "../../Assets/layout.scss";
+
+
+.comment {
+    display: flex;
+    gap: 1.2rem;
+    margin: 1.2rem;
+    padding: 0.5rem 1.2rem;
+    background-color: var(--clr-lightgray);
+    border-radius: 1.2rem;
+}
+
+.comment * {
+    margin: auto;
+}
+
+.comment textarea {
+    background-color: transparent;
+    width: -webkit-fill-available;
+    padding: var(--padding-1);
+    border-radius: var(--border-radius-2);
+    border-color: transparent;
+    max-height: 200px; // 10줄
+
+    &:focus-visible{
+        outline: 0px;
+    }
+}
+
