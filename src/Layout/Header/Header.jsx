@@ -15,7 +15,7 @@ class Header extends Component {
                     <Link to='/'>
                         <div className='logo'>
                             <FontAwesomeIcon icon={faHandshakeAngle} size='2x'/>
-                            <div>글로발 워-커</div>
+                            <div>Glawbal</div>
                         </div>
                     </Link>
                     
