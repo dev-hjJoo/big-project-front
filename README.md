@@ -4,7 +4,8 @@
 * RAG-based AI legal recommendation service for foreign workers around the world
 
 ## 1. Introduction
-<img src="public/preview-web.png" width=400/>
+<img src="public/preview-home.png" width=400/> <img src="public/preview-login.png" width=400/>
+<img src="public/preview-chat1.png" width=400/> <img src="public/preview-chat2.png" width=400/>
 
 * 이 Repository는 KT AIVLE SCHOOL 5기 AI트랙 19조의 빅프로젝트 코드 중 FE 파트의 내용을 포함하고 있습니다.
 * 본 코드는 FE 코드로, React.js 기반으로 작성되었습니다.
@@ -22,3 +23,6 @@
 ## 4. Update Note
 * 2024/07/02 (화)
     * Layout 구축 및 Header, SideNavigation 생성
+* 2024/07/03 (수)
+    * Home 화면 Layout 구축
+    * Chatbot 화면, Login 화면 UI 구현
