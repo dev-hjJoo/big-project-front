@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomePresenter from './HomePresenter';
 import LoginPresenter from '../../Pages/Login/LoginPresenter';
 import JoinPresenter from '../../Pages/Join/JoinPresenter';
-import ChatbotPresenter from '../Chatbot/ChatbotPresenter';
 import CommunityPresenter from '../Commnunity/CommunityPresenter';
+import Chatbot from '../Chatbot/ChatbotContainer';
 
 
 const HomeContainer = () => {
@@ -13,7 +13,7 @@ const HomeContainer = () => {
             <Route path='/' element={<HomePresenter />} />
             <Route path='/login' element={<LoginPresenter />} />
             <Route path='/join' element={<JoinPresenter />} />
-            <Route path='/chat' element={<ChatbotPresenter />} />
+            <Route path='/chat' element={<Chatbot/>} />
             <Route path='/community' element={<CommunityPresenter />} />
         </Routes>
     );

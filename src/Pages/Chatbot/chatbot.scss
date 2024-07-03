@@ -1,0 +1,28 @@
+@import "../../Assets/colors.scss";
+@import "../../Assets/fonts.scss";
+@import "../../Assets/layout.scss";
+
+.chatLog {
+    height: -webkit-fill-available;
+}
+
+.chatLog > div {
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.chatLog .contents {
+    width: fit-content;
+    padding: 0.5rem;
+    border-radius: 0.8rem;
+    max-width: 80%;
+}
+
+.chatLog .contents span {
+    white-space: pre-line;
+}
+
+.chatLog .BOT .contents {
+    background-color: var(--clr-light);
+}
