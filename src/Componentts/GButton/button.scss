@@ -1,0 +1,27 @@
+
+button {
+    height: 2.5rem;
+    border-style: none;
+    border-radius: var(--border-radius-1);
+    display: flex;
+    gap: var(--component-gap);
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+}
+
+button.primary {
+    background-color: var(--clr-highlight);
+    color: white;
+}
+
+button.outlinePrimary {
+    border: 1.5px solid var(--clr-highlight);
+    color: var(--clr-highlight);
+    background-color: white;
+}
+
+
+button.yellow {
+    background-color: #FBE103;
+}
