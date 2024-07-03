@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHandshakeAngle, faGlobe, faBars, faFaceLaughWink } from "@fortawesome/free-solid-svg-icons";
+import { faHandshakeAngle, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import "./header.scss";
 
 

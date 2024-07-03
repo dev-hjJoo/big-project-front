@@ -11,7 +11,7 @@
 }
 
 main {
-    width: -webkit-fill-available;
+    width: calc(100% - 96px);
     height: 100%;
     display: flex;
     flex-direction: column;
