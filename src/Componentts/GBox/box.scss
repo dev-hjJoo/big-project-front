@@ -4,11 +4,15 @@
 
 
 .box {
-    background-color: var(--clr-background);
+    
     height: -webkit-fill-available;
-    margin: 1.2rem;
+    margin: 0.5rem;
     padding: var(--card-padding);
-    border-radius: var(--card-border-radius);
+    border-radius: var(--border-radius-3);
+}
+
+.basic{
+    background-color: var(--clr-background);
 }
 
 .box.large {
@@ -16,5 +20,10 @@
 }
 
 .box.medium {
-    width: 40lvw;
+    width: 35%;
+}
+
+.box.small {
+    width: 25%;
+    padding: var(--padding-1);
 }

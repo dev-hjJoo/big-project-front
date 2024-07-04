@@ -1,25 +1,65 @@
 import React from 'react';
 import "./home.scss"
 import GBox from '../../Componentts/GBox/GBox';
+import { Divider } from '@mui/material';
 
-const HomePresenter = () => {
+const HomePresenter = ({ bow, articles }) => {
     return (
-        <>
-            <div className="layout top">
-                <GBox size='large'>
-                    여기에 내용이 들어갑니다.
-                </GBox>
+        <div className="layout">
+            {/* LEFT */}
+            <div className="left">
+                {/* L-TOP */}
+                <div className="layout top">
+                    <GBox size='large'>
+                        <div className="main">
+                            {/* <img className='fadeoutImage' src='./glawbal.png'/> */}
+                            <h1>Glawbal!</h1>
+                            세계 어디서든 법률 걱정 없이 일하세요!<br></br>
+                            외국인 근로자와 해외 근무자를 위한 맞춤 법률 정보 제공 서비스
+                        </div>
+                    </GBox>
+                </div>
+                {/* L-BOTTOM */}
+                <div className="layout bottom">
+                    <Divider />
+                    <div className="label">Recommended</div>
+                    <div className="articles">
+                        {articles.map((nav, key) => (
+                            <GBox size='small' color='transparency'>
+                                <img src={nav.imgURL}/>
+                                <div className="iHeader">
+                                    <div className="header1"> {nav.source} </div>
+                                    <div className="header2"> views: {nav.datetime} </div>
+                                </div>
+                                <div className="iBody">
+                                    <div className="iTitle">{nav.headline}</div>
+                                    <div className="iContents">{nav.summary}</div>
+                                </div>
+                            </GBox>
+                        ))}
+                    </div>
+                </div>
             </div>
-            <div className="layout bottom">
-                <GBox size='medium'>
-                    여기에 내용이 들어갑니다.
-                </GBox>
-                <GBox size='medium'>
-                    여기에 내용이 들어갑니다.
-                </GBox>
+
+            {/* RIGHT */}
+            <div className="right">
+                <div className="label">Best of the week</div>
+                <div className="bow">
+                    {bow.map((nav, key) => (
+                        <GBox size='large' className="item">
+                        <div className="iHeader">
+                            <div className="source"> {nav.type} </div>
+                            <div className="datetime"> views: {nav.views} </div>
+                        </div>
+                        <div className="iBody">
+                            <div className="iTitle">{nav.headline}</div>
+                            <div className="iContents">{nav.summary}</div>
+                        </div>
+                    </GBox>
+                    ))}
+                </div>
             </div>
-            
-        </>
+        </div>
     );
 };
 

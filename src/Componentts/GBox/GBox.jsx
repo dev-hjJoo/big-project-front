@@ -1,9 +1,9 @@
 import React from 'react';
 import "./box.scss"
 
-const GBox = ({children, size}) => {
+const GBox = ({children, size, color}) => {
     return (
-        <div className={"box "+size}>
+        <div className={"box "+size+((color==undefined) ? ' basic': '')}>
             {children}
         </div>
     );
