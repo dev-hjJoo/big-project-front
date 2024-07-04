@@ -18,41 +18,33 @@
 
 
 ## 3. Structures
-Glawber
-    ├── public
-    ├── src
-    │   ├── Assetts
-    │   │   ├── colors.scss
-    │   │   ├── fonts.scss
-    │   │   └── layout.scss
-    │   ├── Componentts
-    │   │   ├── GBox
-    │   │   ├── GButton
-    │   │   └── GComment
-    │   ├── Layout
-    │   │   ├── Header
-    │   │   ├── SideNavigation
-    │   │   ├── Layout.jsx
-    │   │   └── Layout.scss
-    │   └── Pages
-    │   │   ├── Chatbot
-    │   │   ├── Community
-    │   │   ├── Home
-    │   │   ├── Join
-    │   │   └── Login
-    │   ├── layouts
-    │   │   ├── authentication
-    │   │   ├── billing
-    │   │   ├── dashboard
-    │   │   ├── notifications
-    │   │   ├── profile
-    │   │   ├── rtl
-    │   │   └── tables
-    │   └── index.js
-    ├── .gitignore
-    ├── package.json
-    ├── package-lock.json
-    └── README.md
+Glawber <br>
+    ├── public <br>
+    ├── src <br>
+    │   ├── Assetts <br>
+    │   │   ├── colors.scss <br>
+    │   │   ├── fonts.scss <br>
+    │   │   └── layout.scss <br>
+    │   ├── Componentts <br>
+    │   │   ├── GBox <br>
+    │   │   ├── GButton <br>
+    │   │   └── GComment <br>
+    │   ├── Layout <br>
+    │   │   ├── Header <br>
+    │   │   ├── SideNavigation <br>
+    │   │   ├── Layout.jsx <br>
+    │   │   └── Layout.scss <br>
+    │   └── Pages <br>
+    │   │   ├── Chatbot <br>
+    │   │   ├── Community <br>
+    │   │   ├── Home <br>
+    │   │   ├── Join <br>
+    │   │   └── Login <br>
+    │   └── index.js <br>
+    ├── .gitignore <br>
+    ├── package.json <br>
+    ├── package-lock.json <br>
+    └── README.md <br>
 
 ## 4. Update Note
 * 2024/07/02 (화)
