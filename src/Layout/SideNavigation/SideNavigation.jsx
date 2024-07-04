@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './sideNavigation.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComments, faPeopleGroup, faRightToBracket, faGear } from "@fortawesome/free-solid-svg-icons";
+import { faComments, faPeopleGroup, faRightToBracket, faGear, faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 
 
 const SideNavTop = [
@@ -21,14 +21,19 @@ const SideNavTop = [
 
 const SideNavBottom = [
     {
-        title: "Login",
-        icon: <FontAwesomeIcon icon={faRightToBracket} size='2x' className='animatedIcon'/>,
-        url: "/login",
+        title: "FAQ",
+        icon: <FontAwesomeIcon icon={faCircleQuestion} size='2x' className='animatedIcon'/>,
+        url: "/faq",
     },
     {
         title: "Settings",
         icon: <FontAwesomeIcon icon={faGear} size='2x' className='animatedIcon'/>,
-        url: "/#관리자 화면",
+        url: "/db",
+    },
+    {
+        title: "Login",
+        icon: <FontAwesomeIcon icon={faRightToBracket} size='2x' className='animatedIcon'/>,
+        url: "/login",
     },
 ];
 

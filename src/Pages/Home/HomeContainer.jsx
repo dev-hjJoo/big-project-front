@@ -5,6 +5,8 @@ import LoginPresenter from '../../Pages/Login/LoginPresenter';
 import JoinPresenter from '../../Pages/Join/JoinPresenter';
 import CommunityPresenter from '../Commnunity/CommunityPresenter';
 import Chatbot from '../Chatbot/ChatbotContainer';
+import DBPresenter from '../Admin/DBPresenter';
+import FAQPresenter from '../FAQ/FAQPresenter';
 
 
 const HomeContainer = () => {
@@ -14,7 +16,9 @@ const HomeContainer = () => {
             <Route path='/login' element={<LoginPresenter />} />
             <Route path='/join' element={<JoinPresenter />} />
             <Route path='/chat' element={<Chatbot/>} />
+            <Route path='/faq' element={<FAQPresenter />} />
             <Route path='/community' element={<CommunityPresenter />} />
+            <Route path='/db' element={<DBPresenter />} />
         </Routes>
     );
 };
