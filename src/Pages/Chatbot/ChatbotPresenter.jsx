@@ -7,7 +7,7 @@ import { faPoo, faRobot } from '@fortawesome/free-solid-svg-icons';
 import TextareaAutosize from "react-textarea-autosize";
 
 
-const ChatbotPresenter = ({chatLog, loadContent, addContentToLocalChatLog}) => {
+const ChatbotPresenter = ({chatLog, content, loadContent, addContentToLocalChatLog}) => {
 
 
     return (
@@ -25,7 +25,7 @@ const ChatbotPresenter = ({chatLog, loadContent, addContentToLocalChatLog}) => {
                 ))}
             </div>
             <Divider/>
-            <GComment loadContent={loadContent}/> {/* 작동 안 함 */}
+            <GComment content={content} loadContent={loadContent} addContentToLocalChatLog={addContentToLocalChatLog}/>
         </>
     );
 };

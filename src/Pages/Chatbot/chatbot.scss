@@ -14,7 +14,7 @@
 
 .chatLog .contents {
     width: fit-content;
-    padding: 0.5rem;
+    padding: var(--padding-1) var(--padding-3);
     border-radius: 0.8rem;
     max-width: 80%;
 }
@@ -23,6 +23,18 @@
     white-space: pre-line;
 }
 
+
+/* BOT */
 .chatLog .BOT .contents {
+    background-color: var(--clr-lightgray);
+}
+
+/* USER */
+.chatLog .USER {
+    align-items: end;
+    text-align: end;
+}
+
+.chatLog .USER .contents {
     background-color: var(--clr-light);
 }

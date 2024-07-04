@@ -31,7 +31,10 @@ const Chatbot = () => {
 
     return (
         <>
-            <ChatbotPresenter chatLog={chatLog} loadContent={loadContent} addContentToLocalChatLog={addContentToLocalChatLog} />
+            <ChatbotPresenter chatLog={chatLog} 
+                              content={content} 
+                              loadContent={loadContent} 
+                              addContentToLocalChatLog={addContentToLocalChatLog} />
         </>
     );
 };
