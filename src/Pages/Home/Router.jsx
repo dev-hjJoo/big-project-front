@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomeContainer from './HomeContainer';
 import LoginPresenter from '../Login/LoginPresenter';
-import JoinPresenter from '../Join/JoinPresenter';
+import JoinPresenter from '../Login/JoinPresenter';
 import CommunityPresenter from '../Commnunity/CommunityPresenter';
 import Chatbot from '../Chatbot/ChatbotContainer';
 import DBPresenter from '../Admin/DBPresenter';

@@ -9,11 +9,16 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import GButton from '../../Componentts/GButton/GButton';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 
-const LoginPresenter = () => {
+const JoinPresenter = () => {
     return (
         <div className='form'>
-            <div className="title"><h1>Log in</h1></div>
+            <div className="title"><h1>Join</h1></div>
             <div className="basicLogin">
+                {/* Name */}
+                <div className="name">
+                    <div className="label">Name</div>
+                    <input type='text' placeholder=''/>
+                </div>
                 {/* ID */}
                 <div className="id">
                     <div className="label">Email</div>
@@ -24,29 +29,21 @@ const LoginPresenter = () => {
                     <div className="label">Password</div>
                     <input type='password' placeholder='At least 8 characters'/>
                 </div>
+                {/* Terms and Conditions */}
+                <div className='terms'>
+                    <input type="checkbox" />
+                    I agree with <Link to=''>terms and conditions</Link>
+                </div>
                 {/* Button */}
                 <div className="btn">
-                    <GButton color='primary'>Log In</GButton>
-                    <Link to='/join'>
-                        <GButton color='outlinePrimary'>Sign up</GButton>
-                    </Link>
+                    <GButton color='primary'>Create Account</GButton>
                 </div>
-            </div>
-            <Divider/>
-            <div className="snsLogin">
-                Or
-                <GButton> 
-                    <FontAwesomeIcon icon={faGoogle} style={{color: '#EA4435'}} />
-                    Google Login
-                </GButton>
-                <GButton color='yellow'> 
-                    <FontAwesomeIcon icon={faComment}/>
-                    Kakao Login
-                </GButton>
+                <div className="backToLogin">
+                    Already have an account? <Link to='/login'>Log in</Link>
+                </div>
             </div>
         </div>
     );
 };
 
-
-export default LoginPresenter;
+export default JoinPresenter;
