@@ -1,0 +1,240 @@
+@import "../../Assets/colors.scss";
+@import "../../Assets/fonts.scss";
+@import "../../Assets/layout.scss";
+
+.layout {
+  display: flex;
+  height: calc(100% - 38.4px);
+  box-sizing: border-box;
+  overflow: auto; // 내용이 넘칠 경우 스크롤 가능하도록 설정
+
+  .sidebar {
+    width: 20%;
+    height: 100%;
+    background-color: #f4f4f4;
+    padding: 20px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    overflow-y: auto; // 내용이 넘칠 경우 스크롤바 표시
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      padding: 10px 0;
+
+      span {
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 10px;
+
+        &.active {
+          background-color: #ddd;
+          font-weight: bold;
+        }
+
+        &:hover {
+          background-color: #eee;
+        }
+      }
+    }
+  }
+
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    padding: 20px;
+    box-sizing: border-box;
+    
+    .gbox {
+      flex: 1; // gbox가 빈 공간을 채우도록 설정
+      border: 1px solid #ddd;
+      padding: 10px;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+      background-color: white;
+      margin-bottom: 10px;
+
+      &.large {
+        flex: 1; // large 클래스가 빈 공간을 채우도록 설정
+      }
+    }
+  }
+
+  .api-section {
+    margin-top: 10px;
+
+    h2 {
+      margin-bottom: 10px;
+      font-size: 1.2em;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+    }
+
+    .api-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+
+      label.switch {
+        position: relative;
+        display: inline-block;
+        width: 34px;
+        height: 20px;
+        margin-right: 10px;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 14px;
+        width: 14px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: #2196F3;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(14px);
+      }
+
+      .api-label {
+        margin-left: auto;
+        margin-right: 10px;
+      }
+
+      select {
+        margin-left: 10px;
+        padding: 5px;
+      }
+    }
+  }
+
+  .file-section {
+    h2 {
+      margin-bottom: 10px;
+      font-size: 1.2em;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+    }
+
+    .file-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+
+      .left-actions {
+        button {
+          padding: 5px 10px;
+        }
+      }
+
+      .right-actions {
+        display: flex;
+
+        button {
+          margin-left: 10px;
+          padding: 5px 10px;
+        }
+      }
+    }
+
+    .file-list {
+      list-style: none;
+      padding: 0;
+      overflow-y: auto; 
+      max-height: 80px; 
+
+      li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        
+        span {
+          margin-left: auto;
+          color: #666;
+        }
+      }
+    }
+  }
+
+  // 가로형 반응 웹
+  @media (max-width: 1200px) {
+    .sidebar {
+      width: 200px;
+    }
+
+    .content {
+      width: calc(100% - 200px);
+    }
+  }
+
+  @media (max-width: 992px) {
+    .sidebar {
+      width: 150px;
+    }
+
+    .content {
+      width: calc(100% - 150px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+    .sidebar {
+      width: 100%;
+      height: auto;
+      min-width: 100%;
+    }
+
+    .content {
+      width: 100%;
+      flex: 1;
+    }
+  }
+
+  // 세로형 반응 웹
+  @media (max-height: 500px) {
+    flex-direction: column;
+
+    .sidebar {
+      width: 100%;
+      height: auto;
+      min-width: 100%;
+    }
+
+    .content {
+      width: 100%;
+      flex: 1;
+    }
+  }
+}
