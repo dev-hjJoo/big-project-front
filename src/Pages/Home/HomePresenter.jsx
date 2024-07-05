@@ -10,9 +10,8 @@ const HomePresenter = ({ bow, articles }) => {
             <div className="left">
                 {/* L-TOP */}
                 <div className="layout top">
-                    <GBox size='large'>
+                    <GBox size='large' bgImageSrc='./glawbal.png'>
                         <div className="main">
-                            {/* <img className='fadeoutImage' src='./glawbal.png'/> */}
                             <h1>Glawbal!</h1>
                             세계 어디서든 법률 걱정 없이 일하세요!<br></br>
                             외국인 근로자와 해외 근무자를 위한 맞춤 법률 정보 제공 서비스
@@ -29,7 +28,7 @@ const HomePresenter = ({ bow, articles }) => {
                                 <img src={nav.imgURL}/>
                                 <div className="iHeader">
                                     <div className="header1"> {nav.source} </div>
-                                    <div className="header2"> views: {nav.datetime} </div>
+                                    <div className="header2"> {nav.datetime} </div>
                                 </div>
                                 <div className="iBody">
                                     <div className="iTitle">{nav.headline}</div>
