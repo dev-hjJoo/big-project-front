@@ -55,6 +55,12 @@ Glawber
 * 2024/07/03 (수)
     * Home 화면 Layout 구축
     * Chatbot 화면, Login 화면 UI 구현
+* 2024/07/04 (목)
+    * Home 화면 UI 완성
+    * Chatbot 기능 구현 (v1)
+* 2024/07/05 (금)
+    * SideNavigation 우측 '나라 선택' 옵션 UI 수정
+    * 로그인 화면 수정, 회원가입 화면 생성
 
 
 ## Appendix
