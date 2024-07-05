@@ -20,33 +20,33 @@
 
 ## 3. Structures
 ```
-Glawber <br>
-    ├── public <br>
-    ├── src <br>
-    │   ├── Assetts <br>
-    │   │   ├── colors.scss <br>
-    │   │   ├── fonts.scss <br>
-    │   │   └── layout.scss <br>
-    │   ├── Componentts <br>
-    │   │   ├── GBox <br>
-    │   │   ├── GButton <br>
-    │   │   └── GComment <br>
-    │   ├── Layout <br>
-    │   │   ├── Header <br>
-    │   │   ├── SideNavigation <br>
-    │   │   ├── Layout.jsx <br>
-    │   │   └── Layout.scss <br>
-    │   └── Pages <br>
-    │   │   ├── Chatbot <br>
-    │   │   ├── Community <br>
-    │   │   ├── Home <br>
-    │   │   ├── Join <br>
-    │   │   └── Login <br>
-    │   └── index.js <br>
-    ├── .gitignore <br>
-    ├── package.json <br>
-    ├── package-lock.json <br>
-    └── README.md <br>
+Glawber
+    ├── public
+    ├── src
+    │   ├── Assetts
+    │   │   ├── colors.scss
+    │   │   ├── fonts.scss
+    │   │   └── layout.scss
+    │   ├── Componentts
+    │   │   ├── GBox
+    │   │   ├── GButton
+    │   │   └── GComment
+    │   ├── Layout
+    │   │   ├── Header
+    │   │   ├── SideNavigation
+    │   │   ├── Layout.jsx
+    │   │   └── Layout.scss
+    │   └── Pages
+    │   │   ├── Chatbot
+    │   │   ├── Community
+    │   │   ├── Home
+    │   │   ├── Join
+    │   │   └── Login
+    │   └── index.js
+    ├── .gitignore
+    ├── package.json
+    ├── package-lock.json
+    └── README.md
 ```
 
 ## 4. Update Note
@@ -58,28 +58,28 @@ Glawber <br>
 
 
 ## Appendix
-1. **설치한 패키지 목록** <br>
+1. **설치한 패키지 목록**
 ```
-big-project-front@0.1.0 <br>
-├── @emotion/react@11.11.4 <br>
-├── @emotion/styled@11.11.5 <br>
-├── @fortawesome/fontawesome-svg-core@6.5.2 <br>
-├── @fortawesome/free-brands-svg-icons@6.5.2 <br>
-├── @fortawesome/free-regular-svg-icons@6.5.2 <br>
-├── @fortawesome/free-solid-svg-icons@6.5.2 <br>
-├── @fortawesome/react-fontawesome@0.2.2 <br>
-├── @mui/icons-material@5.15.21 <br>
-├── @mui/material@5.15.21 <br>
-├── @testing-library/jest-dom@5.17.0 <br>
-├── @testing-library/react@13.4.0 <br>
-├── @testing-library/user-event@13.5.0 <br>
-├── material-icons@1.13.12 <br>
-├── react-dom@18.3.1 <br>
-├── react-router-dom@6.24.0 <br>
-├── react-scripts@5.0.1 <br>
-├── react-textarea-autosize@8.5.3 <br>
-├── react@18.3.1 <br>
-├── sass@1.77.6 <br>
-├── scss@0.2.4 <br>
-└── web-vitals@2.1.4 <br>
+big-project-front@0.1.0
+├── @emotion/react@11.11.4
+├── @emotion/styled@11.11.5
+├── @fortawesome/fontawesome-svg-core@6.5.2
+├── @fortawesome/free-brands-svg-icons@6.5.2
+├── @fortawesome/free-regular-svg-icons@6.5.2
+├── @fortawesome/free-solid-svg-icons@6.5.2
+├── @fortawesome/react-fontawesome@0.2.2
+├── @mui/icons-material@5.15.21
+├── @mui/material@5.15.21
+├── @testing-library/jest-dom@5.17.0
+├── @testing-library/react@13.4.0
+├── @testing-library/user-event@13.5.0
+├── material-icons@1.13.12
+├── react-dom@18.3.1
+├── react-router-dom@6.24.0
+├── react-scripts@5.0.1
+├── react-textarea-autosize@8.5.3
+├── react@18.3.1
+├── sass@1.77.6
+├── scss@0.2.4
+└── web-vitals@2.1.4
 ```
