@@ -40,7 +40,6 @@ Glawber
     │   │   ├── Chatbot
     │   │   ├── Community
     │   │   ├── Home
-    │   │   ├── Join
     │   │   └── Login
     │   └── index.js
     ├── .gitignore
