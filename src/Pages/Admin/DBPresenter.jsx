@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import './DB.scss';
+import './db.scss';
 
-const DBPresenter = () => {
-  const [selectedMenu, setSelectedMenu] = useState('db'); // 초기값을 'db'로 설정
+const DbPresenter = () => {
+  const [selectedMenu, setSelectedMenu] = useState('db');
   const [apiSettings, setApiSettings] = useState({
     law: false,
-    terminology: false
+    terminology: false,
   });
 
   const handleMenuClick = (menu) => {
@@ -15,7 +15,7 @@ const DBPresenter = () => {
   const handleToggleChange = (name) => {
     setApiSettings((prevSettings) => ({
       ...prevSettings,
-      [name]: !prevSettings[name]
+      [name]: !prevSettings[name],
     }));
   };
 
@@ -23,21 +23,16 @@ const DBPresenter = () => {
     <div className="layout">
       <div className="sidebar">
         <div className="menu">
-          <div>
-            기능관리
-          </div>
-          <span 
-            className={selectedMenu === 'db' ? 'active' : ''} 
+          <div>기능관리</div>
+          <span
+            className={selectedMenu === 'db' ? 'active' : ''}
             onClick={() => handleMenuClick('db')}
           >
             - DB관리
-          </span> 
-          {'  '}
-          <div>
-            콘텐츠 관리
-          </div>
-          <span 
-            className={selectedMenu === 'dashboard' ? 'active' : ''} 
+          </span>
+          <div>콘텐츠 관리</div>
+          <span
+            className={selectedMenu === 'dashboard' ? 'active' : ''}
             onClick={() => handleMenuClick('dashboard')}
           >
             - 고객 대시보드
@@ -131,4 +126,4 @@ const DBPresenter = () => {
   );
 };
 
-export default DBPresenter;
+export default DbPresenter;

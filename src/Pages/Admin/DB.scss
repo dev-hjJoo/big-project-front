@@ -1,12 +1,12 @@
-@import "../../Assets/colors.scss";
-@import "../../Assets/fonts.scss";
-@import "../../Assets/layout.scss";
+@import '../../assets/colors.scss';
+@import '../../assets/fonts.scss';
+@import '../../assets/layout.scss';
 
 .layout {
   display: flex;
   height: calc(100% - 38.4px);
   box-sizing: border-box;
-  overflow: auto; // 내용이 넘칠 경우 스크롤 가능하도록 설정
+  overflow: auto;
 
   .sidebar {
     width: 20%;
@@ -15,7 +15,7 @@
     padding: 20px;
     box-sizing: border-box;
     flex-shrink: 0;
-    overflow-y: auto; // 내용이 넘칠 경우 스크롤바 표시
+    overflow-y: auto;
 
     .menu {
       display: flex;
@@ -47,9 +47,9 @@
     width: 80%;
     padding: 20px;
     box-sizing: border-box;
-    
+
     .gbox {
-      flex: 1; // gbox가 빈 공간을 채우도록 설정
+      flex: 1;
       border: 1px solid #ddd;
       padding: 10px;
       box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
@@ -57,7 +57,7 @@
       margin-bottom: 10px;
 
       &.large {
-        flex: 1; // large 클래스가 빈 공간을 채우도록 설정
+        flex: 1;
       }
     }
   }
@@ -99,24 +99,24 @@
         right: 0;
         bottom: 0;
         background-color: #ccc;
-        transition: .4s;
+        transition: 0.4s;
         border-radius: 34px;
       }
 
       .slider:before {
         position: absolute;
-        content: "";
+        content: '';
         height: 14px;
         width: 14px;
         left: 3px;
         bottom: 3px;
         background-color: white;
-        transition: .4s;
+        transition: 0.4s;
         border-radius: 50%;
       }
 
       input:checked + .slider {
-        background-color: #2196F3;
+        background-color: #2196f3;
       }
 
       input:checked + .slider:before {
@@ -167,8 +167,8 @@
     .file-list {
       list-style: none;
       padding: 0;
-      overflow-y: auto; 
-      max-height: 80px; 
+      overflow-y: auto;
+      max-height: 80px;
 
       li {
         display: flex;
@@ -177,7 +177,7 @@
         padding: 5px;
         border: 1px solid #ddd;
         border-radius: 4px;
-        
+
         span {
           margin-left: auto;
           color: #666;
@@ -186,7 +186,6 @@
     }
   }
 
-  // 가로형 반응 웹
   @media (max-width: 1200px) {
     .sidebar {
       width: 200px;
@@ -222,7 +221,6 @@
     }
   }
 
-  // 세로형 반응 웹
   @media (max-height: 500px) {
     flex-direction: column;
 
