@@ -47,7 +47,7 @@ Glawber <br>
     ├── package.json <br>
     ├── package-lock.json <br>
     └── README.md <br>
-    ```
+```
 
 ## 4. Update Note
 * 2024/07/02 (화)
