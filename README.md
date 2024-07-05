@@ -19,6 +19,7 @@
 
 
 ## 3. Structures
+```
 Glawber <br>
     ├── public <br>
     ├── src <br>
@@ -46,6 +47,7 @@ Glawber <br>
     ├── package.json <br>
     ├── package-lock.json <br>
     └── README.md <br>
+    ```
 
 ## 4. Update Note
 * 2024/07/02 (화)
@@ -57,6 +59,7 @@ Glawber <br>
 
 ## Appendix
 1. **설치한 패키지 목록** <br>
+```
 big-project-front@0.1.0 <br>
 ├── @emotion/react@11.11.4 <br>
 ├── @emotion/styled@11.11.5 <br>
@@ -79,3 +82,4 @@ big-project-front@0.1.0 <br>
 ├── sass@1.77.6 <br>
 ├── scss@0.2.4 <br>
 └── web-vitals@2.1.4 <br>
+```
