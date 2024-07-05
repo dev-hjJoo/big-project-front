@@ -20,8 +20,15 @@ class Header extends Component {
                     </Link>
                     
                     <div className="userOptions">
-                        <div className='language'>
-                            <FontAwesomeIcon icon={faGlobe} size='lg' className='animatedIcon'/>
+                        <div className='nation'>
+                            <FontAwesomeIcon icon={faGlobe} size='lg'/>
+                            <div className="label">방문 국가:</div>
+                            <select>
+                                <option value="korea"> Korea </option>
+                                <option value="austrailia"> Austrailia </option>
+                                <option value="canada"> Canada </option>
+                                <option value="uk"> United Kingdom </option>
+                            </select>
                         </div>
                     </div>
                 </div>

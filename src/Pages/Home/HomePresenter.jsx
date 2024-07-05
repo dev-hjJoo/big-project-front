@@ -5,7 +5,7 @@ import { Divider } from '@mui/material';
 
 const HomePresenter = ({ bow, articles }) => {
     return (
-        <div className="layout">
+        <div className="home layout">
             {/* LEFT */}
             <div className="left">
                 {/* L-TOP */}

@@ -39,10 +39,22 @@ header {
 }
 
 
-/* User Options Area */
-
-.userOptions {
+/* Nation Area */
+.headerInner .nation {
+    background-color: var(--clr-background);
     display: flex;
-    justify-content: space-evenly;
-    color: var(--clr-dark);
+    gap: 0.3rem;
+    font-size: var(--font-size-2);
+    padding: var(--padding-1) var(--padding-3);
+    align-items: center;
+    border-radius: var(--border-radius-3);
+}
+
+.headerInner .nation select {
+    border-style: none;
+    background-color: transparent;
+
+    &:focus{
+        outline: none;
+    }
 }
