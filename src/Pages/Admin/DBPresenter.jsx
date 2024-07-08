@@ -1,24 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './db.scss';
 
-const DbPresenter = () => {
-  const [selectedMenu, setSelectedMenu] = useState('db');
-  const [apiSettings, setApiSettings] = useState({
-    law: false,
-    terminology: false,
-  });
-
-  const handleMenuClick = (menu) => {
-    setSelectedMenu(menu);
-  };
-
-  const handleToggleChange = (name) => {
-    setApiSettings((prevSettings) => ({
-      ...prevSettings,
-      [name]: !prevSettings[name],
-    }));
-  };
-
+const DBPresenter = ({
+  selectedMenu,
+  apiSettings,
+  fileList,
+  handleMenuClick,
+  handleToggleChange,
+  handleAddFile,
+  handleSelectAll,
+  handleFileCheck,
+  handleDeleteFiles,
+}) => {
   return (
     <div className="layout">
       <div className="sidebar">
@@ -86,30 +79,24 @@ const DbPresenter = () => {
               <h2>All Files</h2>
               <div className="file-actions">
                 <div className="left-actions">
-                  <button>전체 선택</button>
+                  <button onClick={handleSelectAll}>전체 선택</button>
                 </div>
                 <div className="right-actions">
-                  <button>추가</button>
-                  <button>삭제</button>
+                  <button onClick={handleAddFile}>추가</button>
+                  <button onClick={handleDeleteFiles}>삭제</button>
                 </div>
               </div>
               <ul className="file-list">
-                <li>
-                  <input type="checkbox" />
-                  파일 이름1 <span>업로드 일자</span>
-                </li>
-                <li>
-                  <input type="checkbox" />
-                  파일 이름2 <span>업로드 일자</span>
-                </li>
-                <li>
-                  <input type="checkbox" />
-                  파일 이름3 <span>업로드 일자</span>
-                </li>
-                <li>
-                  <input type="checkbox" />
-                  파일 이름4 <span>업로드 일자</span>
-                </li>
+                {fileList.map((file) => (
+                  <li key={file.id}>
+                    <input
+                      type="checkbox"
+                      checked={file.checked}
+                      onChange={() => handleFileCheck(file.id)}
+                    />
+                    {file.name} <span>{file.uploadDate}</span>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -126,4 +113,4 @@ const DbPresenter = () => {
   );
 };
 
-export default DbPresenter;
+export default DBPresenter;
