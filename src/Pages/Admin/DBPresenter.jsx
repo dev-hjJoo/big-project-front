@@ -1,5 +1,5 @@
 import { React } from 'react';
-import './db.scss';
+import './DB.scss';
 
 const DBPresenter = ({
     selectedMenu,
