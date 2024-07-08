@@ -151,6 +151,10 @@
       .left-actions {
         button {
           padding: 5px 10px;
+
+          &:hover {
+            background-color: #ccc !important;
+          }
         }
       }
 
@@ -160,6 +164,10 @@
         button {
           margin-left: 10px;
           padding: 5px 10px;
+
+          &:hover {
+            background-color: #ccc !important;
+          }
         }
       }
     }
