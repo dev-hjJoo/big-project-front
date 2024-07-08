@@ -7,6 +7,7 @@ import CommunityPresenter from '../Commnunity/CommunityPresenter';
 import Chatbot from '../Chatbot/ChatbotContainer';
 import DBPresenter from '../Admin/DBPresenter';
 import FAQPresenter from '../FAQ/FAQPresenter';
+import DBContainer from '../Admin/DBContainer';
 
 
 
@@ -21,7 +22,7 @@ const Router = () => {
             <Route path='/chat' element={<Chatbot/>} />
             <Route path='/faq' element={<FAQPresenter />} />
             <Route path='/community' element={<CommunityPresenter />} />
-            <Route path='/db' element={<DBPresenter />} />
+            <Route path='/db' element={<DBContainer />} />
         </Routes>
     );
 };
