@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DBPresenter from './DBPresenter';
 
-const DBContainer = () => {
+const AdminContainer = () => {
     // States
     const [selectedMenu, setSelectedMenu] = useState('db');
     const [apiSettings, setApiSettings] = useState(() => {
@@ -101,4 +101,4 @@ const DBContainer = () => {
     );
 };
 
-export default DBContainer;
+export default AdminContainer;
