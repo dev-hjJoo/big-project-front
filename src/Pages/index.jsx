@@ -1,6 +1,6 @@
 import React from 'react';
 import Router from './Router';
-import Layout from '../../Layout/Layout';
+import Layout from '../Layout/Layout';
 import { BrowserRouter } from 'react-router-dom';
 
 const HomePage = () => {

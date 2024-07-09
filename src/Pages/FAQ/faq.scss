@@ -1,0 +1,43 @@
+.faqContainer {
+    height: 100%;
+}
+.tabs {
+    display: flex;
+    justify-content: space-around;
+}
+
+.tabs .tab {
+    display: inline;
+    color: var(--clr-gray);
+    width: -webkit-fill-available;
+    text-align: center;
+    border-radius: var(--border-radius-1);
+
+    &:hover {
+        background-color: var(--clr-background);
+        color: var(--clr-dark);
+    }
+}
+
+.tabs .tab.selected {
+    font-weight: 700;
+    color: var(--clr-black);
+    font-style: normal;
+}
+
+// 
+.faqs{
+    height: 80%;
+    margin-bottom: 30px;
+    overflow: scroll;
+}
+
+
+// BUTTON
+.button {
+    width: 100%;
+}
+
+.button button {
+    width: 100%
+}
