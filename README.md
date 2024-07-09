@@ -49,8 +49,11 @@ Glawber
 ```
 
 ## 4. Update Note
-* 2024/07/02 (화)
-    * Layout 구축 및 Header, SideNavigation 생성
+<details><summary>* 2024/07/02 (화)<summary>
+<p>
+```Layout 구축 및 Header, SideNavigation 생성```
+</p>
+<details>
 * 2024/07/03 (수)
     * Home 화면 Layout 구축
     * Chatbot 화면, Login 화면 UI 구현
