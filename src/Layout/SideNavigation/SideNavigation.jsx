@@ -17,14 +17,15 @@ const SideNavTop = [
         icon: <FontAwesomeIcon icon={faPeopleGroup} size='2x' className='animatedIcon'/>,
         url: "/community",
     },
-];
-
-const SideNavBottom = [
     {
         title: "FAQ",
         icon: <FontAwesomeIcon icon={faCircleQuestion} size='2x' className='animatedIcon'/>,
         url: "/faq",
     },
+];
+
+const SideNavBottom = [
+    
     {
         title: "Settings",
         icon: <FontAwesomeIcon icon={faGear} size='2x' className='animatedIcon'/>,
