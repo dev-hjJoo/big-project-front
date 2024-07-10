@@ -13,12 +13,29 @@ button {
 button.primary {
     background-color: var(--clr-highlight);
     color: white;
+
+}
+
+
+button.primary.hover {
+    &:hover {
+        border: 1.5px solid var(--clr-highlight);
+        color: var(--clr-highlight);
+        background-color: white;
+    }
 }
 
 button.outlinePrimary {
     border: 1.5px solid var(--clr-highlight);
     color: var(--clr-highlight);
     background-color: white;
+}
+
+button.outlinePrimary.hover{
+    &:hover{
+        background-color: var(--clr-highlight);
+        color: white;
+    }
 }
 
 

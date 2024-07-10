@@ -30,6 +30,15 @@ body {
 }
 
 
+a{
+    text-decoration: none; 
+    cursor: pointer;
+}
+
+button{
+    cursor: pointer;
+}
+
 /* Icon animation */
 
 .animatedIcon {
@@ -44,3 +53,4 @@ body {
     50% { transform: scale(1.2); }
     100% { tansform: scale(1)}
   }
+
