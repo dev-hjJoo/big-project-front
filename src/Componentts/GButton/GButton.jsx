@@ -1,9 +1,11 @@
 import React from 'react';
 import './button.scss'
 
-const GButton = ({children, color}) => {
+const GButton = ({ children, color, onClick }) => {
     return (
-        <button className={color}> {children} </button>
+        <button className={color} onClick={onClick}>
+            {children}
+        </button>
     );
 };
 
