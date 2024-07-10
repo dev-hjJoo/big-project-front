@@ -49,42 +49,66 @@ Glawber
 ```
 
 ## 4. Update Note
-* 2024/07/02 (화)
-    * Layout 구축 및 Header, SideNavigation 생성
-* 2024/07/03 (수)
-    * Home 화면 Layout 구축
-    * Chatbot 화면, Login 화면 UI 구현
-* 2024/07/04 (목)
-    * Home 화면 UI 완성
-    * Chatbot 기능 구현 (v1)
-* 2024/07/05 (금)
-    * SideNavigation 우측 '나라 선택' 옵션 UI 수정
-    * 로그인 화면 수정, 회원가입 화면 생성
+<details><summary>2024/07/02 (화)</summary>
+
+- 리액트 서버 구현
+- Layout 구축 및 Header, SideNavigation 생성
+</details>
+
+<details><summary>2024/07/03 (수)</summary>
+
+- Home 화면 Layout 구축
+- Chatbot 화면, Login 화면 UI 구현
+</details>
+
+<details><summary>2024/07/04 (목)</summary>
+
+* Home 화면 UI 완성
+* Chatbot 기능 구현 (v1)
+</details>
+
+<details><summary>2024/07/05 (금)</summary>
+
+* SideNavigation 우측 '나라 선택' 옵션 UI 수정
+* 로그인 화면 수정, 회원가입 화면 생성
+</details>
+
+<details><summary>2024/07/08 (월)</summary>
+
+* 관리자 화면 중 DB 관리 화면 UI 완성
+</details>
+
+<details><summary>2024/07/09 (화)</summary>
+
+* FAQ 화면 UI 완성
+</details>
+
+
 
 
 ## Appendix
 1. **설치한 패키지 목록**
-```
-big-project-front@0.1.0
-├── @emotion/react@11.11.4
-├── @emotion/styled@11.11.5
-├── @fortawesome/fontawesome-svg-core@6.5.2
-├── @fortawesome/free-brands-svg-icons@6.5.2
-├── @fortawesome/free-regular-svg-icons@6.5.2
-├── @fortawesome/free-solid-svg-icons@6.5.2
-├── @fortawesome/react-fontawesome@0.2.2
-├── @mui/icons-material@5.15.21
-├── @mui/material@5.15.21
-├── @testing-library/jest-dom@5.17.0
-├── @testing-library/react@13.4.0
-├── @testing-library/user-event@13.5.0
-├── material-icons@1.13.12
-├── react-dom@18.3.1
-├── react-router-dom@6.24.0
-├── react-scripts@5.0.1
-├── react-textarea-autosize@8.5.3
-├── react@18.3.1
-├── sass@1.77.6
-├── scss@0.2.4
-└── web-vitals@2.1.4
-```
+    ```
+    big-project-front@0.1.0
+    ├── @emotion/react@11.11.4
+    ├── @emotion/styled@11.11.5
+    ├── @fortawesome/fontawesome-svg-core@6.5.2
+    ├── @fortawesome/free-brands-svg-icons@6.5.2
+    ├── @fortawesome/free-regular-svg-icons@6.5.2
+    ├── @fortawesome/free-solid-svg-icons@6.5.2
+    ├── @fortawesome/react-fontawesome@0.2.2
+    ├── @mui/icons-material@5.15.21
+    ├── @mui/material@5.15.21
+    ├── @testing-library/jest-dom@5.17.0
+    ├── @testing-library/react@13.4.0
+    ├── @testing-library/user-event@13.5.0
+    ├── material-icons@1.13.12
+    ├── react-dom@18.3.1
+    ├── react-router-dom@6.24.0
+    ├── react-scripts@5.0.1
+    ├── react-textarea-autosize@8.5.3
+    ├── react@18.3.1
+    ├── sass@1.77.6
+    ├── scss@0.2.4
+    └── web-vitals@2.1.4
+    ```

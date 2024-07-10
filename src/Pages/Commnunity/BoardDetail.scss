@@ -1,0 +1,129 @@
+.delete-button {
+    display: flex;
+    justify-content: right;
+    margin-top: 20px;
+
+    button {
+        margin: 0 5px;
+        padding: 10px 20px;
+        border: none;
+        background-color: #f0f0f0;
+        cursor: pointer;
+
+        &.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        &:hover {
+            background-color: #007bff;
+            color: white;
+        }
+    }
+}
+.comment-list {
+    display: flex;
+    justify-content: right;
+    margin-top: 20px;
+
+    button {
+        margin: 0 5px;
+        padding: 10px 20px;
+        border: none;
+        background-color: #f0f0f0;
+        cursor: pointer;
+
+        &.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        &:hover {
+            background-color: #007bff;
+            color: white;
+        }
+    }
+}
+.button2{
+    &.active {
+        background-color: #007bff;
+        color: white;
+    }
+
+    &:hover {
+        background-color: #007bff;
+        color: white;
+    }
+}
+
+.board-detail {
+    .box {
+        background-color: white;
+        padding: 10px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    p {
+        background-color: white;
+        padding: 8px;
+        margin-top: 8px;
+    }
+    h3 {
+        text-align: right;
+        font-size: 1rem;
+    }
+}
+.comment-detail {
+    h2 {
+        text-align: left;
+        font-size: 1rem;
+    }
+    .box {
+        background-color: white;
+        padding: 20px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+}
+
+.comment-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding: 8px 0;
+
+    .comment-content {
+        flex: 1;
+        margin: 0;
+        font-size: 1rem; /* Adjust font size as needed */
+    }
+
+    .comment-author {
+        font-size: 0.8em;
+        color: gray;
+        margin-left: 16px;
+    }
+
+    .button3 {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 4px 8px;
+        cursor: pointer;
+    }
+}
+.board-content{
+    background-color: #ffffff; /* 흰색 배경색 설정 */
+    border-radius: 10px; /* 사각형의 꼭짓점을 부드럽게 곡선으로 설정 */
+    padding: 20px; /* 내부 여백 설정 */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
