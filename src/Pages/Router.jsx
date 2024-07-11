@@ -6,10 +6,8 @@ import JoinPresenter from './Login/JoinPresenter';
 import Chatbot from './Chatbot/ChatbotContainer';
 import FAQContainer from './FAQ/FAQContainer';
 import DBContainer from './Admin/AdminContainer';
-import BoardDetail from './Commnunity/BoardDetail';
-import BoardList from './Commnunity/BoardList';
-import BoardWrite from './Commnunity/BoardWrite';
 import OCRContainer from './OCR/OCRContainer';
+import BoardRouter from './Commnunity/BoardRouter';
 
 
 const Router = () => {
@@ -23,9 +21,7 @@ const Router = () => {
             <Route path='/chat' element={<Chatbot/>} />
             <Route path='/faq' element={<FAQContainer />} />
             <Route path='/db' element={<DBContainer />} />
-            <Route path="/community/list" element={<BoardList />} />
-            <Route path="/community/write" element={<BoardWrite />} />
-            <Route path="/community/detail/:id" element={<BoardDetail />} />
+            <Route path="/community/*" element={<BoardRouter />} />
             <Route path="/ocr" element={<OCRContainer />} />
         </Routes>
     );
