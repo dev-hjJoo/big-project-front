@@ -60,7 +60,7 @@ const BoardDetail = () => {
             <div className="board-detail">
                 <div className="detail-header">
                     <div className="detail-title">{post.title}</div>
-                    <div className="detail-author">작성자: {post.author}</div>
+                    <div className="detail-author">{post.author}</div>
                     <div className="detail-views">👀: {post.views}</div>
                     {/* 수정사항: onClick -> 삭제하시겠습니까 Alert 떠야 함 */}
                     <div className="hiddenMenu"> <FontAwesomeIcon icon={faTrashCan} onClick={handleDelete}/> </div>
@@ -94,7 +94,7 @@ const BoardDetail = () => {
             <div className='comment-list'>   
                 <input
                     type="text"
-                    placeholder="댓글"
+                    placeholder="Enter your comments"
                     value={commentContent}
                     onChange={(e) => setCommentContent(e.target.value)}
                 />
