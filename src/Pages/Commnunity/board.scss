@@ -83,6 +83,7 @@
                 text-decoration: none; /* 밑줄 제거 */
                 cursor: pointer;
                 display: inline-block; /* 인라인 블록 요소로 설정 */
+                font-size: var(--font-size-3);
 
                 &:hover {
                     text-decoration: underline; /* 호버 시 밑줄 추가 */
@@ -113,7 +114,7 @@
     input[type="text"], textarea {
         width: -webkit-fill-available;
         padding: var(--padding-3);
-        font-size: var(--font-size-3);
+        font-size: var(--font-size-4);
         border-style: none;
 
         &:focus{
@@ -125,6 +126,9 @@
         resize: vertical;
         height: 23rem;
         margin: 1.2rem 0rem;
+        background-color: var(--clr-background);
+        border-radius: var(--border-radius-1);
+        resize: none;
     }
 
     .button-container {
@@ -140,6 +144,36 @@
 
 
 // MARK: Detail
+.detail-header{
+    display: flex;
+    justify-content: space-between;
+    gap: var(--component-gap);
+    align-items: center;
+
+    padding: var(--padding-3);
+    font-size: var(--font-size-1);
+    color: var(--clr-gray);
+    text-align: center;
+
+    .detail-title {
+        flex: 20;
+        font-size: var(--font-size-3);
+        font-weight: 700;
+        color: var(--clr-dark);
+        text-align: left;
+    }
+    .detail-author {
+        flex: 5;
+    }
+    .detail-views {
+        flex: 2;
+    }
+    .hiddenMenu {
+        flex: 1;
+        font-size: var(--font-size-3);
+        cursor: pointer;
+    }
+}
 .delete-button {
     display: flex;
     justify-content: right;
@@ -163,41 +197,63 @@
         }
     }
 }
+.comment-detail {
+    height: 8rem;
+    overflow: scroll;
+
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    .comment-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 0.5px dashed var(--clr-gray);
+        padding: var(--padding-1);
+        gap: var(--section-gap);
+
+        .comment-content {
+            flex: 1;
+            margin: 0;
+            font-size: var(--font-size-2);
+            color: var(--clr-dark);
+        }
+    
+        .comment-author {
+            font-size: var(--font-size-1);
+            color: var(--clr-gray);
+            margin-left: 16px;
+        }
+    }
+}
 .comment-list {
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
+    gap: var(--component-gap);
     margin-top: 20px;
+    align-items: right;
 
     button {
         margin: 0 5px;
         padding: 10px 20px;
+        flex: 1;
+    }
+
+    input {
         border: none;
-        background-color: #f0f0f0;
-        cursor: pointer;
+        background-color: var(--clr-background);
+        border-radius: var(--border-radius-1);
+        padding: var(--padding-2);
+        flex: 9;
 
-        &.active {
-            background-color: #007bff;
-            color: white;
-        }
-
-        &:hover {
-            background-color: #007bff;
-            color: white;
+        &:focus {
+            outline: none;
         }
     }
+    
 }
-.button2{
-    &.active {
-        background-color: #007bff;
-        color: white;
-    }
-
-    &:hover {
-        background-color: #007bff;
-        color: white;
-    }
-}
-
 .board-detail {
     .box {
         background-color: white;
@@ -212,9 +268,9 @@
     }
 
     p {
-        background-color: white;
-        padding: 8px;
-        margin-top: 8px;
+        height: 20rem;
+        overflow: scroll;
+        padding: var(--padding-1) var(--padding-3);
     }
     h3 {
         text-align: right;
@@ -234,38 +290,3 @@
     }
 }
 
-.comment-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #ccc;
-    padding: 8px 0;
-
-    .comment-content {
-        flex: 1;
-        margin: 0;
-        font-size: 1rem; /* Adjust font size as needed */
-    }
-
-    .comment-author {
-        font-size: 0.8em;
-        color: gray;
-        margin-left: 16px;
-    }
-
-    .button3 {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        padding: 4px 8px;
-        cursor: pointer;
-    }
-}
-.board-content{
-    background-color: #ffffff; /* 흰색 배경색 설정 */
-    border-radius: 10px; /* 사각형의 꼭짓점을 부드럽게 곡선으로 설정 */
-    padding: 20px; /* 내부 여백 설정 */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
-    margin-bottom: 30px;
-    margin-top: 10px;
-}

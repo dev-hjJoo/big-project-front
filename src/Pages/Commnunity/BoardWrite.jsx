@@ -37,7 +37,6 @@ const BoardWrite = () => {
             <div className="form-container">
                 <form onSubmit={handleSubmit}>
                     <div className="title">
-                        <div className="highlight"></div>
                         <input 
                             type="text" 
                             value={title} 
