@@ -8,6 +8,7 @@ import GButton from '../../Componentts/GButton/GButton';
 const FAQPresenter = ({tab, tabList, changeTab, bow, selectedCol, showDetail}) => {
     return (
         <div className='faqContainer'>
+            <h1>FAQ</h1>
             {/* TAB */}
             <div className="category">
                 <ul className='tabs'>

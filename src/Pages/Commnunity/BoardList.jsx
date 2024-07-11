@@ -7,7 +7,7 @@ import './BoardList.scss';
 const BoardList = () => {
     const [posts, setPosts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const postsPerPage = 4;
+    const postsPerPage = 8;
 
     const loadPosts = () => {
         const savedPosts = JSON.parse(localStorage.getItem('posts')) || [];
@@ -32,20 +32,22 @@ const BoardList = () => {
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
-        <GBox size="large">
+        <>
             <div className='Board-Head'>
-                <h1>커뮤니티 게시판</h1>
+                <h1>Community</h1>
             </div>
             <div className='Board-body'>
                 <ul>
                     <li className='list-header'>
+                        <div className="header-item"></div>
                         <div className='header-item'>글 제목</div>
                         <div className='header-item'>작성자</div>
                         <div className='header-item'>작성일</div>
                         <div className='header-item'>조회수</div>
                     </li>
-                    {currentPosts.map(post => (
-                        <li key={post.id}>
+                    {currentPosts.map((post, index) => (
+                        <li key={post.id} className='list-contents'>
+                            <div className="no">{index+1}</div>
                             <Link to={`/community/detail/${post.id}`}>
                                 <div className='title'>{post.title}</div>
                             </Link>
@@ -57,7 +59,7 @@ const BoardList = () => {
                 </ul>
             </div>
             <Link to="/community/write" className="button-link">
-                <GButton color="primary">글 작성</GButton>
+                <GButton color="outlinePrimary" hover='hover'>글 작성</GButton>
             </Link>
             <div className="pagination">
                 {Array.from({ length: Math.ceil(posts.length / postsPerPage) }, (_, i) => (
@@ -66,7 +68,7 @@ const BoardList = () => {
                     </GButton>
                 ))}
             </div>
-        </GBox>
+        </>
     );
 };
 

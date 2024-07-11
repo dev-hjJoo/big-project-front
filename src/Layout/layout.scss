@@ -29,7 +29,6 @@ body {
     overflow: hidden;
 }
 
-
 a{
     text-decoration: none; 
     cursor: pointer;
@@ -37,6 +36,12 @@ a{
 
 button{
     cursor: pointer;
+}
+
+h1 { 
+    text-align: center; /* 가운데 정렬 */
+    margin-top: 0rem;
+    margin-bottom: 0.5rem;
 }
 
 /* Icon animation */
