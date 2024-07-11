@@ -44,3 +44,7 @@
     text-decoration-line: none;
     gap: var(--padding-1);
 }
+
+.menu li a span {
+    white-space: break-spaces;
+}

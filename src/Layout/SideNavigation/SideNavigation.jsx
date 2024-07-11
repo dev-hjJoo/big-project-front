@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './sideNavigation.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComments, faPeopleGroup, faRightToBracket, faGear, faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
+import { faComments, faPeopleGroup, faRightToBracket, faGear, faCircleQuestion, faClipboardQuestion, faFileSignature } from "@fortawesome/free-solid-svg-icons";
 
 
 const SideNavTop = [
@@ -13,14 +13,19 @@ const SideNavTop = [
         url: "/chat",
     },
     {
+        title: "FAQ",
+        icon: <FontAwesomeIcon icon={faClipboardQuestion} size='2x' className='animatedIcon'/>,
+        url: "/faq",
+    },
+    {
         title: "Community",
         icon: <FontAwesomeIcon icon={faPeopleGroup} size='2x' className='animatedIcon'/>,
         url: "/community/list",
     },
     {
-        title: "FAQ",
-        icon: <FontAwesomeIcon icon={faCircleQuestion} size='2x' className='animatedIcon'/>,
-        url: "/faq",
+        title: "Contract\nAI-Check",
+        icon: <FontAwesomeIcon icon={faFileSignature} size='2x' className='animatedIcon'/>,
+        url: "/ocr",
     },
 ];
 
