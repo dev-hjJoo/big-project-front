@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import GBox from '../../Componentts/GBox/GBox';
 import GButton from '../../Componentts/GButton/GButton';
-import './BoardList.scss';
+import './board.scss'
 
 const BoardList = () => {
     const [posts, setPosts] = useState([]);
@@ -33,9 +32,6 @@ const BoardList = () => {
 
     return (
         <>
-            <div className='Board-Head'>
-                <h1>Community</h1>
-            </div>
             <div className='Board-body'>
                 <ul>
                     <li className='list-header'>

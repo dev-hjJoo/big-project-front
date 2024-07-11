@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import GBox from '../../Componentts/GBox/GBox';
 import GButton from '../../Componentts/GButton/GButton';
-import './BoardDetail.scss';
+import './board.scss'
 
 const BoardDetail = () => {
     const { id } = useParams();

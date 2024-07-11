@@ -20,7 +20,7 @@ const SideNavTop = [
     {
         title: "Community",
         icon: <FontAwesomeIcon icon={faPeopleGroup} size='2x' className='animatedIcon'/>,
-        url: "/community/list",
+        url: "/community",
     },
     {
         title: "Contract\nAI-Check",
