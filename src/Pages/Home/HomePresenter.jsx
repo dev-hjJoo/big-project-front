@@ -2,7 +2,7 @@ import React from 'react';
 import "./home.scss"
 import GBox from '../../Componentts/GBox/GBox';
 import { Divider } from '@mui/material';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const HomePresenter = ({ bow, articles }) => {
     return (
@@ -26,12 +26,12 @@ const HomePresenter = ({ bow, articles }) => {
                     <div className="articles">
                         {articles.map((nav, key) => {
                             // URL에서 마지막 부분을 추출하여 ID로 사용
-                            // const urlParts = nav.url.split('/');
-                            // const id = urlParts[urlParts.length - 1];
+                            const urlParts = nav.url.split('/');
+                            const id = urlParts[urlParts.length - 1];
 
                             return (
                                 <GBox size='small' color='transparency' key={key}>
-                                    <a href={nav.url} target='_blank'>
+                                    <Link to={`/news/${id}`}>
                                         <img
                                             src={nav.imgURL}
                                             alt={nav.headline}
@@ -51,7 +51,7 @@ const HomePresenter = ({ bow, articles }) => {
                                             <div className="iTitle">{nav.headline}</div>
                                             {/* <div className="iContents">{nav.summary}</div> */}
                                         </div>
-                                    </a>
+                                    </Link>
                                 </GBox>
                             );
                         })}

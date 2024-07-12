@@ -11,12 +11,12 @@ import BoardRouter from './Commnunity/BoardRouter';
 import NewsDetail from './Home/NewsDetail';
 
 
-const Router = () => {
+const Router = ({articles}) => {
 
 
     return (        
         <Routes>
-            <Route path='/' element={<HomeContainer />} />
+            <Route path='/' element={<HomeContainer articles={articles} />}/>
             <Route path='/login' element={<LoginPresenter />} />
             <Route path='/join' element={<JoinPresenter />} />
             <Route path='/chat' element={<Chatbot/>} />
@@ -24,7 +24,7 @@ const Router = () => {
             <Route path='/db' element={<DBContainer />} />
             <Route path="/community/*" element={<BoardRouter />} />
             <Route path="/ocr" element={<OCRContainer />} />
-            <Route path="/news/:id" element={<NewsDetail />} />
+            <Route path="/news/:id" element={<NewsDetail articles={articles} />}/>
         </Routes>
     );
 };
