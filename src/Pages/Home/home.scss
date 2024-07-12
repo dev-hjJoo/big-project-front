@@ -1,6 +1,3 @@
-@import "../../Assets/colors.scss";
-@import "../../Assets/fonts.scss";
-@import "../../Assets/layout.scss";
 
 .home.layout {
     display: flex;
@@ -12,6 +9,10 @@
     display: flex;
     flex-direction: column;
     justify-content: end;
+
+    h1{
+        text-align: left;
+    }
 }
 
 .home .label {

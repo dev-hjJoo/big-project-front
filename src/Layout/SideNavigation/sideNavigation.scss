@@ -1,10 +1,5 @@
-@import "../../Assets/colors.scss";
-@import "../../Assets/fonts.scss";
-@import "../../Assets/layout.scss";
-
 
 .sideNav {
-    font-weight: 900;
     font-size: var(--font-size-1);
 
     background-color: var(--clr-lightgray);
@@ -44,4 +39,8 @@
     flex-direction: column;
     text-decoration-line: none;
     gap: var(--padding-1);
+}
+
+.menu li a span {
+    white-space: break-spaces;
 }

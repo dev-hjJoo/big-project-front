@@ -1,4 +1,6 @@
 @import "../Assets/colors.scss";
+@import "../Assets/fonts.scss";
+@import "../Assets/layout.scss";
 
 * {
     font-family: "IBM Plex Sans KR", serif;
@@ -29,6 +31,25 @@ body {
     overflow: hidden;
 }
 
+a{
+    text-decoration: none; 
+    cursor: pointer;
+}
+
+button{
+    cursor: pointer;
+}
+
+h1 { 
+    text-align: center; /* 가운데 정렬 */
+    margin-top: 0rem;
+    margin-bottom: 0.5rem;
+    color: var(--clr-black);
+
+    &:hover {
+        color: var(--clr-black);
+    }
+}
 
 /* Icon animation */
 
@@ -44,3 +65,4 @@ body {
     50% { transform: scale(1.2); }
     100% { tansform: scale(1)}
   }
+

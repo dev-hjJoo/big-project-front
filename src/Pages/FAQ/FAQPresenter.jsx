@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './faq.scss'
 import { Divider } from '@mui/material';
 import GTableColumn from './GTableColumn';
@@ -7,6 +8,7 @@ import GButton from '../../Componentts/GButton/GButton';
 const FAQPresenter = ({tab, tabList, changeTab, bow, selectedCol, showDetail}) => {
     return (
         <div className='faqContainer'>
+            <h1>FAQ</h1>
             {/* TAB */}
             <div className="category">
                 <ul className='tabs'>
@@ -42,7 +44,9 @@ const FAQPresenter = ({tab, tabList, changeTab, bow, selectedCol, showDetail}) =
 
             {/* button */}
             <div className="button">
-                <GButton color='outlinePrimary'>찾으시는 내용이 없나요? 챗봇에게 물어보세요!</GButton>
+                <Link to='/chat'>
+                    <GButton color='outlinePrimary' hover='hover'>찾으시는 내용이 없나요? 챗봇에게 물어보세요!</GButton>
+                </Link>
             </div>
         </div>
     );

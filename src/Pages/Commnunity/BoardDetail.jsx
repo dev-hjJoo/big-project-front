@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import GBox from '../../Componentts/GBox/GBox';
 import GButton from '../../Componentts/GButton/GButton';
-import './BoardDetail.scss';
+import './board.scss'
+import { Divider } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const BoardDetail = () => {
     const { id } = useParams();
@@ -11,9 +15,7 @@ const BoardDetail = () => {
     const [post, setPost] = useState(
         savedPosts.find(post => post.id === parseInt(id)) || { comments: [] }
     );
-
     const [commentContent, setCommentContent] = useState('');
-    const [commentAuthor, setCommentAuthor] = useState('');
 
     useEffect(() => {
         // 조회수 증가
@@ -32,13 +34,12 @@ const BoardDetail = () => {
     };
 
     const addComment = () => {
-        const newComment = { author: commentAuthor, content: commentContent };
+        const newComment = { author: '사용자 닉네임', content: commentContent };
         const updatedPost = { ...post, comments: [...(post.comments || []), newComment] };
         const updatedPosts = savedPosts.map(p => (p.id === updatedPost.id ? updatedPost : p));
         localStorage.setItem('posts', JSON.stringify(updatedPosts));
         setPost(updatedPost); // 상태 업데이트
         setCommentContent(''); // 댓글 입력 필드 초기화
-        setCommentAuthor(''); // 작성자 입력 필드 초기화
     };
 
     const deleteComment = (index) => {
@@ -54,56 +55,54 @@ const BoardDetail = () => {
     }
 
     return (
-        <GBox size="large">
+        <>
+            {/* POST */}
             <div className="board-detail">
-                <h1>{post.title}</h1>
-                <h3 style={{ textAlign: 'right' }}>글 작성자: {post.author} &nbsp;&nbsp;&nbsp;&nbsp;👀: {post.views}</h3>
+                <div className="detail-header">
+                    <div className="detail-title">{post.title}</div>
+                    <div className="detail-author">{post.author}</div>
+                    <div className="detail-views">👀: {post.views}</div>
+                    {/* 수정사항: onClick -> 삭제하시겠습니까 Alert 떠야 함 */}
+                    <div className="hiddenMenu"> <FontAwesomeIcon icon={faTrashCan} onClick={handleDelete}/> </div>
+                </div>
+                <Divider />
                 <div className='board-content'>
                     <p>{post.content}</p>
                 </div>
             </div>
+            <Divider>Comment</Divider>
+
+            {/* Comment */}
             <div className='comment-detail'>
-                <h2>댓글</h2>
-                <GBox size="small">
-                    {post.comments && post.comments.length > 0 ? (
+                {post.comments && post.comments.length > 0 ? (
                         <ul>
                             {post.comments.map((comment, index) => (
                                 <li key={index} className="comment-item">
-                                    <p className="comment-content">{comment.content} <span className="comment-author">작성자: {comment.author}</span></p>
-                                    <button className="button3" onClick={() => deleteComment(index)}>댓글 삭제</button>
+                                    <span className="comment-author">{comment.author}</span>
+                                    {/* 수정사항: 댓글 개수가 게시물 뒤에 [1] 이런 식으로 들어가면 좋을 것 같아요! */}
+                                    <p className="comment-content">{comment.content}</p>
+                                    <FontAwesomeIcon icon={faXmark} onClick={() => deleteComment(index)} />
                                 </li>
                             ))}
                         </ul>
                     ) : (
                         <p>댓글이 없습니다.</p>
-                    )}
-                </GBox>
+                    )
+                }
             </div>
 
             <div className='comment-list'>   
                 <input
                     type="text"
-                    placeholder="작성자"
-                    value={commentAuthor}
-                    onChange={(e) => setCommentAuthor(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="댓글"
+                    placeholder="Enter your comments"
                     value={commentContent}
                     onChange={(e) => setCommentContent(e.target.value)}
                 />
-                <GButton color="danger" onClick={addComment}>
-                    댓글 추가
+                <GButton color="outlinePrimary" hover='hover' onClick={addComment}>
+                    Send
                 </GButton>
             </div>
-
-            <div className='delete-button'>
-                <GButton color="danger" onClick={handleDelete}>
-                    글 삭제
-                </GButton>
-            </div>
-        </GBox>
+        </>
     );
 };
 

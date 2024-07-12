@@ -12,7 +12,7 @@ import { faComment } from '@fortawesome/free-solid-svg-icons';
 const LoginPresenter = () => {
     return (
         <div className='form'>
-            <div className="title"><h1>Log in</h1></div>
+            <h1>Log in</h1>
             <div className="basicLogin">
                 {/* ID */}
                 <div className="id">
