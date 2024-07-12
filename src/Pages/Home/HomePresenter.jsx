@@ -2,6 +2,7 @@ import React from 'react';
 import "./home.scss"
 import GBox from '../../Componentts/GBox/GBox';
 import { Divider } from '@mui/material';
+// import { Link } from 'react-router-dom';
 
 const HomePresenter = ({ bow, articles }) => {
     return (
@@ -23,19 +24,37 @@ const HomePresenter = ({ bow, articles }) => {
                     <Divider />
                     <div className="label">Recommended</div>
                     <div className="articles">
-                        {articles.map((nav, key) => (
-                            <GBox size='small' color='transparency'>
-                                <img src={nav.imgURL}/>
-                                <div className="iHeader">
-                                    <div className="header1"> {nav.source} </div>
-                                    <div className="header2"> {nav.datetime} </div>
-                                </div>
-                                <div className="iBody">
-                                    <div className="iTitle">{nav.headline}</div>
-                                    <div className="iContents">{nav.summary}</div>
-                                </div>
-                            </GBox>
-                        ))}
+                        {articles.map((nav, key) => {
+                            // URL에서 마지막 부분을 추출하여 ID로 사용
+                            // const urlParts = nav.url.split('/');
+                            // const id = urlParts[urlParts.length - 1];
+
+                            return (
+                                <GBox size='small' color='transparency' key={key}>
+                                    <a href={nav.url} target='_blank'>
+                                        <img
+                                            src={nav.imgURL}
+                                            alt={nav.headline}
+                                            style={{
+                                                maxWidth: '100%',
+                                                height: 'auto',
+                                                width: '100%',
+                                                maxHeight: '90px',
+                                                objectFit: 'contain',
+                                            }}
+                                        />
+                                        <div className="iHeader">
+                                            <div className="header1"> {nav.source} </div>
+                                            <div className="header2"> {nav.datetime} </div>
+                                        </div>
+                                        <div className="iBody">
+                                            <div className="iTitle">{nav.headline}</div>
+                                            {/* <div className="iContents">{nav.summary}</div> */}
+                                        </div>
+                                    </a>
+                                </GBox>
+                            );
+                        })}
                     </div>
                 </div>
             </div>
@@ -45,16 +64,16 @@ const HomePresenter = ({ bow, articles }) => {
                 <div className="label">Best of the week</div>
                 <div className="bow">
                     {bow.map((nav, key) => (
-                        <GBox size='large' className="item">
-                        <div className="iHeader">
-                            <div className="source"> {nav.type} </div>
-                            <div className="datetime"> views: {nav.views} </div>
-                        </div>
-                        <div className="iBody">
-                            <div className="iTitle">{nav.headline}</div>
-                            <div className="iContents">{nav.summary}</div>
-                        </div>
-                    </GBox>
+                        <GBox size='large' className="item" key={key}>
+                            <div className="iHeader">
+                                <div className="source"> {nav.type} </div>
+                                <div className="datetime"> views: {nav.views} </div>
+                            </div>
+                            <div className="iBody">
+                                <div className="iTitle">{nav.headline}</div>
+                                <div className="iContents">{nav.summary}</div>
+                            </div>
+                        </GBox>
                     ))}
                 </div>
             </div>
