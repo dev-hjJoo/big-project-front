@@ -13,7 +13,7 @@ const DBPresenter = ({
     handleDeleteFiles,
 }) => {
     return (
-        <div className="layout">
+        <div className="admin-db layout">
             <div className="sidebar">
                 <div className="menu">
                     <div>기능관리</div>
