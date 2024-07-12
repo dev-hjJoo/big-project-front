@@ -88,14 +88,3 @@
         font-size: 12px; /* 글씨 크기 조정 */
     }
 }
-
-@media (max-width: 600px) {
-    .ocr-container {
-      flex-direction: column;
-    }
-  
-    .box {
-      width: 90%;
-      margin-bottom: 10px;
-    }
-  }
