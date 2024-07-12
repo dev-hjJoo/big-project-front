@@ -84,6 +84,7 @@
                 cursor: pointer;
                 display: inline-block; /* 인라인 블록 요소로 설정 */
                 font-size: var(--font-size-3);
+                color: black;
 
                 &:hover {
                     text-decoration: underline; /* 호버 시 밑줄 추가 */

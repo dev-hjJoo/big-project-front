@@ -35,6 +35,9 @@
     width: 100%;
     justify-content: space-evenly;
     gap: 10px;
+
+    max-height: 14rem;
+    overflow-y: hidden;
 }
 
 .bow {
@@ -74,16 +77,17 @@
 
 .iTitle {
     font-size: var(--font-size-2);
+    color: black;
 }
 
-// .iContents {
-//     color: var(--clr-dark);
-//     font-size: var(--font-size-2);
+.iContents {
+    color: var(--clr-dark);
+    font-size: var(--font-size-2);
 
-//     overflow: hidden;
-//     text-overflow: ellipsis;
-//     white-space: nowrap;
-// }
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
 
 /* LEFT */
@@ -96,12 +100,12 @@
 
 .left .top {
     display: flex;
-    height: 50%;
+    height: 60%;
 }
 .left .bottom {
     display: flex;
     flex-direction: column;
-    height: 50%;
+    // height: 50%;
 }
 
 /* L-BOTTOM */

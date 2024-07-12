@@ -20,8 +20,8 @@ const HomePresenter = ({ bow, articles }) => {
                     </GBox>
                 </div>
                 {/* L-BOTTOM */}
+                <Divider />
                 <div className="layout bottom">
-                    <Divider />
                     <div className="label">Recommended</div>
                     <div className="articles">
                         {articles.map((nav, key) => {
