@@ -1,0 +1,74 @@
+.ocr-content {
+    display: flex;
+    flex-direction: column; /* 세로 방향으로 정렬 */
+    align-items: center; /* 가로 방향 중앙 정렬 */
+    padding: 10px; /* 내부 여백 */
+    height: 90vh; /* 화면 전체 높이 설정 */
+    overflow-y: auto; /* 세로 스크롤 가능하도록 설정 */
+    //text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.ocr-container {
+    display: flex;
+    justify-content: space-between; /* 공간을 균등하게 분배 */
+    align-items: flex-start; /* 상단에 정렬 */
+    width: 100%; /* 전체 너비 사용 */
+    max-width: 1300px; /* 최대 너비 설정 */
+    flex-wrap: wrap; /* 화면 크기에 맞게 감싸도록 설정 */
+    margin: 0 auto; /* 중앙 정렬 */
+    overflow-x: hidden; /* 가로 스크롤 제거 */
+    flex-direction: row; /* 가로 방향으로 정렬 */
+    box-sizing: border-box;
+}
+
+.left-section,
+.right-section {
+    flex: 1 1 0; /* 같은 비율로 너비를 가지도록 설정 */
+    margin: 5px; /* 외부 여백 */
+    box-sizing: border-box; /* 박스 크기 계산을 보더와 패딩을 포함하도록 설정 */
+    min-width: 0; /* 오버플로우 방지 */
+    overflow: hidden; /* 오버플로우 방지 */
+}
+
+
+.ocr-uploader {
+    display: flex;
+    justify-content: center; /* 가로 방향 중앙 정렬 */
+    align-items: center; /* 세로 방향 중앙 정렬 */
+    border: 2px dashed #ccc; /* 회색 점선 테두리 */
+    width: 100%; /* 전체 너비 사용 */
+    height: auto;
+    padding: 20px; /* 내부 여백 */
+}
+
+.ocr-result {
+    display: flex;
+    flex-direction: column; /* 세로 방향 정렬 */
+    justify-content: center; /* 가로 방향 중앙 정렬 */
+    align-items: center; /* 세로 방향 중앙 정렬 */
+    border: 2px dashed; /* 점선 테두리 */
+    width: 100%; /* 전체 너비 사용 */
+    padding: 20px; /* 내부 여백 */
+    font-size: 14px; /* 글씨 크기 조정 */
+    overflow-y: auto; /* 세로 스크롤 가능하도록 설정 */
+    text-align: left; /* 텍스트 왼쪽 정렬 */
+}
+
+/* 반응형 디자인을 위한 미디어 쿼리 */
+@media (max-width: 768px) {
+    .ocr-container {
+        flex-direction: column; /* 화면 크기가 768px 이하일 때 세로 방향으로 정렬 */
+    }
+
+    .left-section,
+    .right-section {
+        flex: 1 0 100%; /* 같은 비율로 너비를 가지도록 설정 */
+        margin: 10px 0; /* 상하단 여백 조정 */
+        min-width: 100%; /* 오버플로우 방지 */
+        overflow: visible; /* 오버플로우 방지 */
+    }
+
+    .ocr-result {
+        font-size: 12px; /* 글씨 크기 조정 */
+    }
+}
