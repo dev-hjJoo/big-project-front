@@ -8,6 +8,7 @@ import FAQContainer from './FAQ/FAQContainer';
 import DBContainer from './Admin/AdminContainer';
 import OCRContainer from './OCR/OCRContainer';
 import BoardRouter from './Commnunity/BoardRouter';
+import NewsDetail from './Home/NewsDetail';
 
 
 const Router = () => {
@@ -23,6 +24,7 @@ const Router = () => {
             <Route path='/db' element={<DBContainer />} />
             <Route path="/community/*" element={<BoardRouter />} />
             <Route path="/ocr" element={<OCRContainer />} />
+            <Route path="/news/:id" element={<NewsDetail />} />
         </Routes>
     );
 };
