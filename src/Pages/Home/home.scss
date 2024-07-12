@@ -9,6 +9,10 @@
     display: flex;
     flex-direction: column;
     justify-content: end;
+
+    h1{
+        text-align: left;
+    }
 }
 
 .home .label {
