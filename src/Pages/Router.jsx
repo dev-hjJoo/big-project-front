@@ -9,7 +9,7 @@ import DBContainer from './Admin/AdminContainer';
 import BoardDetail from './Commnunity/BoardDetail';
 import BoardList from './Commnunity/BoardList';
 import BoardWrite from './Commnunity/BoardWrite';
-
+import NewsDetail from './Home/NewsDetail';
 
 const Router = () => {
 
@@ -25,6 +25,7 @@ const Router = () => {
             <Route path="/community/list" element={<BoardList />} />
             <Route path="/community/write" element={<BoardWrite />} />
             <Route path="/community/detail/:id" element={<BoardDetail />} />
+            <Route path="/news/:id" element={<NewsDetail />} />
         </Routes>
     );
 };
