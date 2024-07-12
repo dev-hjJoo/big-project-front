@@ -1,5 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { Divider } from '@mui/material';
+import './news.scss'
 
 const NewsDetail = ({ articles }) => {
   const { id } = useParams(); // URL 파라미터에서 id 추출
@@ -21,9 +23,18 @@ const NewsDetail = ({ articles }) => {
 
   return (
     <div className="news-detail">
-      <h2>{article.headline}</h2>
+      {/* <h2>{article.headline}</h2>
       <p>{article.content}</p>
-      <a href={article.url} target="_blank" rel="noopener noreferrer">원문 보기</a>
+      <a href={article.url} target="_blank" rel="noopener noreferrer">원문 보기</a> */}
+      <div className='news-head'>
+        <div className="detail-title">{article.headline}</div>
+        <div className='detail-agency'>{article.source}</div>
+        <div className='detail-time'>{article.datetime}</div>
+      </div>
+      <Divider />
+      <div className='news-content'>
+        <p>{article.content}</p>
+      </div>
     </div>
   );
 };
