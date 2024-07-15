@@ -14,6 +14,7 @@ const DBPresenter = ({
 }) => {
     return (
         <div className="admin-db layout">
+            {/* SideBar */}
             <div className="sidebar">
                 <div className="menu">
                     <div>기능관리</div>
@@ -32,10 +33,11 @@ const DBPresenter = ({
                     </span>
                 </div>
             </div>
+            {/* Main */}
             {selectedMenu === 'db' ? (
                 <div className="content">
+                    <h1>DB Management</h1>
                     <div className="gbox large">
-                        <h1>DB 관리</h1>
                         <div className="api-section">
                             <h2>API</h2>
                             <div className="api-item">
