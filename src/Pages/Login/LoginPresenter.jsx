@@ -9,29 +9,40 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import GButton from '../../Componentts/GButton/GButton';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 
-const LoginPresenter = () => {
+const LoginPresenter = ({register, handleSubmit, onValid, loginFailure}) => {
     return (
         <div className='form'>
             <h1>Log in</h1>
-            <div className="basicLogin">
+            <form className="basicLogin" onSubmit={handleSubmit(onValid)}>
                 {/* ID */}
                 <div className="id">
                     <div className="label">Email</div>
-                    <input type='email' placeholder='you@example.com'/>
+                    <input type='email'
+                           {...register('email', {
+                            required: true,
+                            pattern: {
+                                        value: /\S+@\S+\.\S+/,
+                                        message: "이메일 형식에 맞지 않습니다."
+                                     }
+                           })} 
+                           placeholder='you@example.com' />
                 </div>
                 {/* Password */}
                 <div className="pw">
                     <div className="label">Password</div>
-                    <input type='password' placeholder='At least 8 characters'/>
+                    <input type='password'
+                           {...register('password', { required: true })}
+                           placeholder='At least 8 characters' />
                 </div>
+                {loginFailure ? <span className='errorMsg'>로그인에 실패하였습니다.</span> : <></>}
                 {/* Button */}
                 <div className="btn">
-                    <GButton color='primary'>Log In</GButton>
+                    <GButton color='primary' type='submit'>Log In</GButton>
                     <Link to='/join'>
                         <GButton color='outlinePrimary'>Sign up</GButton>
                     </Link>
                 </div>
-            </div>
+            </form>
             <Divider/>
             <div className="snsLogin">
                 Or

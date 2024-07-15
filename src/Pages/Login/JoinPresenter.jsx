@@ -1,13 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import GButton from '../../Componentts/GButton/GButton';
 
 import './login.scss'
-import { Divider } from '@mui/material';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
-import GButton from '../../Componentts/GButton/GButton';
-import { faComment } from '@fortawesome/free-solid-svg-icons';
 
 const JoinPresenter = () => {
     return (
@@ -17,21 +13,21 @@ const JoinPresenter = () => {
                 {/* Name */}
                 <div className="name">
                     <div className="label">Name</div>
-                    <input type='text' placeholder=''/>
+                    <input type='text' placeholder='' required/>
                 </div>
                 {/* ID */}
                 <div className="id">
                     <div className="label">Email</div>
-                    <input type='email' placeholder='you@example.com'/>
+                    <input type='email' placeholder='you@example.com' required/>
                 </div>
                 {/* Password */}
                 <div className="pw">
                     <div className="label">Password</div>
-                    <input type='password' placeholder='At least 8 characters'/>
+                    <input type='password' placeholder='At least 8 characters' required/>
                 </div>
                 {/* Terms and Conditions */}
                 <div className='terms'>
-                    <input type="checkbox" />
+                    <input type="checkbox" required/>
                     I agree with <Link to=''>terms and conditions</Link>
                 </div>
                 {/* Button */}

@@ -5,6 +5,9 @@ import { BrowserRouter } from 'react-router-dom';
 
 const HomePage = () => {
     const [articles, setArticles] = useState([]);
+    // User Info.
+    const [userAccessToken, setUserAccessToken] = useState('');
+    const [userEmail, setUserEmail] = useState('')
 
     useEffect(() => {
       fetch(process.env.PUBLIC_URL + '/news_data.json')
@@ -25,10 +28,14 @@ const HomePage = () => {
         .catch(error => console.error('Error fetching data:', error));
     }, []);
 
+
     return (
         <BrowserRouter>
-            <Layout>
-                <Router articles={articles}/>
+            <Layout userAccessToken={userAccessToken}
+                    userEmail={userEmail}>
+                <Router articles={articles}
+                        setUserAccessToken={setUserAccessToken}
+                        setUserEmail={setUserEmail}/>
             </Layout>
         </BrowserRouter>
     );

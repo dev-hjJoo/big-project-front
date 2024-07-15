@@ -5,15 +5,16 @@ import "./layout.scss";
 
 
 
-const Layout = (props: children) => {
+const Layout = ({children, userAccessToken, userEmail}) => {
     return (
         <div className="display">
-            <SideNavigation />
+            <SideNavigation userAccessToken={userAccessToken}
+                            userEmail={userEmail} />
 
             <main>
                 <Header/>
                 <div className="container">
-                    {props.children}
+                    {children}
                 </div>
             </main>
         </div>
