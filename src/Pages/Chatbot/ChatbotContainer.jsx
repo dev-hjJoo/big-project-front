@@ -34,6 +34,10 @@ const Chatbot = () => {
         getSessionAPI(session_id)
     }
 
+    const onClickSubmitChat = () => {
+        getChatAPI()
+    }
+
     const addContentToLocalChatLog = () => {
         setChatLog([ ...chatLog,
             {
@@ -51,9 +55,6 @@ const Chatbot = () => {
         axios({
             method: 'GET',
             url: 'http://34.64.89.168:8000/chatbot/sessions/',
-            data: qs.stringify({
-                user_no: 1,
-            }),
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
                 Authorization: `Bearer ${getCookie('accessToken')}`
@@ -102,9 +103,11 @@ const Chatbot = () => {
             },
         }).then((response) => {
             const result = response.data
+            console.log(result.messages)
 
             setSessionID(result.session_id)
-            if (result.message == null || result.message.length == 0) {
+            if (result.messages == null || result.messages.length == 0) {
+                console.log('what?')
                 setChatLog([{
                     id: 0,
                     sender: 0,
@@ -112,11 +115,33 @@ const Chatbot = () => {
                     send_at: new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' })
                 }])
             } else {
-                setChatLog(result.message)
+                setChatLog(result.messages)
             }
         })
     }
-
+    
+    const getChatAPI = () => {
+        console.log(selectedSessionID)
+        console.log(userInput)
+        axios({
+            method: 'GET',
+            url: `http://34.64.89.168:8000/chatbot/chat/`,
+            params: {
+                session_id: selectedSessionID,
+                query: userInput,
+                nation: 'korea'
+            },
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded',
+                Authorization: `Bearer ${getCookie('accessToken')}`
+            },
+        }).then((response) => {
+            const result = response.data
+            getSessionAPI(selectedSessionID)
+            setUserInput('')
+            console.log(result)
+        })
+    }
 
 
     return (
@@ -129,7 +154,7 @@ const Chatbot = () => {
                               chatLog={chatLog} 
                               userInput={userInput} 
                               loadUserInput={loadUserInput} 
-                              addContentToLocalChatLog={addContentToLocalChatLog} />
+                              onClickSubmitChat={onClickSubmitChat} />
         </>
     );
 };

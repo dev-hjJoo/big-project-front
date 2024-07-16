@@ -8,10 +8,12 @@ import { faFaceLaughWink } from '@fortawesome/free-regular-svg-icons';
 
 
 const ChatbotPresenter = ({sessionList, selectedSessionID, 
-                           onClickCreateNewSession, onClickRemoveSession, onClickConnectSession,
+                           onClickCreateNewSession, 
+                           onClickRemoveSession, 
+                           onClickConnectSession, 
+                           onClickSubmitChat,
                            chatLog, 
-                           userInput, loadUserInput, 
-                           addContentToLocalChatLog}) => {
+                           userInput, loadUserInput, }) => {
 
     const senderIndexToString = (senderIndex) => {
         return (senderIndex == 0) ? 'BOT' : 'USER';
@@ -31,7 +33,6 @@ const ChatbotPresenter = ({sessionList, selectedSessionID,
                 <Divider> Session </Divider>
                 {/* Session List */}
                 <div className="sessions">
-                        {console.log('sessionList', sessionList)}
                         {sessionList.length == 0 ? <>
                             <span>No session</span>
                         </>:<>
@@ -75,7 +76,7 @@ const ChatbotPresenter = ({sessionList, selectedSessionID,
                 <Divider/>
                 <GComment content={userInput} 
                           onChangeContent={loadUserInput} 
-                          submitContent={addContentToLocalChatLog}/>
+                          submitContent={onClickSubmitChat}/>
             </div>}
 
         </div>

@@ -39,7 +39,6 @@ const LoginContainer = ({setuserRefreshToken, setUserEmail}) => {
             const accessToken = result['access']
             const refreshToken = result['refresh']
             
-            console.log('refreshToken: ', refreshToken)
             if(accessToken){
                 setCookie('accessToken', accessToken, 
                 {
