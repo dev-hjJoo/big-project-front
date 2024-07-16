@@ -6,11 +6,11 @@ import TextareaAutosize from "react-textarea-autosize";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowUp } from "@fortawesome/free-solid-svg-icons";
 
-const GComment = ({content, loadContent, addContentToLocalChatLog}) => {
+const GComment = ({content, onChangeContent, submitContent}) => {
     return (
         <div className="comment">
-            <TextareaAutosize placeholder='Message' onChange={loadContent} value={content} /> 
-            <div className="clickBtn" onClick={addContentToLocalChatLog}>
+            <TextareaAutosize placeholder='Message' onChange={onChangeContent} value={content} /> 
+            <div className="clickBtn" onClick={submitContent}>
                 <FontAwesomeIcon icon={faCircleArrowUp} size='lg'/>
             </div>
         </div>

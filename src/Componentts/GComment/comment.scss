@@ -6,6 +6,10 @@
     padding: 0.5rem 1.2rem;
     background-color: var(--clr-lightgray);
     border-radius: 1.2rem;
+
+    .clickBtn {
+        cursor: pointer;
+    }
 }
 
 .comment * {

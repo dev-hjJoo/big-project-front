@@ -3,15 +3,19 @@ import "./chatbot.scss"
 import { Divider } from '@mui/material';
 import GComment from '../../Componentts/GComment/GComment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faPoo, faRobot, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faChildReaching, faPlus, faPoo, faRobot, faTrashCan, faUserGraduate } from '@fortawesome/free-solid-svg-icons';
 import { faFaceLaughWink } from '@fortawesome/free-regular-svg-icons';
 
 
 const ChatbotPresenter = ({sessionList, selectedSessionID, 
-                           onClickCreateNewSession, onClickRemoveSession,
+                           onClickCreateNewSession, onClickRemoveSession, onClickConnectSession,
                            chatLog, 
                            userInput, loadUserInput, 
                            addContentToLocalChatLog}) => {
+
+    const senderIndexToString = (senderIndex) => {
+        return (senderIndex == 0) ? 'BOT' : 'USER';
+    }
 
 
     return (
@@ -34,7 +38,7 @@ const ChatbotPresenter = ({sessionList, selectedSessionID,
                             {sessionList.map((nav, key) => (
                             <div key={nav.session_id} className='session'>
                                 <div className="top">
-                                    <div className="summary">
+                                    <div className="summary" onClick={()=> {onClickConnectSession(nav.session_id)}}>
                                         {nav.summary == null ? `Chat ${nav.session_id}`: nav.summary}
                                     </div>
                                     <div className="btnArea" onClick={() => {onClickRemoveSession(nav.session_id)}}>
@@ -58,20 +62,20 @@ const ChatbotPresenter = ({sessionList, selectedSessionID,
             </div> : <div className='chatContainer'>
                 <div className="chatLog">
                     {chatLog.map((nav, key) => (
-                        <div className={nav.speaker} key={nav.id}>
+                        <div className={senderIndexToString(nav.sender)} key={nav.id}>
                             <div className="avatar">
-                                <FontAwesomeIcon icon={nav.speaker == 'BOT'? faRobot: faPoo} size='lg'/> {nav.speaker}
+                                <FontAwesomeIcon icon={nav.sender == 0? faRobot: faChildReaching} size='lg'/> {senderIndexToString(nav.sender)}
                             </div>
                             <div className="contents">
-                                <span> {nav.content} </span>
+                                <span> {nav.message} </span>
                             </div>
                         </div>
                     ))}
                 </div>
                 <Divider/>
                 <GComment content={userInput} 
-                          loadContent={loadUserInput} 
-                          addContentToLocalChatLog={addContentToLocalChatLog}/>
+                          onChangeContent={loadUserInput} 
+                          submitContent={addContentToLocalChatLog}/>
             </div>}
 
         </div>
