@@ -5,9 +5,10 @@ import { CookiesProvider } from 'react-cookie';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // 두 번 렌더링 되는 것 방지, 추후 수정 필요!
+  // <React.StrictMode>
     <CookiesProvider>
       <HomePage />
     </CookiesProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );

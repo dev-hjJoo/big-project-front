@@ -1,43 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import qs from 'qs';
 import axios from 'axios';
-import { getCookie } from '../../Assets/CookieContainer';
+import qs from 'qs';
+import { removeCookie, getCookie } from '../../Assets/CookieContainer';
 
-const LogoutContainer = ({setUserAccessToken, setUserEmail}) => {
+const LogoutContainer = ({userRefreshToken, setuserRefreshToken, setUserEmail}) => {
 
     const navigate = useNavigate();
+    // const [isLoggingOut, setLoggingOut] = useState(false)
     const [isLoggedOut, setLoggedOut] = useState(false);
 
     // 초기화 코드: 로그아웃 페이지 로딩 시 초기화
     useEffect(()=> {
-        const refreshToken = getCookie('refreshToken')
-        console.log('refreshToken2: ', refreshToken)
-        axios({
-            method: 'POST',
-            url: 'http://34.64.89.168:8000/account/logout/',
-            // data: qs.stringify({
-            //     refresh_token: refreshToken
-            // }),
-            headers: {
-                'content-type': 'application/x-www-form-urlencoded',
-                authorization: `Bearer ${refreshToken}`
-            },
-        }).then((response) => {
-            const result = response.data
-            console.log(result)
-
-            setUserAccessToken('')
-            setUserEmail('')
-            setLoggedOut(true)
-
-            // MARK: Cookie의 refreshToken 초기화 코드 추가
-            
-            navigate('/')
-        }).catch((error) => {
-            console.log(error)
-        })
         
+        if (!isLoggedOut) {
+            axios({
+                method: 'POST',
+                url: 'http://34.64.89.168:8000/account/logout/',
+                data: qs.stringify({
+                    refresh_token: userRefreshToken
+                }),
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded',
+                    Authorization: `Bearer ${getCookie('accessToken')}`
+                },
+            }).then((response) => {
+                const result = response.data
+                console.log('hey')
+    
+                removeCookie('accessToken')
+                setuserRefreshToken('')
+                setUserEmail('')
+                setLoggedOut(true)
+    
+                // MARK: Cookie의 refreshToken 초기화 코드 추가
+                
+                navigate('/')
+            }).catch((error) => {
+                console.log(error)
+            })
+        }
     }, []);
 
     return (

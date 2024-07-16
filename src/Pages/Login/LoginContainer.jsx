@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { setCookie } from '../../Assets/CookieContainer';
 
 
-const LoginContainer = ({setUserAccessToken, setUserEmail}) => {
+const LoginContainer = ({setuserRefreshToken, setUserEmail}) => {
 
     // variable
     const today = new Date()
@@ -40,12 +40,18 @@ const LoginContainer = ({setUserAccessToken, setUserEmail}) => {
             const refreshToken = result['refresh']
             
             console.log('refreshToken: ', refreshToken)
-            if(refreshToken){
-                setCookie('refreshToken', refreshToken);
+            if(accessToken){
+                setCookie('accessToken', accessToken, 
+                {
+                    sameSite: 'strict',
+                    path: '/',
+                    // httpOnly: true,
+                }
+                );
             }
 
             // state 변경
-            setUserAccessToken(accessToken)
+            setuserRefreshToken(refreshToken)
             setUserEmail(data.email)
             setLoginFailure(false)
 

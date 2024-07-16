@@ -45,13 +45,13 @@ const SideNavBottom = [
     },
 ];
 
-const SideNavigation = ({userAccessToken, userEmail}) => {
+const SideNavigation = ({userRefreshToken, userEmail}) => {
     return (
         <div className="sideNav">
             <div className="sideNavInner">
                 <div className="sideNavTop">
                     {/* 로그인 완료된 상태여야만 상단메뉴(기능 메뉴) 뜸 */}
-                    {userAccessToken != '' ? 
+                    {userRefreshToken != '' ? 
                         <nav className='menu'>
                             <ul>
                                 {SideNavTop.map((nav, key) => (

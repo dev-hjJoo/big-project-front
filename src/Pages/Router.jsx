@@ -12,15 +12,16 @@ import LoginContainer from './Login/LoginContainer';
 import LogoutContainer from './Login/LogoutContainer';
 
 
-const Router = ({articles, setUserAccessToken, setUserEmail}) => {
+const Router = ({articles, userRefreshToken, setuserRefreshToken, setUserEmail}) => {
 
 
     return (        
         <Routes>
             <Route path='/' element={<HomeContainer articles={articles} />}/>
-            <Route path='/login' element={<LoginContainer setUserAccessToken={setUserAccessToken}
+            <Route path='/login' element={<LoginContainer setuserRefreshToken={setuserRefreshToken}
                                                           setUserEmail={setUserEmail} />} />
-            <Route path='/logout' element={<LogoutContainer setUserAccessToken={setUserAccessToken}
+            <Route path='/logout' element={<LogoutContainer userRefreshToken={userRefreshToken}
+                                                            setuserRefreshToken={setuserRefreshToken}
                                                             setUserEmail={setUserEmail}/>} />
             <Route path='/join' element={<JoinContainer />} />
             <Route path='/chat' element={<Chatbot/>} />

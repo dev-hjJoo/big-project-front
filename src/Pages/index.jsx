@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 const HomePage = () => {
     const [articles, setArticles] = useState([]);
     // User Info.
-    const [userAccessToken, setUserAccessToken] = useState('');
+    const [userRefreshToken, setuserRefreshToken] = useState('');
     const [userEmail, setUserEmail] = useState('')
 
     useEffect(() => {
@@ -31,10 +31,11 @@ const HomePage = () => {
 
     return (
         <BrowserRouter>
-            <Layout userAccessToken={userAccessToken}
+            <Layout userRefreshToken={userRefreshToken}
                     userEmail={userEmail}>
                 <Router articles={articles}
-                        setUserAccessToken={setUserAccessToken}
+                        userRefreshToken={userRefreshToken}
+                        setuserRefreshToken={setuserRefreshToken}
                         setUserEmail={setUserEmail}/>
             </Layout>
         </BrowserRouter>
