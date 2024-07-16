@@ -8,19 +8,37 @@ import { getCookie } from '../../Assets/CookieContainer';
 const Chatbot = () => {
     // States
     const [sessionList, setSessionList] = useState([])
-    const [selectedSessionNo, setSessionNo] = useState(0)
+    const [selectedSessionID, setSessionID] = useState(-1)
 
     const [userInput, setUserInput] = useState('')
-    const [chatLog, setChatLog] = useState([{
-        id: 1,
-        speaker: "BOT",
-        content: "안녕하세요. 전세계 어디에서나 일하고 싶은 당신을 위한, 글로-발 워커입니다.\n질문할 내용이 있으신가요?",
-        datetime: "2024/07/02 16:36"
-    },])
+    const [chatLog, setChatLog] = useState([])
+
+
+    // UseEffects
+    useEffect( () => { // 해당 페이지 로딩되면 세션 리스트 호출
+        getSessionListAPI()
+        
+    }, []);
 
     // Functions
     const loadUserInput = e => {
         setUserInput(e.target.value)
+    }
+
+    const onClickCreateNewSession = () => {
+        createNewSessionAPI()
+
+        setChatLog([{
+            id: 0,
+            speaker: "BOT",
+            content: "안녕하세요. 전세계 어디에서나 일하고 싶은 당신을 위한, 글로-발 워커입니다.\n질문할 내용이 있으신가요?",
+            datetime: new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' })
+        }])
+        
+    }
+
+    const onClickRemoveSession = (session_id) => {
+        removeSessionAPI(session_id)
     }
 
     const addContentToLocalChatLog = () => {
@@ -35,14 +53,8 @@ const Chatbot = () => {
         setUserInput('')
     }
 
-    // 해당 페이지 로딩되면 세션 리스트 호출
-    useEffect( () => {
-        const data = getSessionList()
-        setSessionList(data)
-    }, []);
-
-
-    const getSessionList = () => {
+    // AXIOS
+    const getSessionListAPI = () => {
         axios({
             method: 'GET',
             url: 'http://34.64.89.168:8000/chatbot/sessions/',
@@ -54,15 +66,44 @@ const Chatbot = () => {
                 Authorization: `Bearer ${getCookie('accessToken')}`
             },
         }).then((response) => {
-            console.log('1', response.data)
+            setSessionList(response.data)
+        })
+    }
+
+    const createNewSessionAPI = () => {
+        axios({
+            method: 'POST',
+            url: 'http://34.64.89.168:8000/chatbot/sessions/new/',
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded',
+                Authorization: `Bearer ${getCookie('accessToken')}`
+            },
+        }).then((response) => {
+            getSessionListAPI()
             return response.data
+        })
+    }
+
+    const removeSessionAPI = (session_id) => {
+        axios({
+            method: 'DELETE',
+            url: `http://34.64.89.168:8000/chatbot/sessions/${session_id}/`,
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded',
+                Authorization: `Bearer ${getCookie('accessToken')}`
+            },
+        }).then((response) => {
+            getSessionListAPI()
+            // return response.data
         })
     }
 
     return (
         <>
             <ChatbotPresenter sessionList={sessionList}
-                              selectedSessionNo={selectedSessionNo}
+                              selectedSessionID={selectedSessionID}
+                              onClickCreateNewSession={onClickCreateNewSession}
+                              onClickRemoveSession={onClickRemoveSession}
                               chatLog={chatLog} 
                               userInput={userInput} 
                               loadUserInput={loadUserInput} 
