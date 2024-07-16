@@ -25,9 +25,7 @@ const LogoutContainer = ({userRefreshToken, setuserRefreshToken, setUserEmail}) 
                     Authorization: `Bearer ${getCookie('accessToken')}`
                 },
             }).then((response) => {
-                const result = response.data
-                console.log('hey')
-    
+                // const result = response.data  
                 removeCookie('accessToken')
                 setuserRefreshToken('')
                 setUserEmail('')
