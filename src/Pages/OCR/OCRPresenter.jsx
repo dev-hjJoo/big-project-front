@@ -1,24 +1,29 @@
 import React, { Suspense, lazy } from 'react';
 import GBox from '../../Componentts/GBox/GBox';
 import GButton from '../../Componentts/GButton/GButton';
-import "./ocr.scss"
+import "./ocr.scss";
 import { Divider } from '@mui/material';
 
-const OCRPresenter = ({ images = [], onButtonClick, contractType, onSelectChange }) => {
+const OCRPresenter = ({ images = [], onButtonClick, contractType, onSelectChange, result, error }) => {
     const ResultBox = lazy(() =>
         contractType === 'standard'
             ? import('./StandardResultBox')
             : import('./ForeignResultBox')
     );
 
+    const uploadMessage = contractType === 'standard' 
+        ? "Please upload the image of the labor contract."
+        : "Please upload the images of the two labor contracts.";
+
     return (
         <div>
             <div className="ocr-content">
-                {/* 설명부 */}
                 <h1>AI 근로계약서 검토</h1>
-                <p style={{ textAlign: 'center' }}>근로계약서 이미지를 업로드 해 보세요.<br />AI가 분석해서 근로계약서를 검토 해 드립니다.</p>
+                <p style={{ textAlign: 'center' }}>
+                    근로계약서 이미지를 업로드 해 보세요.<br />
+                    AI가 분석해서 근로계약서를 검토 해 드립니다.
+                </p>
 
-                {/* 버튼부 */}
                 <div className="buttonArea" style={{ display: 'flex', alignItems: 'center' }}>
                     <select value={contractType} onChange={onSelectChange} style={{ marginRight: '10px' }}>
                         <option value="standard">표준근로계약서 업로드</option>
@@ -29,7 +34,7 @@ const OCRPresenter = ({ images = [], onButtonClick, contractType, onSelectChange
                     </GButton>
                 </div>
 
-                <div className="ocr-container" >
+                <div className="ocr-container">
                     <div className="left-section" style={{ textAlign: 'center' }}>
                         <GBox className="ocr-uploader" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             {images.length > 0 ? (
@@ -37,15 +42,19 @@ const OCRPresenter = ({ images = [], onButtonClick, contractType, onSelectChange
                                     <img key={index} src={image} alt={`Uploaded ${index}`} className="uploaded-image" style={{ maxWidth: '100%', height: 'auto', margin: '10px' }} />
                                 ))
                             ) : (
-                                <p>Please upload the labor contract files.</p>
+                                <p>{uploadMessage}</p>
                             )}
                         </GBox>
                     </div>
                     <div className="right-section">
-                        {/* 이미지가 있을 때만 ResultBox 표시 */}
-                        {images.length > 0 && (
+                        {error && (
+                            <div style={{ color: 'red', textAlign: 'center' }}>
+                                {error}
+                            </div>
+                        )}
+                        {images.length > 0 && result && (
                             <Suspense fallback={<div>Loading...</div>}>
-                                <ResultBox />
+                                <ResultBox result={result} />
                             </Suspense>
                         )}
                     </div>
@@ -54,6 +63,5 @@ const OCRPresenter = ({ images = [], onButtonClick, contractType, onSelectChange
         </div>
     );
 };
-
 
 export default OCRPresenter;
