@@ -121,16 +121,14 @@ const Chatbot = () => {
     }
     
     const getChatAPI = () => {
-        console.log(selectedSessionID)
-        console.log(userInput)
         axios({
-            method: 'GET',
+            method: 'POST',
             url: `http://34.64.89.168:8000/chatbot/chat/`,
-            params: {
+            data: qs.stringify({
                 session_id: selectedSessionID,
                 query: userInput,
                 nation: 'korea'
-            },
+            }),
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
                 Authorization: `Bearer ${getCookie('accessToken')}`
