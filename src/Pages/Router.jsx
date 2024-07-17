@@ -10,28 +10,34 @@ import NewsDetail from './Home/NewsDetail';
 import JoinContainer from './Login/JoinContainer';
 import LoginContainer from './Login/LoginContainer';
 import LogoutContainer from './Login/LogoutContainer';
+import { getCookie } from '../Authorization/CookieContainer';
+import PrivateRouter from './PrivateRouter';
 
 
-const Router = ({articles, userRefreshToken, setuserRefreshToken, setUserEmail}) => {
+const Router = ({articles, userAccessToken, setUserAccessToken, setUserEmail}) => {
 
 
-    return (        
+    return (
         <Routes>
+            {/* Public */}
             <Route path='/' element={<HomeContainer articles={articles} />}/>
-            <Route path='/login' element={<LoginContainer setuserRefreshToken={setuserRefreshToken}
+            <Route path='/login' element={<LoginContainer setUserAccessToken={setUserAccessToken}
                                                           setUserEmail={setUserEmail} />} />
-            <Route path='/logout' element={<LogoutContainer userRefreshToken={userRefreshToken}
-                                                            setuserRefreshToken={setuserRefreshToken}
+            <Route path='/logout' element={<LogoutContainer userAccessToken={userAccessToken}
+                                                            setUserAccessToken={setUserAccessToken}
                                                             setUserEmail={setUserEmail}/>} />
-            <Route path='/join' element={<JoinContainer />} />
-            <Route path='/chat' element={<Chatbot/>} />
-            <Route path='/faq' element={<FAQContainer />} />
-            <Route path='/db' element={<DBContainer />} />
-            <Route path="/community/*" element={<BoardRouter />} />
-            <Route path="/ocr" element={<OCRContainer />} />
             <Route path="/news/:id" element={<NewsDetail articles={articles} />}/>
-        </Routes>
-    );
+
+            {/* Private */}
+            <Route element={<PrivateRouter/>}>
+                <Route path='/join' element={<JoinContainer />} />
+                <Route path='/chat' element={<Chatbot userAccessToken={userAccessToken}/>} />
+                <Route path='/faq' element={<FAQContainer userAccessToken={userAccessToken} />} />   
+                <Route path='/db' element={<DBContainer userAccessToken={userAccessToken} />} />
+                <Route path="/community/*" element={<BoardRouter userAccessToken={userAccessToken} />} />
+                <Route path="/ocr" element={<OCRContainer userAccessToken={userAccessToken} />} />
+            </Route>
+        </Routes>);
 };
 
 export default Router;

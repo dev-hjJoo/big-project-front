@@ -3,9 +3,9 @@ import qs from 'qs'
 import axios from 'axios'
 
 import ChatbotPresenter from './ChatbotPresenter';
-import { getCookie } from '../../Assets/CookieContainer';
+import { getCookie } from '../../Authorization/CookieContainer';
 
-const Chatbot = () => {
+const Chatbot = ({userAccessToken}) => {
     // States
     const [sessionList, setSessionList] = useState([])
     const [selectedSessionID, setSessionID] = useState(-1)
@@ -57,7 +57,7 @@ const Chatbot = () => {
             url: 'http://34.64.89.168:8000/chatbot/sessions/',
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
-                Authorization: `Bearer ${getCookie('accessToken')}`
+                Authorization: `Bearer ${userAccessToken}`
             },
         }).then((response) => {
             setSessionList(response.data)
@@ -70,7 +70,7 @@ const Chatbot = () => {
             url: 'http://34.64.89.168:8000/chatbot/sessions/new/',
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
-                Authorization: `Bearer ${getCookie('accessToken')}`
+                Authorization: `Bearer ${userAccessToken}`
             },
         }).then((response) => {
             const result = response.data
@@ -85,7 +85,7 @@ const Chatbot = () => {
             url: `http://34.64.89.168:8000/chatbot/sessions/${session_id}/`,
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
-                Authorization: `Bearer ${getCookie('accessToken')}`
+                Authorization: `Bearer ${userAccessToken}`
             },
         }).then((response) => {
             getSessionListAPI()
@@ -99,7 +99,7 @@ const Chatbot = () => {
             url: `http://34.64.89.168:8000/chatbot/sessions/${session_id}/`,
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
-                Authorization: `Bearer ${getCookie('accessToken')}`
+                Authorization: `Bearer ${userAccessToken}`
             },
         }).then((response) => {
             const result = response.data
@@ -131,7 +131,7 @@ const Chatbot = () => {
             }),
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
-                Authorization: `Bearer ${getCookie('accessToken')}`
+                Authorization: `Bearer ${userAccessToken}`
             },
         }).then((response) => {
             const result = response.data

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import FAQPresenter from './FAQPresenter';
 import axios from 'axios';
-import { getCookie } from '../../Assets/CookieContainer';
+import { getCookie } from '../../Authorization/CookieContainer';
 
 
-const FAQContainer = () => {
+const FAQContainer = ({userAccessToken}) => {
 
 
     // variable
@@ -78,7 +78,7 @@ const FAQContainer = () => {
             url: `http://34.64.89.168:8000/fqa/fqas/`,
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
-                Authorization: `Bearer ${getCookie('accessToken')}`
+                Authorization: `Bearer ${userAccessToken}`
             },
         }).then((response) => {
             const result = response.data

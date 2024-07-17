@@ -4,10 +4,10 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
-import { setCookie } from '../../Assets/CookieContainer';
+import { setCookie } from '../../Authorization/CookieContainer';
 
 
-const LoginContainer = ({setuserRefreshToken, setUserEmail}) => {
+const LoginContainer = ({setUserAccessToken, setUserEmail}) => {
 
     // variable
     const today = new Date()
@@ -35,12 +35,12 @@ const LoginContainer = ({setuserRefreshToken, setUserEmail}) => {
         }).then((response) => {
             const result = response.data
             
-            // refreshToken 처리
             const accessToken = result['access']
             const refreshToken = result['refresh']
             
+            // refreshToken -> Cookie
             if(accessToken){
-                setCookie('accessToken', accessToken, 
+                setCookie('refreshToken', refreshToken, 
                 {
                     sameSite: 'strict',
                     path: '/',
@@ -49,8 +49,10 @@ const LoginContainer = ({setuserRefreshToken, setUserEmail}) => {
                 );
             }
 
-            // state 변경
-            setuserRefreshToken(refreshToken)
+            // accessToken -> local variable
+            setUserAccessToken(accessToken)
+
+            // When login succeeds
             setUserEmail(data.email)
             setLoginFailure(false)
 

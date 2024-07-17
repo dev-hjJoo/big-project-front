@@ -14,7 +14,7 @@ const NewsDetail = ({ articles }) => {
   const article = articles.find(item => {
     const urlParts = item.url.split('/');
     const newsId = urlParts[urlParts.length - 1];
-    return newsId === id;
+    return newsId == id;
   });
 
   if (!article) {

@@ -19,14 +19,14 @@ const DBPresenter = ({
                 <div className="menu">
                     <div>기능관리</div>
                     <span
-                        className={selectedMenu === 'db' ? 'active' : ''}
+                        className={selectedMenu == 'db' ? 'active' : ''}
                         onClick={() => handleMenuClick('db')}
                     >
                         - DB관리
                     </span>
                     <div>콘텐츠 관리</div>
                     <span
-                        className={selectedMenu === 'dashboard' ? 'active' : ''}
+                        className={selectedMenu == 'dashboard' ? 'active' : ''}
                         onClick={() => handleMenuClick('dashboard')}
                     >
                         - 고객 대시보드
@@ -34,7 +34,7 @@ const DBPresenter = ({
                 </div>
             </div>
             {/* Main */}
-            {selectedMenu === 'db' ? (
+            {selectedMenu == 'db' ? (
                 <div className="content">
                     <h1>DB Management</h1>
                     <div className="gbox large">
@@ -103,7 +103,7 @@ const DBPresenter = ({
                         </div>
                     </div>
                 </div>
-            ) : selectedMenu === 'dashboard' ? (
+            ) : selectedMenu == 'dashboard' ? (
                 <div className="content">
                     <div className="gbox large">
                         <h1>고객 대시보드</h1>
