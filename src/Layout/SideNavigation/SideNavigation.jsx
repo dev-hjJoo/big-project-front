@@ -40,7 +40,7 @@ const SideNavigation = ({userAccessToken, userEmail}) => {
             <div className="sideNavInner">
                 <div className="sideNavTop">
                     {/* 로그인 완료된 상태여야만 상단메뉴(기능 메뉴) 뜸 */}
-                    {(userAccessToken != '') ? 
+                    {(userAccessToken != null) ? 
                         <nav className='menu'>
                             <ul>
                                 {SideNavTop.map((nav, key) => (
@@ -70,7 +70,7 @@ const SideNavigation = ({userAccessToken, userEmail}) => {
                             }
 
                             {/* 로그인/로그아웃 */}
-                            {(userAccessToken == '') ? 
+                            {(userAccessToken == null) ? 
                                 <li>
                                     <Link to="/login">
                                         <FontAwesomeIcon icon={faRightToBracket} size='2x' className='animatedIcon'/>

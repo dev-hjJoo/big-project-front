@@ -14,7 +14,7 @@ const HomePage = () => {
 
     useEffect(() => {
       // AccessToken
-      if (userAccessToken == '' && getCookie('refreshToken') != null) {
+      if (userAccessToken == null && getCookie('refreshToken') != null) {
         getAccessTokenFromRefreshTokenAPI()
       }
 
