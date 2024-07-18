@@ -18,58 +18,58 @@ const BoardDetail = ({userAccessToken}) => {
 
     // 게시글을 백엔드 서버에서 가져오는 함수
     const fetchPost = () => {
-        axios({
-            method: 'GET',
-            url: `http://34.64.89.168:8000/community/articles/${id}/`,
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${userAccessToken}`
-            },
-        })
-            .then(response => {
+        if (userAccessToken != null) {
+            axios({
+                method: 'GET',
+                url: `http://34.64.89.168:8000/community/articles/${id}/`,
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${userAccessToken}`
+                },
+            }).then(response => {
                 setPost(response.data); // 상태에 게시글 저장
-            })
-            .catch(error => {
+            }).catch(error => {
                 console.error('게시글을 가져오는 중 오류 발생:', error); // 오류 처리
             });
+        }
     };
 
     // 컴포넌트가 마운트될 때 게시글을 로드
     useEffect(() => {
         fetchPost(); // 초기 로드
-    }, [id]);
+    }, [userAccessToken, id]);
 
     // 게시글 삭제 함수
     const handleDelete = () => {
-        axios({
-            method: 'DELETE',
-            url: `http://34.64.89.168:8000/community/articles/${id}/`,
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${userAccessToken}`
-            },
-        })
-            .then(() => {
+        if (userAccessToken != null) {
+            axios({
+                method: 'DELETE',
+                url: `http://34.64.89.168:8000/community/articles/${id}/`,
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${userAccessToken}`
+                },
+            }).then(() => {
                 navigate('/community/list'); // 삭제 후 목록 페이지로 이동
-            })
-            .catch(error => {
+            }).catch(error => {
                 console.error('게시글을 삭제하는 중 오류 발생:', error); // 오류 처리
             });
+        }
     };
 
     // 댓글 추가 함수
     const addComment = () => {
         const newComment = { message: commentContent, article: 1}; // 새로운 댓글 객체
-        axios({
-            method: 'POST',
-            url: `http://34.64.89.168:8000/community/articles/${id}/comments/`, // URL 수정
-            data: JSON.stringify(newComment), // 데이터를 JSON으로 변환
-            headers: {
-                'Content-Type': 'application/json', // 헤더 설정
-                Authorization: `Bearer ${userAccessToken}`
-            },
-        })
-            .then(response => {
+        if (userAccessToken != null) {
+            axios({
+                method: 'POST',
+                url: `http://34.64.89.168:8000/community/articles/${id}/comments/`, // URL 수정
+                data: JSON.stringify(newComment), // 데이터를 JSON으로 변환
+                headers: {
+                    'Content-Type': 'application/json', // 헤더 설정
+                    Authorization: `Bearer ${userAccessToken}`
+                },
+            }).then(response => {
                 const addedComment = {
                     user: response.data.user,
                     message: response.data.message, // 'mesage' 오타 수정
@@ -81,30 +81,31 @@ const BoardDetail = ({userAccessToken}) => {
                     comments: [...prevPost.comments, addedComment] // 상태에 새로운 댓글 추가
                 }));
                 setCommentContent(''); // 댓글 입력 필드 초기화
-            })
-            .catch(error => {
+            }).catch(error => {
                 console.error('댓글을 추가하는 중 오류 발생:', error); // 오류 처리
             });
+        }
     };
     // 댓글 삭제 함수
     const deleteComment = (commentId) => {
-        axios({
-            method: 'DELETE',
-            url: `http://34.64.89.168:8000/community/comments/${commentId}/`,
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${userAccessToken}`
-            },
-        })
-            .then(() => {
+        if (userAccessToken != null) {
+            axios({
+                method: 'DELETE',
+                url: `http://34.64.89.168:8000/community/comments/${commentId}/`,
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${userAccessToken}`
+                },
+            }).then(() => {
                 setPost(prevPost => ({
                     ...prevPost,
                     comments: prevPost.comments.filter(comment => comment.id !== commentId) // 상태에서 댓글 삭제
                 }));
-            })
-            .catch(error => {
+            }).catch(error => {
                 console.error('댓글을 삭제하는 중 오류 발생:', error); // 오류 처리
             });
+        }
+        
     };
 
     if (!post) {
