@@ -13,6 +13,8 @@ const Chatbot = ({userAccessToken}) => {
     const [userInput, setUserInput] = useState('')
     const [chatLog, setChatLog] = useState([])
 
+    const [writingMode, setWritingMode] = useState(true)
+
 
     // UseEffects
     useEffect( () => { // 해당 페이지 로딩되면 세션 리스트 호출
@@ -121,6 +123,7 @@ const Chatbot = ({userAccessToken}) => {
     }
     
     const getChatAPI = () => {
+        setWritingMode(false)
         axios({
             method: 'POST',
             url: `http://34.64.89.168:8000/chatbot/chat/`,
@@ -137,7 +140,7 @@ const Chatbot = ({userAccessToken}) => {
             const result = response.data
             getSessionAPI(selectedSessionID)
             setUserInput('')
-            console.log(result)
+            setWritingMode(true)
         })
     }
 
@@ -149,10 +152,11 @@ const Chatbot = ({userAccessToken}) => {
                               onClickCreateNewSession={onClickCreateNewSession}
                               onClickRemoveSession={onClickRemoveSession}
                               onClickConnectSession={onClickConnectSession}
+                              onClickSubmitChat={onClickSubmitChat} 
                               chatLog={chatLog} 
                               userInput={userInput} 
                               loadUserInput={loadUserInput} 
-                              onClickSubmitChat={onClickSubmitChat} />
+                              writingMode={writingMode}/>
         </>
     );
 };
