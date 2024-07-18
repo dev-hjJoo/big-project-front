@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import GButton from '../../Componentts/GButton/GButton';
 import './board.scss';
+import userEvent from '@testing-library/user-event';
 
 const BoardList = ({userAccessToken}) => {
     const [posts, setPosts] = useState([]); // 게시글 목록 상태
@@ -11,22 +12,25 @@ const BoardList = ({userAccessToken}) => {
 
     // 게시글을 백엔드 서버에서 가져오는 함수
     const loadPosts = () => {
-        axios({
-            method: 'GET',
-            url: 'http://34.64.89.168:8000/community/articles/',
-            headers: {
-                'content-type': 'application/x-www-form-urlencoded',
-                Authorization: `Bearer ${userAccessToken}` // 인증 토큰 추가
-            },
-        }).then((response) => {
-            console.log('Using token:', userAccessToken); // 토큰 디버깅용 로그
-            const result = response.data;
-            console.log(result, "결과");
-            result.sort((a, b) => b.id - a.id); // 최신 순으로 정렬
-            setPosts(result); // 상태에 게시글 목록 저장
-        }).catch((error) => {
-            console.error('게시글을 가져오는 중 오류 발생:', error); // 오류 처리
-        });
+        if (userAccessToken != null) {
+            axios({
+                method: 'GET',
+                url: 'http://34.64.89.168:8000/community/articles/',
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded',
+                    Authorization: `Bearer ${userAccessToken}` // 인증 토큰 추가
+                },
+            }).then((response) => {
+                console.log('Using token:', userAccessToken); // 토큰 디버깅용 로그
+                const result = response.data;
+                console.log(result, "결과");
+                result.sort((a, b) => b.id - a.id); // 최신 순으로 정렬
+                setPosts(result); // 상태에 게시글 목록 저장
+            }).catch((error) => {
+                console.error('게시글을 가져오는 중 오류 발생:', error); // 오류 처리
+            });
+        }
+        
     };
 
     // 컴포넌트가 마운트될 때와 스토리지 변경 시 게시글을 다시 로드
@@ -37,6 +41,15 @@ const BoardList = ({userAccessToken}) => {
             window.removeEventListener('storage', loadPosts); // 클린업
         };
     }, []);
+
+    // access token 재획득 후 게시글 로드
+    useEffect(() => {
+        loadPosts();
+        window.addEventListener('storage', loadPosts); // 스토리지 변경 감지
+        return () => {
+            window.removeEventListener('storage', loadPosts); // 클린업
+        };
+    }, [userAccessToken])
 
     // 날짜와 시간을 포맷팅하는 함수   !! 추후에 변경 예정
     const formatDate = (dateString) => {

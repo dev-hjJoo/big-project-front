@@ -117,7 +117,7 @@ const BoardDetail = ({userAccessToken}) => {
             <div className="board-detail">
                 <div className="detail-header">
                     <div className="detail-title">{post.title}</div>
-                    <div className="detail-author">{post.user ? post.user.username : '알 수 없음'}</div> {/* user가 정의되어 있는지 확인 */}
+                    <div className="detail-author">{post.user?.username ? post.user.username : '알 수 없음'}</div> {/* user가 정의되어 있는지 확인 */}
                     <div className="detail-views">👀: {post.view}</div>
                     {/* 삭제 버튼 클릭 시 확인 알림 */}
                     <div className="hiddenMenu">
@@ -137,7 +137,7 @@ const BoardDetail = ({userAccessToken}) => {
                     <ul>
                         {post.comments.map((comment, index) => (
                             <li key={comment.id} className="comment-item">
-                                <span className="comment-author">{comment.user ? comment.user.username : '알 수 없음'}</span> {/* user가 정의되어 있는지 확인 */}
+                                <span className="comment-author">{comment.user?.username ? comment.user.username : '알 수 없음'}</span> {/* user가 정의되어 있는지 확인 */}
                                 <p className="comment-content">{comment.message}</p>
                                 <FontAwesomeIcon icon={faXmark} onClick={() => deleteComment(comment.id)} />
                             </li>
