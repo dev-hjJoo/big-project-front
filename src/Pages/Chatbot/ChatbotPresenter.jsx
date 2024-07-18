@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import {React, useRef, useEffect} from 'react';
 import "./chatbot.scss"
 import { Divider } from '@mui/material';
 import GComment from '../../Componentts/GComment/GComment';
@@ -15,9 +15,17 @@ const ChatbotPresenter = ({sessionList, selectedSessionID,
                            chatLog, 
                            userInput, loadUserInput, }) => {
 
+    // 채팅 시 보여지는 이름 처리
     const senderIndexToString = (senderIndex) => {
         return (senderIndex == 0) ? 'BOT' : 'USER';
     }
+
+    // Scroll 처리
+    const messageEndRef = useRef(null);
+    useEffect(() => {
+        if (!messageEndRef.current) return
+        messageEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      }, [chatLog]);
 
 
     return (
@@ -72,6 +80,7 @@ const ChatbotPresenter = ({sessionList, selectedSessionID,
                             </div>
                         </div>
                     ))}
+                    <div ref={messageEndRef}></div>
                 </div>
                 <Divider/>
                 <GComment content={userInput} 
