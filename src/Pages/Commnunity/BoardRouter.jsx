@@ -2,9 +2,9 @@ import React from 'react';
 import { Route, Routes, Navigate, Link } from 'react-router-dom';
 import BoardList from './BoardList';
 import BoardDetail from './BoardDetail';
-import BoardWrite from './BoardWrite';
+import BoardWriteContainer from './BoardWriteContainer';
 
-const BoardRouter = () => {
+const BoardRouter = ({userAccessToken}) => {
     return (
         <>
             <Link to='/community'>
@@ -15,9 +15,9 @@ const BoardRouter = () => {
             
             <Routes>
                 <Route path="/" element={<Navigate to="list" />} />
-                <Route path='list' element={<BoardList/>} />
-                <Route path='write' element={<BoardWrite/>} />
-                <Route path='detail/:id' element={<BoardDetail/>} />
+                <Route path='list' element={<BoardList userAccessToken={userAccessToken}/>} />
+                <Route path='write' element={<BoardWriteContainer userAccessToken={userAccessToken}/>} />
+                <Route path='detail/:id' element={<BoardDetail userAccessToken={userAccessToken}/>} />
             </Routes> 
         </>
     );

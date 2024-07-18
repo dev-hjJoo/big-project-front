@@ -1,37 +1,9 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import GButton from "../../Componentts/GButton/GButton";
+import React from 'react';
+import './board.scss';
 import { Divider } from "@mui/material";
-import './board.scss'
+import GButton from "../../Componentts/GButton/GButton";
 
-const BoardWrite = () => {
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const navigate = useNavigate();
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const newPost = {
-            id: Date.now(),
-            title,
-            content,
-            author: "Anonymous",
-            created_at: new Date().toLocaleString(undefined, {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit'
-            }), // Current date and time
-            views: 0,
-        };
-
-        const savedPosts = JSON.parse(localStorage.getItem('posts')) || [];
-        localStorage.setItem('posts', JSON.stringify([...savedPosts, newPost]));
-
-        navigate('/community/list');
-    };
-
+const BoardWritePresenter = ({ title, setTitle, content, setContent, handleSubmit }) => {
     return (
         <>
             <div className="form-container">
@@ -62,4 +34,4 @@ const BoardWrite = () => {
     );
 };
 
-export default BoardWrite;
+export default BoardWritePresenter;
