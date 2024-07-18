@@ -9,7 +9,7 @@ import qs from 'qs';
 const HomePage = () => {
     const [articles, setArticles] = useState([]);
     // User Info.
-    const [userAccessToken, setUserAccessToken] = useState('');
+    const [userAccessToken, setUserAccessToken] = useState(null);
     const [userEmail, setUserEmail] = useState('')
 
     useEffect(() => {
@@ -56,7 +56,7 @@ const HomePage = () => {
     }
 
     useEffect(()=> {
-      if (userAccessToken == '' && getCookie('refreshToken') != null) {
+      if (userAccessToken == null && getCookie('refreshToken') != null) {
         getAccessTokenFromRefreshTokenAPI()
       }
     }, [userAccessToken])

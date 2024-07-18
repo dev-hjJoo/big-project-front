@@ -22,6 +22,10 @@ const Chatbot = ({userAccessToken}) => {
         
     }, []);
 
+    useEffect(() => { // accessToken 업데이트 시 세션 리스트 호출
+        getSessionListAPI()
+    }, [userAccessToken])
+
     // Functions
     const loadUserInput = e => {
         setUserInput(e.target.value)
@@ -54,94 +58,103 @@ const Chatbot = ({userAccessToken}) => {
 
     // AXIOS
     const getSessionListAPI = () => {
-        axios({
-            method: 'GET',
-            url: 'http://34.64.89.168:8000/chatbot/sessions/',
-            headers: {
-                'content-type': 'application/x-www-form-urlencoded',
-                Authorization: `Bearer ${userAccessToken}`
-            },
-        }).then((response) => {
-            setSessionList(response.data)
-        })
+        if (userAccessToken != null) {
+            axios({
+                method: 'GET',
+                url: 'http://34.64.89.168:8000/chatbot/sessions/',
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded',
+                    Authorization: `Bearer ${userAccessToken}`
+                },
+            }).then((response) => {
+                setSessionList(response.data)
+            })
+        }
+        
     }
 
     const createNewSessionAPI = () => {
-        axios({
-            method: 'POST',
-            url: 'http://34.64.89.168:8000/chatbot/sessions/new/',
-            headers: {
-                'content-type': 'application/x-www-form-urlencoded',
-                Authorization: `Bearer ${userAccessToken}`
-            },
-        }).then((response) => {
-            const result = response.data
-            getSessionListAPI()
-            getSessionAPI(result.session_id)
-        })
+        if (userAccessToken != null) {
+            axios({
+                method: 'POST',
+                url: 'http://34.64.89.168:8000/chatbot/sessions/new/',
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded',
+                    Authorization: `Bearer ${userAccessToken}`
+                },
+            }).then((response) => {
+                const result = response.data
+                getSessionListAPI()
+                getSessionAPI(result.session_id)
+            })
+        }
     }
 
     const removeSessionAPI = (session_id) => {
-        axios({
-            method: 'DELETE',
-            url: `http://34.64.89.168:8000/chatbot/sessions/${session_id}/`,
-            headers: {
-                'content-type': 'application/x-www-form-urlencoded',
-                Authorization: `Bearer ${userAccessToken}`
-            },
-        }).then((response) => {
-            getSessionListAPI()
-            // return response.data
-        })
+        if (userAccessToken != null) {
+            axios({
+                method: 'DELETE',
+                url: `http://34.64.89.168:8000/chatbot/sessions/${session_id}/`,
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded',
+                    Authorization: `Bearer ${userAccessToken}`
+                },
+            }).then((response) => {
+                getSessionListAPI()
+                // return response.data
+            })
+        }
     }
 
     const getSessionAPI = (session_id) => {
-        axios({
-            method: 'GET',
-            url: `http://34.64.89.168:8000/chatbot/sessions/${session_id}/`,
-            headers: {
-                'content-type': 'application/x-www-form-urlencoded',
-                Authorization: `Bearer ${userAccessToken}`
-            },
-        }).then((response) => {
-            const result = response.data
-            console.log(result.messages)
+        if (userAccessToken != null) {
+            axios({
+                method: 'GET',
+                url: `http://34.64.89.168:8000/chatbot/sessions/${session_id}/`,
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded',
+                    Authorization: `Bearer ${userAccessToken}`
+                },
+            }).then((response) => {
+                const result = response.data
 
-            setSessionID(result.session_id)
-            if (result.messages == null || result.messages.length == 0) {
-                console.log('what?')
-                setChatLog([{
-                    id: 0,
-                    sender: 0,
-                    message: "안녕하세요. 전세계 어디에서나 일하고 싶은 당신을 위한, 글로-발 워커입니다.\n질문할 내용이 있으신가요?",
-                    send_at: new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' })
-                }])
-            } else {
-                setChatLog(result.messages)
-            }
-        })
+                setSessionID(result.session_id)
+                if (result.messages == null || result.messages.length == 0) {
+                    setChatLog([{
+                        id: 0,
+                        sender: 0,
+                        message: "안녕하세요. 전세계 어디에서나 일하고 싶은 당신을 위한, 글로-발 워커입니다.\n질문할 내용이 있으신가요?",
+                        send_at: new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' })
+                    }])
+                } else {
+                    setChatLog(result.messages)
+                }
+            })
+        }
     }
     
     const getChatAPI = () => {
         setWritingMode(false)
-        axios({
-            method: 'POST',
-            url: `http://34.64.89.168:8000/chatbot/chat/`,
-            data: qs.stringify({
-                session_id: selectedSessionID,
-                query: userInput,
-                nation: 'korea'
-            }),
-            headers: {
-                'content-type': 'application/x-www-form-urlencoded',
-                Authorization: `Bearer ${userAccessToken}`
-            },
-        }).then((response) => {
-            const result = response.data
-            getSessionAPI(selectedSessionID)
-            setUserInput('')
-            setWritingMode(true)
-        })
+        if (userAccessToken != null) {
+            axios({
+                method: 'POST',
+                url: `http://34.64.89.168:8000/chatbot/chat/`,
+                data: qs.stringify({
+                    session_id: selectedSessionID,
+                    query: userInput,
+                    nation: 'korea'
+                }),
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded',
+                    Authorization: `Bearer ${userAccessToken}`
+                },
+            }).then((response) => {
+                const result = response.data
+                getSessionAPI(selectedSessionID)
+                setUserInput('')
+                setWritingMode(true)
+            })
+        }
     }
 
 
