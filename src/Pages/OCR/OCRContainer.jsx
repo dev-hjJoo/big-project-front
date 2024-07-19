@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import OCRPresenter from './OCRPresenter';
-import { getCookie } from '../../Assets/CookieContainer';
 
-const OCRContainer = () => {
+const OCRContainer = ({ userAccessToken }) => {
     const [contractType, setContractType] = useState('');
     const [imageFiles, setImageFiles] = useState([]);
     const [result, setResult] = useState(null);
@@ -44,7 +43,7 @@ const OCRContainer = () => {
             data: formData,
             headers: {
                 'Content-Type': 'multipart/form-data',
-                Authorization: `Bearer ${getCookie('accessToken')}`
+                Authorization: `Bearer ${userAccessToken}`
             }
         }).then((response) => {
             const result = response.data;

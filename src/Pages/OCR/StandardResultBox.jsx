@@ -36,6 +36,9 @@ const StandardResultBox = ({ missingItems }) => {
         <GBox className="ocr-result" style={{ textAlign: 'left' }}>
             <h3>근로계약서 검토 결과</h3>
             <Divider />
+            {missingItems.length === 0 && (
+                <p style={{ fontWeight: 'bold', color: 'blue' }}>근로계약서에 모든 항목이 포함되어 있습니다.</p>
+            )}
             <ol>
                 {renderItem('근로계약기간', (
                     <>

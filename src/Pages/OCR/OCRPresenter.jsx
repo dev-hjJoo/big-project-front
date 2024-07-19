@@ -111,7 +111,7 @@ const OCRPresenter = ({
                     <div className="contract-type-upload">
                         <label>
                             <select value={contractType} onChange={handleContractTypeChange}>
-                                <option value="">Select Contract Type</option>
+                                <option value=""> Select Contract Type </option>
                                 <option value="standard_contract">Standard Contract</option>
                                 <option value="foreigner_contract">Foreigner Contract</option>
                             </select>

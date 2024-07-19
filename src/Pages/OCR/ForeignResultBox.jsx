@@ -38,6 +38,9 @@ const ForeignResultBox = ({ missingItems }) => {
         <GBox className="ocr-result" style={{ textAlign: 'left' }}>
             <h3>Review Results of Foreign Worker Employment Contract</h3>
             <Divider />
+            {missingItems.length === 0 && (
+                <p style={{ fontWeight: 'bold', color: 'blue' }}>All items are included in the contract.</p>
+            )}
             <ol>
                 {renderItem('Employment Contract Period', (
                     <>
