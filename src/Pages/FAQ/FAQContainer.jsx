@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FAQPresenter from './FAQPresenter';
+import axios from 'axios';
+import { getCookie } from '../../Authorization/CookieContainer';
 
-const FAQContainer = () => {
+
+const FAQContainer = ({userAccessToken}) => {
 
 
     // variable
@@ -27,6 +30,10 @@ const FAQContainer = () => {
         if (selectedCol == '') setSelectedCol(bowID)
         else setSelectedCol('')
     }
+
+    useEffect(() => {
+        getFAQListAPI()
+    }, [])
 
 
     // state
@@ -64,6 +71,22 @@ const FAQContainer = () => {
             content: loremIpsum
         },   
     ])
+
+    const getFAQListAPI = () => {
+        axios({
+            method: 'GET',
+            url: `http://34.64.89.168:8000/fqa/fqas/`,
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded',
+                Authorization: `Bearer ${userAccessToken}`
+            },
+        }).then((response) => {
+            const result = response.data
+            console.log(result)
+
+        })
+    }
+
 
     // result
     return (

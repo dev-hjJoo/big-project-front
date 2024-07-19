@@ -2,14 +2,23 @@ import React, { useState, useEffect } from 'react';
 import Router from './Router';
 import Layout from '../Layout/Layout';
 import { BrowserRouter } from 'react-router-dom';
+import { getCookie } from '../Authorization/CookieContainer';
+import axios from 'axios';
+import qs from 'qs';
 
 const HomePage = () => {
     const [articles, setArticles] = useState([]);
     // User Info.
-    const [userRefreshToken, setuserRefreshToken] = useState('');
+    const [userAccessToken, setUserAccessToken] = useState(null);
     const [userEmail, setUserEmail] = useState('')
 
     useEffect(() => {
+      // AccessToken
+      if (userAccessToken == null && getCookie('refreshToken') != null) {
+        getAccessTokenFromRefreshTokenAPI()
+      }
+
+      // NEWS
       fetch(process.env.PUBLIC_URL + '/news_data.json')
         .then(response => response.json())
         .then(data => {
@@ -29,13 +38,36 @@ const HomePage = () => {
     }, []);
 
 
+    const getAccessTokenFromRefreshTokenAPI = () => {
+      axios({
+          method: 'POST',
+          url: 'http://34.64.89.168:8000/account/token/refresh/',
+          data: qs.stringify({
+            refresh: getCookie('refreshToken')
+          }),
+          headers: {
+              'content-type': 'application/x-www-form-urlencoded',
+          },
+      }).then((response) => {
+          const result = response.data
+          const accessToken = result.access
+          setUserAccessToken(accessToken)
+      })
+    }
+
+    useEffect(()=> {
+      if (userAccessToken == null && getCookie('refreshToken') != null) {
+        getAccessTokenFromRefreshTokenAPI()
+      }
+    }, [userAccessToken])
+
     return (
         <BrowserRouter>
-            <Layout userRefreshToken={userRefreshToken}
+            <Layout userAccessToken={userAccessToken}
                     userEmail={userEmail}>
                 <Router articles={articles}
-                        userRefreshToken={userRefreshToken}
-                        setuserRefreshToken={setuserRefreshToken}
+                        userAccessToken={userAccessToken}
+                        setUserAccessToken={setUserAccessToken}
                         setUserEmail={setUserEmail}/>
             </Layout>
         </BrowserRouter>

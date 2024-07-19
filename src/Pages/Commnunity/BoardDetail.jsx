@@ -1,105 +1,164 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import GBox from '../../Componentts/GBox/GBox';
 import GButton from '../../Componentts/GButton/GButton';
-import './board.scss'
+import qs from 'qs';
+import './board.scss';
 import { Divider } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const BoardDetail = () => {
-    const { id } = useParams();
-    const navigate = useNavigate();
-    const savedPosts = JSON.parse(localStorage.getItem('posts')) || [];
-    const [post, setPost] = useState(
-        savedPosts.find(post => post.id === parseInt(id)) || { comments: [] }
-    );
-    const [commentContent, setCommentContent] = useState('');
+const BoardDetail = ({userAccessToken}) => {
+    const { id } = useParams(); // URL 파라미터에서 게시글 ID를 가져옴
+    const navigate = useNavigate(); // 페이지 이동을 위한 네비게이트 객체
+    const [post, setPost] = useState({ comments: [] }); // 게시글 상태
+    const [commentContent, setCommentContent] = useState(''); // 댓글 내용 상태
 
-    useEffect(() => {
-        // 조회수 증가
-        if (post) {
-            const updatedPost = { ...post, views: post.views + 1 };
-            const updatedPosts = savedPosts.map(p => (p.id === updatedPost.id ? updatedPost : p));
-            localStorage.setItem('posts', JSON.stringify(updatedPosts));
-            setPost(updatedPost);
+    // 게시글을 백엔드 서버에서 가져오는 함수
+    const fetchPost = () => {
+        if (userAccessToken != null) {
+            axios({
+                method: 'GET',
+                url: `http://34.64.89.168:8000/community/articles/${id}/`,
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${userAccessToken}`
+                },
+            }).then(response => {
+                setPost(response.data); // 상태에 게시글 저장
+            }).catch(error => {
+                console.error('게시글을 가져오는 중 오류 발생:', error); // 오류 처리
+            });
         }
-    }, [id]); // post ID 바뀔때만 작동
+    };
 
+    // 컴포넌트가 마운트될 때 게시글을 로드
+    useEffect(() => {
+        fetchPost(); // 초기 로드
+    }, [userAccessToken, id]);
+
+    // 게시글 삭제 함수
     const handleDelete = () => {
-        const updatedPosts = savedPosts.filter(p => p.id !== post.id);
-        localStorage.setItem('posts', JSON.stringify(updatedPosts));
-        navigate('/community/list'); // 삭제 후 목록 페이지로 이동
+        if (userAccessToken != null) {
+            axios({
+                method: 'DELETE',
+                url: `http://34.64.89.168:8000/community/articles/${id}/`,
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${userAccessToken}`
+                },
+            }).then(() => {
+                navigate('/community/list'); // 삭제 후 목록 페이지로 이동
+            }).catch(error => {
+                console.error('게시글을 삭제하는 중 오류 발생:', error); // 오류 처리
+            });
+        }
     };
 
+    // 댓글 추가 함수
     const addComment = () => {
-        const newComment = { author: '사용자 닉네임', content: commentContent };
-        const updatedPost = { ...post, comments: [...(post.comments || []), newComment] };
-        const updatedPosts = savedPosts.map(p => (p.id === updatedPost.id ? updatedPost : p));
-        localStorage.setItem('posts', JSON.stringify(updatedPosts));
-        setPost(updatedPost); // 상태 업데이트
-        setCommentContent(''); // 댓글 입력 필드 초기화
+        const newComment = { message: commentContent, article: 1}; // 새로운 댓글 객체
+        if (userAccessToken != null) {
+            axios({
+                method: 'POST',
+                url: `http://34.64.89.168:8000/community/articles/${id}/comments/`, // URL 수정
+                data: JSON.stringify(newComment), // 데이터를 JSON으로 변환
+                headers: {
+                    'Content-Type': 'application/json', // 헤더 설정
+                    Authorization: `Bearer ${userAccessToken}`
+                },
+            }).then(response => {
+                const addedComment = {
+                    user: response.data.user,
+                    message: response.data.message, // 'mesage' 오타 수정
+                    created_at: response.data.created_at,
+                    updated_at: response.data.updated_at
+                };
+                setPost(prevPost => ({
+                    ...prevPost,
+                    comments: [...prevPost.comments, addedComment] // 상태에 새로운 댓글 추가
+                }));
+                setCommentContent(''); // 댓글 입력 필드 초기화
+            }).catch(error => {
+                console.error('댓글을 추가하는 중 오류 발생:', error); // 오류 처리
+            });
+        }
     };
-
-    const deleteComment = (index) => {
-        const updatedComments = post.comments.filter((_, i) => i !== index);
-        const updatedPost = { ...post, comments: updatedComments };
-        const updatedPosts = savedPosts.map(p => (p.id === updatedPost.id ? updatedPost : p));
-        localStorage.setItem('posts', JSON.stringify(updatedPosts));
-        setPost(updatedPost); // 상태 업데이트
+    // 댓글 삭제 함수
+    const deleteComment = (commentId) => {
+        if (userAccessToken != null) {
+            axios({
+                method: 'DELETE',
+                url: `http://34.64.89.168:8000/community/comments/${commentId}/`,
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${userAccessToken}`
+                },
+            }).then(() => {
+                setPost(prevPost => ({
+                    ...prevPost,
+                    comments: prevPost.comments.filter(comment => comment.id !== commentId) // 상태에서 댓글 삭제
+                }));
+            }).catch(error => {
+                console.error('댓글을 삭제하는 중 오류 발생:', error); // 오류 처리
+            });
+        }
+        
     };
 
     if (!post) {
-        return <GBox size="large">Post not found</GBox>;
+        return <GBox size="large">게시글을 찾을 수 없습니다</GBox>; // 게시글이 로드되지 않았을 때 표시
     }
 
     return (
         <>
-            {/* POST */}
+            {/* 게시글 상세 */}
             <div className="board-detail">
                 <div className="detail-header">
                     <div className="detail-title">{post.title}</div>
-                    <div className="detail-author">{post.author}</div>
-                    <div className="detail-views">👀: {post.views}</div>
-                    {/* 수정사항: onClick -> 삭제하시겠습니까 Alert 떠야 함 */}
-                    <div className="hiddenMenu"> <FontAwesomeIcon icon={faTrashCan} onClick={handleDelete}/> </div>
+                    <div className="detail-author">{post.user?.username ? post.user.username : '알 수 없음'}</div> {/* user가 정의되어 있는지 확인 */}
+                    <div className="detail-views">👀: {post.view}</div>
+                    {/* 삭제 버튼 클릭 시 확인 알림 */}
+                    <div className="hiddenMenu">
+                        <FontAwesomeIcon icon={faTrashCan} onClick={() => window.confirm('정말 삭제하시겠습니까?') && handleDelete()} />
+                    </div>
                 </div>
                 <Divider />
                 <div className='board-content'>
                     <p>{post.content}</p>
                 </div>
             </div>
-            <Divider>Comment</Divider>
+            <Divider>댓글</Divider>
 
-            {/* Comment */}
+            {/* 댓글 목록 */}
             <div className='comment-detail'>
                 {post.comments && post.comments.length > 0 ? (
-                        <ul>
-                            {post.comments.map((comment, index) => (
-                                <li key={index} className="comment-item">
-                                    <span className="comment-author">{comment.author}</span>
-                                    {/* 수정사항: 댓글 개수가 게시물 뒤에 [1] 이런 식으로 들어가면 좋을 것 같아요! */}
-                                    <p className="comment-content">{comment.content}</p>
-                                    <FontAwesomeIcon icon={faXmark} onClick={() => deleteComment(index)} />
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p>댓글이 없습니다.</p>
-                    )
-                }
+                    <ul>
+                        {post.comments.map((comment, index) => (
+                            <li key={comment.id} className="comment-item">
+                                <span className="comment-author">{comment.user?.username ? comment.user.username : '알 수 없음'}</span> {/* user가 정의되어 있는지 확인 */}
+                                <p className="comment-content">{comment.message}</p>
+                                <FontAwesomeIcon icon={faXmark} onClick={() => deleteComment(comment.id)} />
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>댓글이 없습니다.</p>
+                )}
             </div>
 
-            <div className='comment-list'>   
+            {/* 댓글 작성 */}
+            <div className='comment-list'>
                 <input
                     type="text"
-                    placeholder="Enter your comments"
+                    placeholder="댓글을 입력하세요"
                     value={commentContent}
                     onChange={(e) => setCommentContent(e.target.value)}
                 />
                 <GButton color="outlinePrimary" hover='hover' onClick={addComment}>
-                    Send
+                    작성
                 </GButton>
             </div>
         </>
@@ -107,5 +166,3 @@ const BoardDetail = () => {
 };
 
 export default BoardDetail;
-
-

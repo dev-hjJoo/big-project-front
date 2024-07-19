@@ -74,7 +74,7 @@ const AdminContainer = () => {
 
     const handleFileCheck = (id) => {
         const updatedFiles = fileList.map(file =>
-            file.id === id ? { ...file, checked: !file.checked } : file
+            file.id == id ? { ...file, checked: !file.checked } : file
         );
         setFileList(updatedFiles);
     };

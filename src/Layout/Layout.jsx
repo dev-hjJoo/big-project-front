@@ -5,10 +5,10 @@ import "./layout.scss";
 
 
 
-const Layout = ({children, userRefreshToken, userEmail}) => {
+const Layout = ({children, userAccessToken, userEmail}) => {
     return (
         <div className="display">
-            <SideNavigation userRefreshToken={userRefreshToken}
+            <SideNavigation userAccessToken={userAccessToken}
                             userEmail={userEmail} />
 
             <main>

@@ -14,7 +14,7 @@ const FAQPresenter = ({tab, tabList, changeTab, bow, selectedCol, showDetail}) =
                 <ul className='tabs'>
                     {tabList.map((tabItem) => (
                         <li key={tabItem.id} 
-                            className={`tab ${tab === tabItem.id ? 'selected' : ''}`} 
+                            className={`tab ${tab == tabItem.id ? 'selected' : ''}`} 
                             onClick={() => changeTab(tabItem.id)}>
                             {tabItem.label}
                         </li>

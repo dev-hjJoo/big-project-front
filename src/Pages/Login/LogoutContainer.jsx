@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import qs from 'qs';
-import { removeCookie, getCookie } from '../../Assets/CookieContainer';
+import { removeCookie, getCookie } from '../../Authorization/CookieContainer';
 
-const LogoutContainer = ({userRefreshToken, setuserRefreshToken, setUserEmail}) => {
+const LogoutContainer = ({userAccessToken, setUserAccessToken, setUserEmail}) => {
 
     const navigate = useNavigate();
     // const [isLoggingOut, setLoggingOut] = useState(false)
@@ -18,16 +18,16 @@ const LogoutContainer = ({userRefreshToken, setuserRefreshToken, setUserEmail}) 
                 method: 'POST',
                 url: 'http://34.64.89.168:8000/account/logout/',
                 data: qs.stringify({
-                    refresh_token: userRefreshToken
+                    refresh_token: getCookie('refreshToken')
                 }),
                 headers: {
                     'content-type': 'application/x-www-form-urlencoded',
-                    Authorization: `Bearer ${getCookie('accessToken')}`
+                    Authorization: `Bearer ${userAccessToken}`
                 },
             }).then((response) => {
                 // const result = response.data  
-                removeCookie('accessToken')
-                setuserRefreshToken('')
+                removeCookie('refreshToken')
+                setUserAccessToken('')
                 setUserEmail('')
                 setLoggedOut(true)
     

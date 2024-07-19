@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import './sideNavigation.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComments, faPeopleGroup, faRightToBracket, faGear, faCircleQuestion, faClipboardQuestion, faFileSignature, faArrowUpFromBracket, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faComments, faPeopleGroup, faRightToBracket, faGear, faClipboardQuestion, faFileSignature, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import getLoginState from '../../Authorization/UserContainer';
 
 
 const SideNavTop = [
@@ -29,29 +30,17 @@ const SideNavTop = [
     },
 ];
 
-const SideNavBottom = [
-    
-    {
-        title: "Settings",
-        userEmail: 'admin@glawbal.com',
-        icon: <FontAwesomeIcon icon={faGear} size='2x' className='animatedIcon'/>,
-        url: "/db",
-    },
-    {
-        title: "Login",
-        userEmail: '',
-        icon: <FontAwesomeIcon icon={faRightToBracket} size='2x' className='animatedIcon'/>,
-        url: "/login",
-    },
-];
 
-const SideNavigation = ({userRefreshToken, userEmail}) => {
+const SideNavigation = ({userAccessToken, userEmail}) => {
+
+    const isLogin = getLoginState()
+
     return (
         <div className="sideNav">
             <div className="sideNavInner">
                 <div className="sideNavTop">
                     {/* 로그인 완료된 상태여야만 상단메뉴(기능 메뉴) 뜸 */}
-                    {userRefreshToken != '' ? 
+                    {(userAccessToken != null) ? 
                         <nav className='menu'>
                             <ul>
                                 {SideNavTop.map((nav, key) => (
@@ -81,7 +70,7 @@ const SideNavigation = ({userRefreshToken, userEmail}) => {
                             }
 
                             {/* 로그인/로그아웃 */}
-                            {(userEmail == '') ? 
+                            {(userAccessToken == null) ? 
                                 <li>
                                     <Link to="/login">
                                         <FontAwesomeIcon icon={faRightToBracket} size='2x' className='animatedIcon'/>

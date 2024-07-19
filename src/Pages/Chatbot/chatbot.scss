@@ -28,7 +28,7 @@
         display: flex;
         flex-direction: column;
         overflow: scroll;
-        max-height: 37rem;
+        max-height: 90%;
         
         .session {
             border-bottom: 0.1px solid var(--clr-gray);
@@ -130,5 +130,25 @@
     
     .chatLog .USER .contents {
         background-color: var(--clr-light);
+    }
+
+    /* INPUT AREA */
+    .inputArea {
+        position: relative;
+        .chatSpinner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            color: var(--clr-highlight);
+            display: flex;
+            justify-content: center;
+            background-color: var(--clr-white);
+            opacity: 0.6;
+
+            svg {
+                top: 33%;
+                position: absolute;
+            }
+        }
     }
 }

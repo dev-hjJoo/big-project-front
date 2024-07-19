@@ -1,9 +1,9 @@
-import {React, useState} from 'react';
+import {React, useRef, useEffect} from 'react';
 import "./chatbot.scss"
 import { Divider } from '@mui/material';
 import GComment from '../../Componentts/GComment/GComment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChildReaching, faPlus, faPoo, faRobot, faTrashCan, faUserGraduate } from '@fortawesome/free-solid-svg-icons';
+import { faChildReaching, faGavel, faHandshake, faHandshakeAlt, faPlus, faPoo, faRobot, faSpinner, faTrashCan, faUserGraduate } from '@fortawesome/free-solid-svg-icons';
 import { faFaceLaughWink } from '@fortawesome/free-regular-svg-icons';
 
 
@@ -13,11 +13,19 @@ const ChatbotPresenter = ({sessionList, selectedSessionID,
                            onClickConnectSession, 
                            onClickSubmitChat,
                            chatLog, 
-                           userInput, loadUserInput, }) => {
+                           userInput, loadUserInput, writingMode}) => {
 
+    // 채팅 시 보여지는 이름 처리
     const senderIndexToString = (senderIndex) => {
         return (senderIndex == 0) ? 'BOT' : 'USER';
     }
+
+    // Scroll 처리
+    const messageEndRef = useRef(null);
+    useEffect(() => {
+        if (!messageEndRef.current) return
+        messageEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      }, [chatLog]);
 
 
     return (
@@ -72,11 +80,20 @@ const ChatbotPresenter = ({sessionList, selectedSessionID,
                             </div>
                         </div>
                     ))}
+                    <div ref={messageEndRef}></div>
                 </div>
                 <Divider/>
-                <GComment content={userInput} 
-                          onChangeContent={loadUserInput} 
+                <div className="inputArea">
+                    { writingMode ? 
+                        <></>:
+                        <div className="chatSpinner"><FontAwesomeIcon icon={faGavel} size='2x' spin/></div> 
+                    }
+                    
+                    <GComment content={userInput} 
+                          onChangeContent={loadUserInput}
+                          readOnly={writingMode ? false:true} 
                           submitContent={onClickSubmitChat}/>
+                </div>
             </div>}
 
         </div>

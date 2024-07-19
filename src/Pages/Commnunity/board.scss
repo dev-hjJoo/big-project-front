@@ -272,6 +272,7 @@
         height: 20rem;
         overflow: scroll;
         padding: var(--padding-1) var(--padding-3);
+        white-space: break-spaces; // 줄바꿈 처리
     }
     h3 {
         text-align: right;
