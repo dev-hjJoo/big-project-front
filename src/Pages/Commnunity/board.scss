@@ -10,6 +10,7 @@
     margin-bottom: 1rem;
 }
 
+
 .pagination {
     display: flex;
     justify-content: center;
@@ -292,3 +293,71 @@
     }
 }
 
+// 댓글 수 꾸미기
+.comment-count {
+    color: #007bff; /* 파란색 */
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+
+
+.edit-title {
+    width: 100%;
+    padding: var(--padding-3);
+    font-size: var(--font-size-4);
+    border: none; /* 테두리를 없앰 */
+    border-radius: var(--border-radius-1); /* 모서리를 둥글게 */
+    box-sizing: border-box; /* 화면 사이즈에 맞게 조정 */
+    margin-bottom: 1rem;
+    background-color: var(--clr-background); /* 내부 색상을 연한 파랑색으로 변경 */
+    
+    &:focus {
+        outline: none; /* 입력 시 테두리가 다시 나오지 않도록 함 */
+    }
+}
+
+.edit-content {
+    width: -webkit-fill-available;
+    padding: var(--padding-3);
+    font-size: var(--font-size-4);
+    border-style: none;
+    border-radius: var(--border-radius-1);
+    resize: none;
+    height: 23rem;
+    margin: 1.2rem 0rem;
+    background-color: var(--clr-lightgray);
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px; /* 버튼 사이의 간격 조절 */
+
+    .button-link {
+        display: inline-block;
+        padding: 0; /* 내부 GButton의 패딩을 사용 */
+        text-decoration: none;
+    }
+
+    .button-link .GButton, .button-search {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        border: 1px solid var(--clr-primary);
+        border-radius: 4px;
+        color: var(--clr-primary);
+        background-color: white;
+        cursor: pointer;
+    }
+
+    .button-search {
+        width: auto; /* button-link와 동일한 크기 */
+    }
+}

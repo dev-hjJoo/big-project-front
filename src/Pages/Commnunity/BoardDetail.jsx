@@ -7,7 +7,7 @@ import qs from 'qs';
 import './board.scss';
 import { Divider } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { faTrashCan, faEdit } from '@fortawesome/free-regular-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const BoardDetail = ({userAccessToken}) => {
@@ -15,6 +15,12 @@ const BoardDetail = ({userAccessToken}) => {
     const navigate = useNavigate(); // 페이지 이동을 위한 네비게이트 객체
     const [post, setPost] = useState({ comments: [] }); // 게시글 상태
     const [commentContent, setCommentContent] = useState(''); // 댓글 내용 상태
+
+
+    const [isEditing, setIsEditing] = useState(false); // 수정 모드 상태
+    const [editTitle, setEditTitle] = useState(''); // 수정할 제목 상태
+    const [editContent, setEditContent] = useState(''); // 수정할 내용 상태
+
 
     // 게시글을 백엔드 서버에서 가져오는 함수
     const fetchPost = () => {
@@ -28,6 +34,8 @@ const BoardDetail = ({userAccessToken}) => {
                 },
             }).then(response => {
                 setPost(response.data); // 상태에 게시글 저장
+                setEditTitle(response.data.title); // 수정할 제목 초기화
+                setEditContent(response.data.content); // 수정할 내용 초기화
             }).catch(error => {
                 console.error('게시글을 가져오는 중 오류 발생:', error); // 오류 처리
             });
@@ -59,7 +67,7 @@ const BoardDetail = ({userAccessToken}) => {
 
     // 댓글 추가 함수
     const addComment = () => {
-        const newComment = { message: commentContent, article: 1}; // 새로운 댓글 객체
+        const newComment = { message: commentContent, article: id}; // 새로운 댓글 객체
         if (userAccessToken != null) {
             axios({
                 method: 'POST',
@@ -71,8 +79,8 @@ const BoardDetail = ({userAccessToken}) => {
                 },
             }).then(response => {
                 const addedComment = {
-                    user: response.data.user,
-                    message: response.data.message, // 'mesage' 오타 수정
+                    user_nickname: response.data.user_nickname,
+                    message: response.data.message, 
                     created_at: response.data.created_at,
                     updated_at: response.data.updated_at
                 };
@@ -107,6 +115,31 @@ const BoardDetail = ({userAccessToken}) => {
         }
         
     };
+        // 게시글 수정 함수
+        const handleEdit = () => {
+            if (userAccessToken != null) {
+                axios({
+                    method: 'PUT',
+                    url: `http://34.64.89.168:8000/community/articles/${id}/`,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${userAccessToken}`
+                    },
+                    data: {
+                        title: editTitle,
+                        content: editContent,
+                        image: post.image?.id,
+                        category: 1,
+                        is_active: post.is_active
+                    }
+                }).then(response => {
+                    setPost(response.data); // 상태에 수정된 게시글 저장
+                    setIsEditing(false); // 수정 모드 종료
+                }).catch(error => {
+                    console.error('게시글을 수정하는 중 오류 발생:', error); // 오류 처리
+                });
+            }
+    };
 
     if (!post) {
         return <GBox size="large">게시글을 찾을 수 없습니다</GBox>; // 게시글이 로드되지 않았을 때 표시
@@ -117,18 +150,46 @@ const BoardDetail = ({userAccessToken}) => {
             {/* 게시글 상세 */}
             <div className="board-detail">
                 <div className="detail-header">
-                    <div className="detail-title">{post.title}</div>
-                    <div className="detail-author">{post.user?.username ? post.user.username : '알 수 없음'}</div> {/* user가 정의되어 있는지 확인 */}
+                    <div className="detail-title">
+                        {isEditing ? (
+                            <input
+                                type="text"
+                                value={editTitle}
+                                className='edit-title'
+                                onChange={(e) => setEditTitle(e.target.value)}
+                            />
+                        ) : (
+                            post.title
+                        )}
+                    </div>
+                    <div className="detail-author">{post.user_nickname}</div> 
                     <div className="detail-views">👀: {post.view}</div>
                     {/* 삭제 버튼 클릭 시 확인 알림 */}
-                    <div className="hiddenMenu">
-                        <FontAwesomeIcon icon={faTrashCan} onClick={() => window.confirm('정말 삭제하시겠습니까?') && handleDelete()} />
-                    </div>
+                    {/* 글 작성자와 사용자가 같을 경우에만 삭제 및 수정 버튼 보이도록 */}
+                    {post.is_author && (
+                        <div className="hiddenMenu">
+                            <FontAwesomeIcon icon={faTrashCan} onClick={() => window.confirm('정말 삭제하시겠습니까?') && handleDelete()} />
+                            <FontAwesomeIcon icon={faEdit} onClick={() => setIsEditing(true)} /> {/* 수정 버튼 추가 */}
+                        </div>
+                    )}
                 </div>
                 <Divider />
                 <div className='board-content'>
-                    <p>{post.content}</p>
+                    {isEditing ? (
+                        <textarea
+                            value={editContent}
+                            className='edit-content'
+                            onChange={(e) => setEditContent(e.target.value)}
+                        />
+                    ) : (
+                        <p>{post.content}</p>
+                    )}
                 </div>
+                {isEditing && (
+                    <GButton color="outlinePrimary" hover='hover' onClick={handleEdit}>
+                        수정 완료
+                    </GButton>
+                )}
             </div>
             <Divider>댓글</Divider>
 
@@ -138,9 +199,11 @@ const BoardDetail = ({userAccessToken}) => {
                     <ul>
                         {post.comments.map((comment, index) => (
                             <li key={comment.id} className="comment-item">
-                                <span className="comment-author">{comment.user?.username ? comment.user.username : '알 수 없음'}</span> {/* user가 정의되어 있는지 확인 */}
+                                <span className="comment-author">{comment.user_nickname}</span> 
                                 <p className="comment-content">{comment.message}</p>
-                                <FontAwesomeIcon icon={faXmark} onClick={() => deleteComment(comment.id)} />
+                                {post.is_author && (
+                                    <FontAwesomeIcon icon={faXmark} onClick={() => deleteComment(comment.id)} />
+                                )}
                             </li>
                         ))}
                     </ul>

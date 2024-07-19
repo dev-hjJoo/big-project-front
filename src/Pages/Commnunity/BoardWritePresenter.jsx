@@ -13,7 +13,7 @@ const BoardWritePresenter = ({ title, setTitle, content, setContent, handleSubmi
                             type="text" 
                             value={title} 
                             onChange={(e) => setTitle(e.target.value)} 
-                            placeholder="Please enter a title"
+                            placeholder="제목"
                             required
                         />
                     </div>
@@ -22,6 +22,7 @@ const BoardWritePresenter = ({ title, setTitle, content, setContent, handleSubmi
                         <textarea 
                             value={content} 
                             onChange={(e) => setContent(e.target.value)} 
+                            placeholder='내용'
                             required
                         />
                     </div>
