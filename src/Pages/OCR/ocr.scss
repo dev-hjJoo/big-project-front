@@ -15,12 +15,10 @@
     align-items: flex-start; /* 상단에 정렬 */
     width: 100%; /* 전체 너비 사용 */
     max-width: 1300px; /* 최대 너비 설정 */
-    // flex-wrap: wrap; /* 화면 크기에 맞게 감싸도록 설정 */
     margin: 0 auto; /* 중앙 정렬 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
     flex-direction: row; /* 가로 방향으로 정렬 */
     box-sizing: border-box;
-
 }
 
 .left-section,
@@ -47,7 +45,6 @@
     }
 }
 
-
 .ocr-uploader {
     display: flex;
     justify-content: center; /* 가로 방향 중앙 정렬 */
@@ -69,6 +66,18 @@
     font-size: 14px; /* 글씨 크기 조정 */
     overflow-y: auto; /* 세로 스크롤 가능하도록 설정 */
     text-align: left; /* 텍스트 왼쪽 정렬 */
+}
+
+.contract-type-upload {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* 간격 조정 */
+}
+
+.form-actions {
+    display: flex;
+    justify-content: center; /* 버튼 중앙 정렬 */
+    margin-top: 20px; /* 버튼과 다른 요소 사이의 여백 */
 }
 
 /* 반응형 디자인을 위한 미디어 쿼리 */

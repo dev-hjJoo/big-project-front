@@ -2,8 +2,7 @@ import React from 'react';
 import GBox from '../../Componentts/GBox/GBox';
 import { Divider } from '@mui/material';
 
-const StandardResultBox = ({ result }) => {
-    // 백엔드의 체크리스트 항목을 프론트엔드의 타이틀과 매핑
+const StandardResultBox = ({ missingItems }) => {
     const titleMapping = {
         '근로개시일': '근로계약기간',
         '근무장소': '근무장소',
@@ -21,10 +20,10 @@ const StandardResultBox = ({ result }) => {
         '근로자': '근로자'
     };
 
-    const missingItemsSet = new Set(result.missing_items.map(item => titleMapping[item]));
+    const missingItemsSet = new Set(missingItems.map(item => titleMapping[item]));
 
     const renderItem = (title, content) => (
-        <li>
+        <li key={title}>
             <div className='title' style={{ color: missingItemsSet.has(title) ? 'red' : 'black' }}>
                 {title}
             </div>

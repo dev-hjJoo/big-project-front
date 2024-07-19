@@ -1,63 +1,150 @@
-import React, { Suspense, lazy } from 'react';
-import GBox from '../../Componentts/GBox/GBox';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import GButton from '../../Componentts/GButton/GButton';
 import "./ocr.scss";
-import { Divider } from '@mui/material';
 
-const OCRPresenter = ({ images = [], onButtonClick, contractType, onSelectChange, result, error }) => {
+const mergeImagesHorizontally = (imageFiles, callback) => {
+    const image1 = new Image();
+    const image2 = new Image();
+
+    image1.src = URL.createObjectURL(imageFiles[0]);
+    image2.src = URL.createObjectURL(imageFiles[1]);
+
+    image1.onload = () => {
+        image2.onload = () => {
+            const maxHeight = Math.max(image1.height, image2.height);
+            const totalWidth = image1.width + image2.width;
+
+            const canvas = document.createElement('canvas');
+            canvas.width = totalWidth;
+            canvas.height = maxHeight;
+
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(image1, 0, 0);
+            ctx.drawImage(image2, image1.width, 0);
+
+            const mergedImage = canvas.toDataURL('image/png');
+            callback(mergedImage);
+        };
+    };
+};
+
+const drawBoundingBoxes = (image, res, setOutputImage) => {
+    const img = new Image();
+    img.src = image;
+
+    img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+
+        res.images[0].fields.forEach(field => {
+            const boundingBox = field.boundingPoly.vertices;
+            ctx.beginPath();
+            ctx.moveTo(boundingBox[0].x, boundingBox[0].y);
+            for (let i = 1; i < boundingBox.length; i++) {
+                ctx.lineTo(boundingBox[i].x, boundingBox[i].y);
+            }
+            ctx.closePath();
+
+            if (field.inferText) {
+                ctx.strokeStyle = 'green';
+                ctx.lineWidth = 2;
+            } else {
+                ctx.strokeStyle = 'red';
+                ctx.lineWidth = 4;
+            }
+            ctx.stroke();
+        });
+
+        const outputImage = canvas.toDataURL('image/png');
+        setOutputImage(outputImage);
+    };
+};
+
+
+const OCRPresenter = ({
+    contractType,
+    imageFiles,
+    result,
+    missingItems,
+    error,
+    handleContractTypeChange,
+    handleFileChange,
+    handleSubmit
+}) => {
+    const [outputImage, setOutputImage] = useState(null);
+
     const ResultBox = lazy(() =>
-        contractType === 'standard'
+        contractType === 'standard_contract'
             ? import('./StandardResultBox')
             : import('./ForeignResultBox')
     );
 
-    const uploadMessage = contractType === 'standard' 
-        ? "Please upload the image of the labor contract."
-        : "Please upload the images of the two labor contracts.";
+    useEffect(() => {
+        if (imageFiles.length > 0 && result) {
+            if (contractType === 'foreigner_contract' && imageFiles.length === 2) {
+                mergeImagesHorizontally(imageFiles, (mergedImage) => {
+                    drawBoundingBoxes(mergedImage, result, setOutputImage);
+                });
+            } else {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    drawBoundingBoxes(e.target.result, result, setOutputImage);
+                };
+                reader.readAsDataURL(imageFiles[0]);
+            }
+        }
+    }, [imageFiles, result, contractType]);
 
     return (
         <div>
             <div className="ocr-content">
-                <h1>AI 근로계약서 검토</h1>
+                <h1>Contract AI-Check</h1>
                 <p style={{ textAlign: 'center' }}>
                     근로계약서 이미지를 업로드 해 보세요.<br />
                     AI가 분석해서 근로계약서를 검토 해 드립니다.
                 </p>
-
-                <div className="buttonArea" style={{ display: 'flex', alignItems: 'center' }}>
-                    <select value={contractType} onChange={onSelectChange} style={{ marginRight: '10px' }}>
-                        <option value="standard">표준근로계약서 업로드</option>
-                        <option value="foreign">외국인 표준근로계약서 업로드</option>
-                    </select>
-                    <GButton color="primary" hover="hover" onClick={onButtonClick}>
-                        Upload Image
-                    </GButton>
-                </div>
-
+                <form onSubmit={handleSubmit}>
+                    <div className="contract-type-upload">
+                        <label>
+                            <select value={contractType} onChange={handleContractTypeChange}>
+                                <option value="">Select Contract Type</option>
+                                <option value="standard_contract">Standard Contract</option>
+                                <option value="foreigner_contract">Foreigner Contract</option>
+                            </select>
+                        </label>
+                        <GButton type="button" color="primary" hover="hover">
+                            <label>
+                                Upload Images
+                                <input type="file" multiple onChange={handleFileChange} style={{ display: 'none' }} />
+                            </label>
+                        </GButton>
+                    </div>
+                    <div className="form-actions">
+                        <GButton type="submit" color="primary" hover="hover">Submit</GButton>
+                    </div>
+                </form> 
+                {error && <p style={{ color: 'red' }}>{error}</p>}
                 <div className="ocr-container">
-                    <div className="left-section" style={{ textAlign: 'center' }}>
-                        <GBox className="ocr-uploader" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            {images.length > 0 ? (
-                                images.map((image, index) => (
-                                    <img key={index} src={image} alt={`Uploaded ${index}`} className="uploaded-image" style={{ maxWidth: '100%', height: 'auto', margin: '10px' }} />
-                                ))
-                            ) : (
-                                <p>{uploadMessage}</p>
-                            )}
-                        </GBox>
-                    </div>
-                    <div className="right-section">
-                        {error && (
-                            <div style={{ color: 'red', textAlign: 'center' }}>
-                                {error}
+                    {result && (
+                        <>
+                            <div className="left-section" style={{ textAlign: 'center' }}>
+                                {outputImage ? (
+                                    <img src={outputImage} alt="OCR Result" style={{ maxWidth: '100%', height: 'auto', margin: '10px' }} />
+                                ) : (
+                                    <pre>{JSON.stringify(result, null, 2)}</pre>
+                                )}
                             </div>
-                        )}
-                        {images.length > 0 && result && (
-                            <Suspense fallback={<div>Loading...</div>}>
-                                <ResultBox result={result} />
-                            </Suspense>
-                        )}
-                    </div>
+                            <div className="right-section">
+                                <Suspense fallback={<div>Loading...</div>}>
+                                    <ResultBox missingItems={missingItems} />
+                                </Suspense>
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
         </div>

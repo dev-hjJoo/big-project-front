@@ -2,8 +2,7 @@ import React from 'react';
 import GBox from '../../Componentts/GBox/GBox';
 import { Divider } from '@mui/material';
 
-const ForeignResultBox = ({ result }) => {
-    // 백엔드의 체크리스트 항목을 프론트엔드의 타이틀과 매핑
+const ForeignResultBox = ({ missingItems }) => {
     const titleMapping = {
         '사용자': 'Employer',
         '취업자': 'Employee',
@@ -23,11 +22,10 @@ const ForeignResultBox = ({ result }) => {
         '취업자_서명': 'Employee Signature'
     };
 
-    // 백엔드에서 넘어온 항목을 프론트엔드의 타이틀로 변환하여 누락 항목 체크
-    const missingItemsSet = new Set(result.missing_items.map(item => titleMapping[item]));
+    const missingItemsSet = new Set(missingItems.map(item => titleMapping[item]));
 
     const renderItem = (title, content) => (
-        <li>
+        <li key={title}>
             <div className='title' style={{ color: missingItemsSet.has(title) ? 'red' : 'black' }}>
                 {title}
             </div>
@@ -84,10 +82,10 @@ const ForeignResultBox = ({ result }) => {
                 {renderItem('Date', (
                     <li>Specify the contract date.</li>
                 ))}
-                {renderItem('Employer', (
+                {renderItem('Employer Signature', (
                     <li>Specify the business name, phone number, address, and representative, and ensure a signature is provided.</li>
                 ))}
-                {renderItem('Employee', (
+                {renderItem('Employee Signature', (
                     <li>Specify the employee's name, contact information, and address, and ensure a signature is provided.</li>
                 ))}
             </ol>

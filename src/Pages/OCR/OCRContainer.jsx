@@ -1,79 +1,80 @@
-import React, { useState, useRef } from 'react';
-import OCRPresenter from './OCRPresenter';
-import GButton from '../../Componentts/GButton/GButton';
+import React, { useState } from 'react';
 import axios from 'axios';
+import OCRPresenter from './OCRPresenter';
 import { getCookie } from '../../Assets/CookieContainer';
 
 const OCRContainer = () => {
-    const [images, setImages] = useState([]);
-    const [contractType, setContractType] = useState('standard');
+    const [contractType, setContractType] = useState('');
+    const [imageFiles, setImageFiles] = useState([]);
     const [result, setResult] = useState(null);
-    const [error, setError] = useState(null); 
-    const fileInputRef = useRef(null);
+    const [missingItems, setMissingItems] = useState([]);
+    const [error, setError] = useState('');
 
-    const handleImageUpload = (event) => {
-        const files = Array.from(event.target.files);
-        const imageUrls = files.map(file => URL.createObjectURL(file));
-        setImages(imageUrls);
+    const handleContractTypeChange = (e) => {
+        setContractType(e.target.value);
         setResult(null);
-        setError(null); 
-        uploadImages(files);
+        setMissingItems([]);
+        setError('');
+    };    
+
+    const handleFileChange = (e) => {
+        setImageFiles([...e.target.files]);
+        setResult(null);
+        setMissingItems([]);
+        setError('');
     };
 
-    const uploadImages = async (files) => {
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (imageFiles.length === 0) {
+            setError('Please upload images.');
+            return;
+        }
+
         const formData = new FormData();
         formData.append('contract', contractType);
-        files.forEach(file => formData.append('image_files', file));
+        imageFiles.forEach((file) => {
+            formData.append('image_files', file);
+        });
 
-        try {
-            const response = await axios.post('http://34.64.89.168:8000/ocr/upload/', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    Authorization: `Bearer ${getCookie('accessToken')}`
-                }
-            });
-            setResult(response.data);
-        } catch (error) {
-            if (error.response) {
-                setError(error.response.data.error);
-                console.error('Error uploading images:', error.response.data);
-            } else {
-                setError('An unexpected error occurred.');
-                console.error('Error uploading images:', error.message);
+        axios({
+            method: 'POST',
+            url: 'http://34.64.89.168:8000/ocr/upload/',
+            data: formData,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${getCookie('accessToken')}`
             }
-        }
-    };
-
-    const handleButtonClick = () => {
-        fileInputRef.current.click();
-    };
-
-    const handleSelectChange = (event) => {
-        setContractType(event.target.value);
-        setImages([]);
-        setResult(null);
-        setError(null); 
+        }).then((response) => {
+            const result = response.data;
+            console.log('ocr result:', result)
+            setResult(result.result);
+            setMissingItems(result.missing_items);
+            setError('');
+        }).catch((error) => {
+            console.error(error); 
+            if (error.response) {
+                setError(error.response.data.error || 'An error occurred.');
+            } else if (error.request) {
+                setError('No response received from the server.');
+            } else {
+                setError('Error in setting up the request.');
+            }
+        });
     };
 
     return (
-        <div>
-            <input
-                type="file"
-                accept="image/*"
-                ref={fileInputRef}
-                style={{ display: 'none' }}
-                onChange={handleImageUpload}
-                multiple
-            />
-            <OCRPresenter
-                images={images}
-                onButtonClick={handleButtonClick}
-                contractType={contractType}
-                onSelectChange={handleSelectChange}
-                result={result}
-                error={error} 
-            />
-        </div>
+        <OCRPresenter
+            contractType={contractType}
+            imageFiles={imageFiles}
+            result={result}
+            missingItems={missingItems}
+            error={error}
+            handleContractTypeChange={handleContractTypeChange}
+            handleFileChange={handleFileChange}
+            handleSubmit={handleSubmit}
+        />
     );
 };
 
