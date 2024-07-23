@@ -39,23 +39,36 @@
 
     p {
         height: 20rem;
-        overflow: scroll;
-        padding: var(--padding-1) var(--padding-3);
     }
     h3 {
         text-align: right;
         font-size: 1rem;
     }
+    
 }
 
 .news-content {
     padding: var(--padding-2);
     font-size: var(--font-size-2);
     line-height: 1.6;
-    height: auto;
-    max-height: 50vh; // Adjust the maximum height as needed
-    overflow-y: auto; // Ensure content is scrollable if it exceeds max-height
+    height: 30rm;
+    max-height: 60vh; 
     background-color: #f9f9f9; // Light background color for better readability
     margin-top: var(--margin-2);
     margin-bottom: var(--margin-2);
+    overflow: scroll;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+        width: 0; // 스크롤바 막대 제거
+        height: 0; // 가로 스크롤바 막대 제거
+    }
+    padding: var(--padding-1) var(--padding-3);
+
   }
+
+.news-image {
+    width: 22rem; // 이미지 너비 증가
+    height: 15rem; // 이미지 높이 자동 조정
+    margin: 1rem auto; // 이미지와 텍스트 사이 간격 및 가운데 정렬
+    display: block; // 가운데 정렬을 위한 블록 요소
+}
