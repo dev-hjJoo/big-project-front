@@ -5,7 +5,7 @@ import axios from 'axios'
 import ChatbotPresenter from './ChatbotPresenter';
 import { getCookie } from '../../Authorization/CookieContainer';
 
-const Chatbot = ({userAccessToken}) => {
+const Chatbot = ({userAccessToken, selectedNation}) => {
     // States
     const [sessionList, setSessionList] = useState([])
     const [selectedSessionID, setSessionID] = useState(-1)
@@ -142,7 +142,7 @@ const Chatbot = ({userAccessToken}) => {
                 data: qs.stringify({
                     session_id: selectedSessionID,
                     query: userInput,
-                    nation: 'korea'
+                    nation: selectedNation
                 }),
                 headers: {
                     'content-type': 'application/x-www-form-urlencoded',

@@ -14,7 +14,7 @@ import { getCookie } from '../Authorization/CookieContainer';
 import PrivateRouter from './PrivateRouter';
 
 
-const Router = ({articles, userAccessToken, setUserAccessToken, setUserEmail}) => {
+const Router = ({articles, userAccessToken, setUserAccessToken, setUserEmail, selectedNation}) => {
 
 
     return (
@@ -23,15 +23,15 @@ const Router = ({articles, userAccessToken, setUserAccessToken, setUserEmail}) =
             <Route path='/' element={<HomeContainer articles={articles} />}/>
             <Route path='/login' element={<LoginContainer setUserAccessToken={setUserAccessToken}
                                                           setUserEmail={setUserEmail} />} />
-            <Route path='/logout' element={<LogoutContainer userAccessToken={userAccessToken}
-                                                            setUserAccessToken={setUserAccessToken}
-                                                            setUserEmail={setUserEmail}/>} />
             <Route path='/join' element={<JoinContainer />} />
             <Route path="/news/:id" element={<NewsDetail articles={articles} />}/>
 
             {/* Private */}
             <Route element={<PrivateRouter userAccessToken={userAccessToken}/>}>
-                <Route path='/chat' element={<Chatbot userAccessToken={userAccessToken}/>} />
+                <Route path='/logout' element={<LogoutContainer userAccessToken={userAccessToken}
+                                                                setUserAccessToken={setUserAccessToken}
+                                                                setUserEmail={setUserEmail}/>} />
+                <Route path='/chat' element={<Chatbot userAccessToken={userAccessToken} selectedNation={selectedNation}/>} />
                 <Route path='/faq' element={<FAQContainer userAccessToken={userAccessToken} />} />   
                 <Route path='/db' element={<DBContainer userAccessToken={userAccessToken} />} />
                 <Route path="/community/*" element={<BoardRouter userAccessToken={userAccessToken} />} />

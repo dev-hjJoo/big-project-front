@@ -11,6 +11,7 @@ const HomePage = () => {
     // User Info.
     const [userAccessToken, setUserAccessToken] = useState(null);
     const [userEmail, setUserEmail] = useState('')
+    const [selectedNation, setSelectedNation] = useState('korea');
 
     useEffect(() => {
       // AccessToken
@@ -37,6 +38,11 @@ const HomePage = () => {
         .catch(error => console.error('Error fetching data:', error));
     }, []);
 
+    useEffect(()=> {
+      if (userAccessToken == null && getCookie('refreshToken') != null) {
+        getAccessTokenFromRefreshTokenAPI()
+      }
+    }, [userAccessToken])
 
     const getAccessTokenFromRefreshTokenAPI = () => {
       axios({
@@ -55,16 +61,13 @@ const HomePage = () => {
       })
     }
 
-    useEffect(()=> {
-      if (userAccessToken == null && getCookie('refreshToken') != null) {
-        getAccessTokenFromRefreshTokenAPI()
-      }
-    }, [userAccessToken])
 
     return (
         <BrowserRouter>
             <Layout userAccessToken={userAccessToken}
-                    userEmail={userEmail}>
+                    userEmail={userEmail}
+                    selectedNation={selectedNation}
+                    setSelectedNation={setSelectedNation} >
                 <Router articles={articles}
                         userAccessToken={userAccessToken}
                         setUserAccessToken={setUserAccessToken}
