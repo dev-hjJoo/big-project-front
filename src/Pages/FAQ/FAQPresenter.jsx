@@ -14,11 +14,12 @@ const FAQPresenter = ({tab, tabList, changeTab, bow, selectedCol, showDetail}) =
             {/* TAB */}
             <div className="category">
                 <ul className='tabs'>
-                    {tabList.map((tabItem) => (
-                        <li key={tabItem.id} 
-                            className={`tab ${tab == tabItem.id ? 'selected' : ''}`} 
-                            onClick={() => changeTab(tabItem.id)}>
-                            {tabItem.label}
+                    {tabList.map((tabItem, index) => (
+                        <li key={tabItem} 
+                            className={`tab ${tab == index ? 'selected' : ''}`} 
+                            onClick={() => changeTab(index)}>
+                            {tabItem}
+
                         </li>
                     ))}
                 </ul>
@@ -30,14 +31,19 @@ const FAQPresenter = ({tab, tabList, changeTab, bow, selectedCol, showDetail}) =
                     <div className="table">
                         {bow.map((bowItem, index) => (
                             <>
-                            <GTableColumn onClick={() => showDetail(bowItem.index)}>
-                                <div className="no">{index+1}</div>
-                                <div className="headline">{bowItem.headline}</div>
-                                <div className="views">{bowItem.views}</div>
+                            <GTableColumn onClick={() => showDetail(bowItem.id)}>
+                                <div className="no">{bowItem.id}</div>
+                                <div className="headline">
+                                    {(tab==0) ? bowItem.content :
+                                     (tab==1) ? `[${bowItem.law} | ${bowItem.ministry}] ${bowItem.code}` :
+                                     bowItem.content
+                                    }
+                                </div>
+                                <div className="views">{bowItem.week_view}</div>
                             </GTableColumn>
-                            {(selectedCol == bowItem.index) ? 
+                            {(selectedCol == bowItem.id) ? 
                                 (<div className="detail">
-                                    {bowItem.summary + bowItem.content}
+                                    {bowItem.content}
                                 </div>) : ''}
 
                             </>
