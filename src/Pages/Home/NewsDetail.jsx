@@ -33,7 +33,7 @@ const NewsDetail = ({ articles }) => {
       </div>
       <Divider />
       <div className='news-content'>
-        <p>{article.content}</p>
+        <p style={{ whiteSpace: 'pre-line' }}>{article.content}</p>
       </div>
     </div>
   );
