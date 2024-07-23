@@ -27,7 +27,7 @@ const LogoutContainer = ({userAccessToken, setUserAccessToken, setUserEmail}) =>
             }).then((response) => {
                 // const result = response.data  
                 removeCookie('refreshToken')
-                setUserAccessToken('')
+                setUserAccessToken(null)
                 setUserEmail('')
                 setLoggedOut(true)
     

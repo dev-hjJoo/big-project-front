@@ -1,11 +1,8 @@
-import React from 'react';
-import getLoginState from '../Authorization/UserContainer';
+import React, { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
-const PrivateRouter = () => {
-    const isLogin = getLoginState();
-
-    return isLogin ? <Outlet /> : <Navigate to='/login'/>
+const PrivateRouter = ({userAccessToken}) => {
+    return (userAccessToken != null) ? <Outlet /> : <Navigate to='/login'/>
     
 };
 

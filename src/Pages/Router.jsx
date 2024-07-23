@@ -30,7 +30,7 @@ const Router = ({articles, userAccessToken, setUserAccessToken, setUserEmail}) =
             <Route path="/news/:id" element={<NewsDetail articles={articles} />}/>
 
             {/* Private */}
-            <Route element={<PrivateRouter/>}>
+            <Route element={<PrivateRouter userAccessToken={userAccessToken}/>}>
                 <Route path='/chat' element={<Chatbot userAccessToken={userAccessToken}/>} />
                 <Route path='/faq' element={<FAQContainer userAccessToken={userAccessToken} />} />   
                 <Route path='/db' element={<DBContainer userAccessToken={userAccessToken} />} />
