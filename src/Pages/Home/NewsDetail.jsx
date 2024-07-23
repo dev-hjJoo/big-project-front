@@ -33,7 +33,8 @@ const NewsDetail = ({ articles }) => {
       </div>
       <Divider />
       <div className='news-content'>
-        <p>{article.content}</p>
+        {article.imgURL && <img src={article.imgURL} alt="뉴스 이미지" className="news-image" />}
+        <p style={{ whiteSpace: 'pre-line' }}>{article.content}</p>
       </div>
     </div>
   );
