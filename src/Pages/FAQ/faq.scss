@@ -30,6 +30,16 @@
     height: 70%;
     margin-bottom: 30px;
     overflow: scroll;
+
+    .bowLoading {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        gap: var(--component-gap);
+        color: var(--clr-gray);
+    }
 }
 
 

@@ -4,6 +4,8 @@ import './faq.scss'
 import { Divider } from '@mui/material';
 import GTableColumn from './GTableColumn';
 import GButton from '../../Componentts/GButton/GButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGavel } from '@fortawesome/free-solid-svg-icons';
 
 const FAQPresenter = ({tab, tabList, changeTab, bow, selectedCol, showDetail}) => {
     return (
@@ -24,22 +26,27 @@ const FAQPresenter = ({tab, tabList, changeTab, bow, selectedCol, showDetail}) =
             <Divider/>
             {/* Contents */}
             <div className="faqs">
-                <div className="table">
-                    {bow.map((bowItem, index) => (
-                        <>
-                        <GTableColumn onClick={() => showDetail(bowItem.index)}>
-                            <div className="no">{index+1}</div>
-                            <div className="headline">{bowItem.headline}</div>
-                            <div className="views">{bowItem.views}</div>
-                        </GTableColumn>
-                        {(selectedCol == bowItem.index) ? 
-                            (<div className="detail">
-                                {bowItem.summary + bowItem.content}
-                            </div>) : ''}
+                {(bow != null) ? 
+                    <div className="table">
+                        {bow.map((bowItem, index) => (
+                            <>
+                            <GTableColumn onClick={() => showDetail(bowItem.index)}>
+                                <div className="no">{index+1}</div>
+                                <div className="headline">{bowItem.headline}</div>
+                                <div className="views">{bowItem.views}</div>
+                            </GTableColumn>
+                            {(selectedCol == bowItem.index) ? 
+                                (<div className="detail">
+                                    {bowItem.summary + bowItem.content}
+                                </div>) : ''}
 
-                        </>
-                    ))}
-                </div>
+                            </>
+                        ))}
+                    </div> : 
+                    <div className="bowLoading">
+                        <div className="bowSpinner"><FontAwesomeIcon icon={faGavel} size='2x' spin/></div> 
+                        <div className="loadingText">로딩 중입니다. 잠시만 기다려주세요.</div>
+                    </div>}
             </div>
 
             {/* button */}
