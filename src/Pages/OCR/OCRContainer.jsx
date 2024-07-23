@@ -1,48 +1,79 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import OCRPresenter from './OCRPresenter';
-import GButton from '../../Componentts/GButton/GButton';
 
-const OCRContainer = () => {
-    // 업로드된 이미지 URL을 저장하는 상태
-    const [images, setImages] = useState([]);
-    const [contractType, setContractType] = useState('standard');
-    // 숨겨진 파일 입력 요소에 대한 참조
-    const fileInputRef = useRef(null);
+const OCRContainer = ({ userAccessToken }) => {
+    const [contractType, setContractType] = useState('');
+    const [imageFiles, setImageFiles] = useState([]);
+    const [result, setResult] = useState(null);
+    const [missingItems, setMissingItems] = useState([]);
+    const [error, setError] = useState('');
 
-    // 이미지 업로드를 처리하는 이벤트 핸들러
-    const handleImageUpload = (event) => {
-        const files = Array.from(event.target.files);
-        const imageUrls = files.map(file => URL.createObjectURL(file));
-        setImages(prevImages => [...prevImages, ...imageUrls]);
+    const handleContractTypeChange = (e) => {
+        setContractType(e.target.value);
+        setResult(null);
+        setMissingItems([]);
+        setError('');
+    };    
+
+    const handleFileChange = (e) => {
+        setImageFiles([...e.target.files]);
+        setResult(null);
+        setMissingItems([]);
+        setError('');
     };
 
-    // 버튼 클릭을 처리하는 이벤트 핸들러
-    const handleButtonClick = () => {
-        fileInputRef.current.click();   // 숨겨진 파일 입력 요소를 클릭
-    };
 
-    const handleSelectChange = (event) => {
-        setContractType(event.target.value);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (imageFiles.length === 0) {
+            setError('Please upload images.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('contract', contractType);
+        imageFiles.forEach((file) => {
+            formData.append('image_files', file);
+        });
+
+        axios({
+            method: 'POST',
+            url: 'http://34.64.89.168:8000/ocr/upload/',
+            data: formData,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${userAccessToken}`
+            }
+        }).then((response) => {
+            const result = response.data;
+            console.log('ocr result:', result)
+            setResult(result.result);
+            setMissingItems(result.missing_items);
+            setError('');
+        }).catch((error) => {
+            console.error(error); 
+            if (error.response) {
+                setError(error.response.data.error || 'An error occurred.');
+            } else if (error.request) {
+                setError('No response received from the server.');
+            } else {
+                setError('Error in setting up the request.');
+            }
+        });
     };
 
     return (
-        <div>
-            <input
-                type="file"
-                accept="image/*"
-                ref={fileInputRef}
-                style={{ display: 'none' }} // 파일 입력 요소 숨기기
-                onChange={handleImageUpload}    // 파일이 선택되면 handleImageUpload 호출
-                multiple
-            />
-            {/* OCRPresenter 컴포넌트에 이미지와 버튼 클릭 핸들러 전달 */}
-            <OCRPresenter
-                images={images}
-                onButtonClick={handleButtonClick}
-                contractType={contractType}
-                onSelectChange={handleSelectChange}
-            />
-        </div>
+        <OCRPresenter
+            contractType={contractType}
+            imageFiles={imageFiles}
+            result={result}
+            missingItems={missingItems}
+            error={error}
+            handleContractTypeChange={handleContractTypeChange}
+            handleFileChange={handleFileChange}
+            handleSubmit={handleSubmit}
+        />
     );
 };
 
