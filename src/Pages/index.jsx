@@ -71,7 +71,8 @@ const HomePage = () => {
                 <Router articles={articles}
                         userAccessToken={userAccessToken}
                         setUserAccessToken={setUserAccessToken}
-                        setUserEmail={setUserEmail}/>
+                        setUserEmail={setUserEmail}
+                        selectedNation={selectedNation}/>
             </Layout>
         </BrowserRouter>
     );
