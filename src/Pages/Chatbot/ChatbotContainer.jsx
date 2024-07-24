@@ -4,7 +4,8 @@ import axios from 'axios'
 import Modal from 'react-modal';
 
 import ChatbotPresenter from './ChatbotPresenter';
-import { getCookie } from '../../Authorization/CookieContainer';
+import { Divider } from '@mui/material';
+import GButton from '../../Componentts/GButton/GButton';
 
 const Chatbot = ({ userAccessToken, selectedNation = 'korea' }) => {
     // States
@@ -243,20 +244,30 @@ const Chatbot = ({ userAccessToken, selectedNation = 'korea' }) => {
                     }
                 }}
             >
-                <button 
-                    onClick={closeModal} 
+                <div className="btnArea"
                     style={{
-                        position: 'absolute',
-                        top: '10px',
-                        right: '10px',
-                        background: 'none',
-                        border: 'none',
-                        fontSize: '1.2rem',
-                        cursor: 'pointer'
+                        width: '100%',
+                        display: 'flex',
+                        justifyContent: 'end',
+                        borderBottom: '1px dashed var(--clr-gray)',
+                        gap: '0.5rem',
+                        padding: 'var(--padding-1)', 
                     }}
+                    onClick={()=>console.log('hey!')}
                 >
-                    &times;
-                </button>
+                    <GButton color='outlinePrimary' hover='hover'>본문 번역</GButton>
+                    <button 
+                        onClick={closeModal} 
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            fontSize: '2rem',
+                        }}
+                    >
+                        &times;
+                    </button>
+                </div>
+                <Divider/>
                 <h2>판례 사례 {currentCaseIndex + 1}</h2>
                 {caseResults.length > 0 && (
                     <div>

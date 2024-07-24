@@ -5,6 +5,7 @@ import GComment from '../../Componentts/GComment/GComment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChildReaching, faGavel, faHandshake, faHandshakeAlt, faPlus, faPoo, faRobot, faSpinner, faTrashCan, faUserGraduate } from '@fortawesome/free-solid-svg-icons';
 import { faFaceLaughWink } from '@fortawesome/free-regular-svg-icons';
+import GButton from '../../Componentts/GButton/GButton';
 
 
 const ChatbotPresenter = ({sessionList, selectedSessionID, 
@@ -78,10 +79,12 @@ const ChatbotPresenter = ({sessionList, selectedSessionID,
                             </div>
                             <div className="contents">
                                 <span> {nav.message} </span>
-                                {nav.sender === 0 && nav.message !== "안녕하세요. 전세계 어디에서나 일하고 싶은 당신을 위한, 글로-발 워커입니다.\n질문할 내용이 있으신가요?" && ( // 첫 인사말 메시지를 제외
-                                    <button className="caseSearchBtn" onClick={() => onClickSearchCase(nav.id)}> 
-                                        판례 찾기
-                                    </button>)}
+                                <div className="btnArea">
+                                    {nav.sender === 0 && nav.message !== "안녕하세요. 전세계 어디에서나 일하고 싶은 당신을 위한, 글로-발 워커입니다.\n질문할 내용이 있으신가요?" && ( // 첫 인사말 메시지를 제외
+                                    <GButton color='primary' hover='hover' onClick={() => onClickSearchCase(nav.id)}>
+                                        관련 판례 확인하기
+                                    </GButton>)}
+                                </div>
                             </div>
                         </div>
                     ))}

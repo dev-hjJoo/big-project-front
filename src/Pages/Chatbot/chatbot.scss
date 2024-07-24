@@ -123,6 +123,12 @@
     /* BOT */
     .chatLog .BOT .contents {
         background-color: var(--clr-lightgray);
+        .btnArea {
+            padding-top: var(--padding-2);
+            width: 100%;
+            display: flex;
+            justify-content: end;
+        }
     }
     
     .chatLog .contents .caseSearchBtn {
