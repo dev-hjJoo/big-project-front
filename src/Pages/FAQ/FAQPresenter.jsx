@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './faq.scss'
+
 import { Divider } from '@mui/material';
 import GTableColumn from './GTableColumn';
 import GButton from '../../Componentts/GButton/GButton';
@@ -34,12 +35,9 @@ const FAQPresenter = ({tab, tabList, changeTab, bow, selectedCol, showDetail}) =
                             <GTableColumn onClick={() => showDetail(bowItem.id)}>
                                 <div className="no">{bowItem.id}</div>
                                 <div className="headline">
-                                    {(tab==0) ? bowItem.content :
-                                     (tab==1) ? `[${bowItem.law} | ${bowItem.ministry}] ${bowItem.code}` :
-                                     bowItem.content
-                                    }
+                                    {bowItem.title}
                                 </div>
-                                <div className="views">{bowItem.week_view}</div>
+                                <div className="views">{bowItem.views}</div>
                             </GTableColumn>
                             {(selectedCol == bowItem.id) ? 
                                 (<div className="detail">

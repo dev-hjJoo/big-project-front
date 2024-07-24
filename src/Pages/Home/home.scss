@@ -18,8 +18,9 @@
 .home .label {
     margin: 0px 1rem;
     color: var(--clr-highlight);
-    align-items: end;
+    align-items: center;
     display: flex;
+    justify-content: space-between;
 }
 
 .home .small img {

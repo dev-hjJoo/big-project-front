@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import HomePresenter from './HomePresenter';
+import { totalList } from '../FAQ/faqDB';
 import NewsDetail from './NewsDetail';
 
 const HomeContainer = () => {
@@ -57,7 +58,7 @@ const HomeContainer = () => {
 
   return (
     <>
-      <HomePresenter bow={bow} articles={articles} />
+      <HomePresenter bow={totalList.slice(0, 4)} articles={articles} />
     </>
   );
 };

@@ -3,6 +3,8 @@ import "./home.scss"
 import GBox from '../../Componentts/GBox/GBox';
 import { Divider } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAnglesRight } from '@fortawesome/free-solid-svg-icons';
 
 const HomePresenter = ({ bow, articles }) => {
     return (
@@ -61,17 +63,22 @@ const HomePresenter = ({ bow, articles }) => {
 
             {/* RIGHT */}
             <div className="right">
-                <div className="label">Best of the week</div>
+                <div className="label">
+                    <span>Best of the week</span>
+                    <Link to='/faq' style={{color: 'var(--clr-gray)'}}>
+                        <span style={{fontSize: 'var(--font-size-1)', paddingRight: '0.2rem'}}>자세히 보기</span>
+                        <FontAwesomeIcon icon={faAnglesRight} size='sm'/>
+                    </Link>
+                </div>
                 <div className="bow">
                     {bow.map((nav, key) => (
                         <GBox size='large' className="item" key={key}>
                             <div className="iHeader">
-                                <div className="source"> {nav.type} </div>
                                 <div className="datetime"> views: {nav.views} </div>
                             </div>
                             <div className="iBody">
-                                <div className="iTitle">{nav.headline}</div>
-                                <div className="iContents">{nav.summary}</div>
+                                <div className="iTitle">{nav.title}</div>
+                                <div className="iContents">{nav.content}</div>
                             </div>
                         </GBox>
                     ))}

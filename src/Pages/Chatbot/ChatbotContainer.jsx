@@ -249,13 +249,9 @@ const Chatbot = ({ userAccessToken, selectedNation = 'korea' }) => {
                         width: '100%',
                         display: 'flex',
                         justifyContent: 'end',
-                        borderBottom: '1px dashed var(--clr-gray)',
-                        gap: '0.5rem',
-                        padding: 'var(--padding-1)', 
                     }}
                     onClick={()=>console.log('hey!')}
                 >
-                    <GButton color='outlinePrimary' hover='hover'>본문 번역</GButton>
                     <button 
                         onClick={closeModal} 
                         style={{
