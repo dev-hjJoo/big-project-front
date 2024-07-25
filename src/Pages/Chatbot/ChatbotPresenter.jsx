@@ -13,7 +13,7 @@ const ChatbotPresenter = ({sessionList, selectedSessionID,
                            onClickConnectSession, 
                            onClickSubmitChat,
                            onClickSearchCase,
-                           chatLog, 
+                           chatLog, uiTexts,
                            userInput, loadUserInput, writingMode}) => {
 
     // 채팅 시 보여지는 이름 처리
@@ -80,7 +80,7 @@ const ChatbotPresenter = ({sessionList, selectedSessionID,
                                 <span> {nav.message} </span>
                                 {nav.sender === 0 && nav.message !== "안녕하세요. 전세계 어디에서나 일하고 싶은 당신을 위한, 글로-발 워커입니다.\n질문할 내용이 있으신가요?" && ( // 첫 인사말 메시지를 제외
                                     <button className="caseSearchBtn" onClick={() => onClickSearchCase(nav.id)}> 
-                                        판례 찾기
+                                        {uiTexts.search_cases || "판례 찾기"}
                                     </button>)}
                             </div>
                         </div>

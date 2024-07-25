@@ -20,6 +20,9 @@ const Chatbot = ({ userAccessToken, selectedNation = 'korea' }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentCaseIndex, setCurrentCaseIndex] = useState(0);
 
+    const [uiTexts, setUiTexts] = useState({});
+    const [uiTexts2, setUiTexts2] = useState({});
+    
     // UseEffects
     useEffect( () => { // 해당 페이지 로딩되면 세션 리스트 호출
         getSessionListAPI()
@@ -186,6 +189,7 @@ const Chatbot = ({ userAccessToken, selectedNation = 'korea' }) => {
                 getSessionAPI(selectedSessionID)
                 setUserInput('')
                 setWritingMode(true)
+                setUiTexts(result.ui_texts);  
             })
         }
     }
@@ -203,6 +207,7 @@ const Chatbot = ({ userAccessToken, selectedNation = 'korea' }) => {
             }).then((response) => {
                 setCaseResults(response.data.case_results); 
                 setIsModalOpen(true); 
+                setUiTexts2(response.data.ui_texts); 
             });
         }
     };
@@ -223,12 +228,14 @@ const Chatbot = ({ userAccessToken, selectedNation = 'korea' }) => {
                 loadUserInput={loadUserInput}
                 writingMode={writingMode}
                 caseResults={caseResults}
+                uiTexts={uiTexts}
+                uiTexts2={uiTexts2}
             />
 
 <Modal
                 isOpen={isModalOpen}
                 onRequestClose={closeModal}
-                contentLabel="판례 사례 모달"
+                contentLabel={uiTexts2.case_example || "판례 사례 모달"}
                 ariaHideApp={false}
                 style={{
                     content: {
@@ -257,10 +264,10 @@ const Chatbot = ({ userAccessToken, selectedNation = 'korea' }) => {
                 >
                     &times;
                 </button>
-                <h2>판례 사례 {currentCaseIndex + 1}</h2>
+                <h2>{uiTexts2.case_example || "판례 사례"} {currentCaseIndex + 1}</h2>
                 {caseResults.length > 0 && (
                     <div>
-                        <p>내용 전문: {caseResults[currentCaseIndex].content || "내용이 없습니다"}</p>
+                        <p>{uiTexts2.full_text || "내용 전문"}: {caseResults[currentCaseIndex].content || "내용이 없습니다"}</p>
                     </div>
                 )}
                 <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
