@@ -12,6 +12,7 @@ import LoginContainer from './Login/LoginContainer';
 import LogoutContainer from './Login/LogoutContainer';
 import { getCookie } from '../Authorization/CookieContainer';
 import PrivateRouter from './PrivateRouter';
+import OnlyBeforeLoginRouter from './OnlyBeforeLoginRouter';
 
 
 const Router = ({articles, userAccessToken, setUserAccessToken, setUserEmail, selectedNation}) => {
@@ -21,10 +22,14 @@ const Router = ({articles, userAccessToken, setUserAccessToken, setUserEmail, se
         <Routes>
             {/* Public */}
             <Route path='/' element={<HomeContainer articles={articles} />}/>
-            <Route path='/login' element={<LoginContainer setUserAccessToken={setUserAccessToken}
-                                                          setUserEmail={setUserEmail} />} />
-            <Route path='/join' element={<JoinContainer />} />
             <Route path="/news/:id" element={<NewsDetail articles={articles} />}/>
+
+            {/* Befor Login */}
+            <Route element={<OnlyBeforeLoginRouter userAccessToken={userAccessToken}/>}>
+                <Route path='/login' element={<LoginContainer setUserAccessToken={setUserAccessToken}
+                                                            setUserEmail={setUserEmail} />} />
+                <Route path='/join' element={<JoinContainer />} />
+            </Route>
 
             {/* Private */}
             <Route element={<PrivateRouter userAccessToken={userAccessToken}/>}>
