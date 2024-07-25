@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import GBox from '../../Componentts/GBox/GBox';
@@ -94,6 +94,14 @@ const BoardDetail = ({userAccessToken}) => {
             });
         }
     };
+
+    // 댓글 추가 시 Scroll 처리
+    const commentEndRef = useRef(null);
+    useEffect(() => {
+        if (!commentEndRef.current) return
+        commentEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      }, [post.comments]);
+
     // 댓글 삭제 함수
     const deleteComment = (commentId) => {
         if (userAccessToken != null) {
@@ -213,6 +221,7 @@ const BoardDetail = ({userAccessToken}) => {
                     ) : (
                         <p>댓글이 없습니다.</p>
                     )}
+                    <div ref={commentEndRef}></div>
                 </div>
     
                 {/* 댓글 작성 */}
