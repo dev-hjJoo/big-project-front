@@ -289,6 +289,10 @@
         text-align: right;
         font-size: 1rem;
     }
+    .btnArea {
+        display: flex;
+        justify-content: end;
+    }
 }
 .comment-detail {
     h2 {
@@ -305,8 +309,7 @@
 
 // 댓글 수 꾸미기
 .comment-count {
-    color: #007bff; /* 파란색 */
-    font-weight: bold;
+    color: var(--clr-highlight);
     margin-left: 5px;
 }
 
@@ -319,8 +322,6 @@
     border: none; /* 테두리를 없앰 */
     border-radius: var(--border-radius-1); /* 모서리를 둥글게 */
     box-sizing: border-box; /* 화면 사이즈에 맞게 조정 */
-    margin-bottom: 1rem;
-    background-color: var(--clr-background); /* 내부 색상을 연한 파랑색으로 변경 */
     
     &:focus {
         outline: none; /* 입력 시 테두리가 다시 나오지 않도록 함 */

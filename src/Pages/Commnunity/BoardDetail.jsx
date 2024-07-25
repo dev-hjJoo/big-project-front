@@ -186,44 +186,48 @@ const BoardDetail = ({userAccessToken}) => {
                     )}
                 </div>
                 {isEditing && (
-                    <GButton color="outlinePrimary" hover='hover' onClick={handleEdit}>
-                        수정 완료
+                    <div className="btnArea">
+                        <GButton color="outlinePrimary" hover='hover' onClick={handleEdit}>
+                            수정 완료
+                        </GButton>
+                    </div>
+                )}
+            </div>
+            {!isEditing && (<>
+                <Divider>댓글</Divider>
+
+                {/* 댓글 목록 */}
+                <div className='comment-detail'>
+                    {post.comments && post.comments.length > 0 ? (
+                        <ul>
+                            {post.comments.map((comment, index) => (
+                                <li key={comment.id} className="comment-item">
+                                    <span className="comment-author">{comment.user_nickname}</span> 
+                                    <p className="comment-content">{comment.message}</p>
+                                    {post.is_author && (
+                                        <FontAwesomeIcon icon={faXmark} onClick={() => deleteComment(comment.id)} />
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p>댓글이 없습니다.</p>
+                    )}
+                </div>
+    
+                {/* 댓글 작성 */}
+                <div className='comment-list'>
+                    <input
+                        type="text"
+                        placeholder="댓글을 입력하세요"
+                        value={commentContent}
+                        onChange={(e) => setCommentContent(e.target.value)}
+                    />
+                    <GButton color="outlinePrimary" hover='hover' onClick={addComment}>
+                        작성
                     </GButton>
-                )}
-            </div>
-            <Divider>댓글</Divider>
-
-            {/* 댓글 목록 */}
-            <div className='comment-detail'>
-                {post.comments && post.comments.length > 0 ? (
-                    <ul>
-                        {post.comments.map((comment, index) => (
-                            <li key={comment.id} className="comment-item">
-                                <span className="comment-author">{comment.user_nickname}</span> 
-                                <p className="comment-content">{comment.message}</p>
-                                {post.is_author && (
-                                    <FontAwesomeIcon icon={faXmark} onClick={() => deleteComment(comment.id)} />
-                                )}
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <p>댓글이 없습니다.</p>
-                )}
-            </div>
-
-            {/* 댓글 작성 */}
-            <div className='comment-list'>
-                <input
-                    type="text"
-                    placeholder="댓글을 입력하세요"
-                    value={commentContent}
-                    onChange={(e) => setCommentContent(e.target.value)}
-                />
-                <GButton color="outlinePrimary" hover='hover' onClick={addComment}>
-                    작성
-                </GButton>
-            </div>
+                </div>
+            </>)}
         </>
     );
 };
