@@ -27,7 +27,7 @@ const Header = ({selectedNation, setSelectedNation}) => {
                         <div className="label">방문 국가:</div>
                         <select onChange={handleSelect} value={selectedNation}>
                             <option value="korea"> Korea </option>
-                            <option value="austrailia"> Austrailia </option>
+                            <option value="australia"> Austrailia </option>
                             <option value="canada"> Canada </option>
                             <option value="uk"> United Kingdom </option>
                         </select>
