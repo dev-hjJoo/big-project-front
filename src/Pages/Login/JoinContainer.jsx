@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import JoinPresenter from './JoinPresenter';
@@ -6,6 +7,7 @@ import JoinPresenter from './JoinPresenter';
 const JoinContainer = () => {
     const { register, handleSubmit, reset, setError } = useForm();
     const [error, setErrorState] = useState('');
+    const navigate = useNavigate()
 
     const checkEmail = async (email) => {
         const formData = new FormData();
@@ -106,6 +108,7 @@ const JoinContainer = () => {
                 alert('Membership successful');
                 await verifyEmail(data.email);
                 reset();
+                navigate('/login');
             }
         } catch (error) {
             console.error(error);
