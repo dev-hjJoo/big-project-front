@@ -45,7 +45,6 @@ const JoinContainer = () => {
 
             if (response.status === 200 && response.data.exists) {
                 setError('nickname', { type: 'manual', message: 'Nickname already exists' });
-                reset();
                 return false;
             }
             return true;
