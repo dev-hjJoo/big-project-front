@@ -15,7 +15,7 @@ import PrivateRouter from './PrivateRouter';
 import OnlyBeforeLoginRouter from './OnlyBeforeLoginRouter';
 
 
-const Router = ({articles, userAccessToken, setUserAccessToken, setUserEmail, selectedNation}) => {
+const Router = ({articles, userAccessToken, setUserAccessToken, userNickname, setUserNickname, selectedNation}) => {
 
 
     return (
@@ -27,7 +27,7 @@ const Router = ({articles, userAccessToken, setUserAccessToken, setUserEmail, se
             {/* Befor Login */}
             <Route element={<OnlyBeforeLoginRouter userAccessToken={userAccessToken}/>}>
                 <Route path='/login' element={<LoginContainer setUserAccessToken={setUserAccessToken}
-                                                            setUserEmail={setUserEmail} />} />
+                                                            setUserNickname={setUserNickname} />} />
                 <Route path='/join' element={<JoinContainer />} />
             </Route>
 
@@ -35,11 +35,11 @@ const Router = ({articles, userAccessToken, setUserAccessToken, setUserEmail, se
             <Route element={<PrivateRouter userAccessToken={userAccessToken}/>}>
                 <Route path='/logout' element={<LogoutContainer userAccessToken={userAccessToken}
                                                                 setUserAccessToken={setUserAccessToken}
-                                                                setUserEmail={setUserEmail}/>} />
+                                                                setUserNickname={setUserNickname}/>} />
                 <Route path='/chat' element={<Chatbot userAccessToken={userAccessToken} selectedNation={selectedNation}/>} />
                 <Route path='/faq' element={<FAQContainer userAccessToken={userAccessToken} />} />   
                 <Route path='/db' element={<DBContainer userAccessToken={userAccessToken} />} />
-                <Route path="/community/*" element={<BoardRouter userAccessToken={userAccessToken} />} />
+                <Route path="/community/*" element={<BoardRouter userAccessToken={userAccessToken} userNickname={userNickname}/>} />
                 <Route path="/ocr" element={<OCRContainer userAccessToken={userAccessToken} />} />
             </Route>
         </Routes>);

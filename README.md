@@ -1,4 +1,6 @@
-# Glawbal
+# Glawbal worker
+<img src="public/thumbnail.jpg" width=200/>
+
 > 전세계 어디에서나 일하고 싶은 당신을 위한, 글로-발 워커!
 * 전세계 외국인 근로자를 위한 RAG 기반 AI 법률 탐색 서비스
 * RAG-based AI legal recommendation service for foreign workers around the world
@@ -49,41 +51,28 @@ Glawber
 ```
 
 ## 4. Update Note
-<details><summary>2024/07/02 (화)</summary>
+<details><summary>개발 1주차: 2024/07/02 (화) ~ 2024/07/05 (금)</summary>
 
 - 리액트 서버 구현
 - Layout 구축 및 Header, SideNavigation 생성
-</details>
-
-<details><summary>2024/07/03 (수)</summary>
-
 - Home 화면 Layout 구축
 - Chatbot 화면, Login 화면 UI 구현
-</details>
-
-<details><summary>2024/07/04 (목)</summary>
-
 * Home 화면 UI 완성
 * Chatbot 기능 구현 (v1)
-</details>
-
-<details><summary>2024/07/05 (금)</summary>
-
 * SideNavigation 우측 '나라 선택' 옵션 UI 수정
 * 로그인 화면 수정, 회원가입 화면 생성
 </details>
 
-<details><summary>2024/07/08 (월)</summary>
+<details><summary>개발 2주차: 2024/07/08 (월) ~ 2024/07/12 (금)</summary>
 
 * 관리자 화면 중 DB 관리 화면 UI 완성
-</details>
-
-<details><summary>2024/07/09 (화)</summary>
-
 * FAQ 화면 UI 완성
 </details>
 
+<details><summary>개발 4주차(마무리): 2024/07/22 (월) ~ 2024/07/26 (금)</summary>
 
+* 채팅 화면 디테일 잡기 (세션 리스트 최신순 정렬 및 날짜 포맷 변경, 채팅 인사말 고정)
+</details>
 
 
 ## Appendix

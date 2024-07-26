@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faEdit } from '@fortawesome/free-regular-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const BoardDetail = ({userAccessToken}) => {
+const BoardDetail = ({userAccessToken, userNickname}) => {
     const { id } = useParams(); // URL 파라미터에서 게시글 ID를 가져옴
     const navigate = useNavigate(); // 페이지 이동을 위한 네비게이트 객체
     const [post, setPost] = useState({ comments: [] }); // 게시글 상태
@@ -212,7 +212,7 @@ const BoardDetail = ({userAccessToken}) => {
                                 <li key={comment.id} className="comment-item">
                                     <span className="comment-author">{comment.user_nickname}</span> 
                                     <p className="comment-content">{comment.message}</p>
-                                    {post.is_author && (
+                                    {(comment.user_nickname == userNickname) && (
                                         <FontAwesomeIcon icon={faXmark} onClick={() => deleteComment(comment.id)} />
                                     )}
                                 </li>

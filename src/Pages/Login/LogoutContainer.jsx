@@ -4,7 +4,7 @@ import axios from 'axios';
 import qs from 'qs';
 import { removeCookie, getCookie } from '../../Authorization/CookieContainer';
 
-const LogoutContainer = ({userAccessToken, setUserAccessToken, setUserEmail}) => {
+const LogoutContainer = ({userAccessToken, setUserAccessToken, setUserNickname}) => {
 
     const navigate = useNavigate();
     // const [isLoggingOut, setLoggingOut] = useState(false)
@@ -28,7 +28,7 @@ const LogoutContainer = ({userAccessToken, setUserAccessToken, setUserEmail}) =>
                 // const result = response.data  
                 removeCookie('refreshToken')
                 setUserAccessToken(null)
-                setUserEmail('')
+                setUserNickname('')
                 setLoggedOut(true)
     
                 // MARK: Cookie의 refreshToken 초기화 코드 추가

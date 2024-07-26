@@ -31,7 +31,7 @@ const SideNavTop = [
 ];
 
 
-const SideNavigation = ({userAccessToken, userEmail}) => {
+const SideNavigation = ({userAccessToken, userNickname}) => {
 
     const isLogin = getLoginState()
 
@@ -60,7 +60,7 @@ const SideNavigation = ({userAccessToken, userEmail}) => {
                     <nav className='menu'>
                         <ul>
                             {/* 관리자 화면 */}
-                            {userEmail == 'admin@glawbal.com' ? 
+                            {userNickname == 'admin' ? 
                                 <li>
                                     <Link to="/db">
                                         <FontAwesomeIcon icon={faGear} size='2x' className='animatedIcon'/>

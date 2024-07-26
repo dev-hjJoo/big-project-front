@@ -10,7 +10,7 @@ const HomePage = () => {
     const [articles, setArticles] = useState([]);
     // User Info.
     const [userAccessToken, setUserAccessToken] = useState(null);
-    const [userEmail, setUserEmail] = useState('')
+    const [userNickname, setUserNickname] = useState(null)
     const [selectedNation, setSelectedNation] = useState('korea');
 
     useEffect(() => {
@@ -65,13 +65,14 @@ const HomePage = () => {
     return (
         <BrowserRouter>
             <Layout userAccessToken={userAccessToken}
-                    userEmail={userEmail}
+                    userNickname={userNickname}
                     selectedNation={selectedNation}
                     setSelectedNation={setSelectedNation} >
                 <Router articles={articles}
                         userAccessToken={userAccessToken}
+                        userNickname={userNickname}
                         setUserAccessToken={setUserAccessToken}
-                        setUserEmail={setUserEmail}
+                        setUserNickname={setUserNickname}
                         selectedNation={selectedNation}/>
             </Layout>
         </BrowserRouter>

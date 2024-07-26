@@ -5,11 +5,11 @@ import "./layout.scss";
 
 
 
-const Layout = ({children, userAccessToken, userEmail, selectedNation, setSelectedNation}) => {
+const Layout = ({children, userAccessToken, userNickname, selectedNation, setSelectedNation}) => {
     return (
         <div className="display">
             <SideNavigation userAccessToken={userAccessToken}
-                            userEmail={userEmail} />
+                            userNickname={userNickname} />
 
             <main>
                 <Header selectedNation={selectedNation}

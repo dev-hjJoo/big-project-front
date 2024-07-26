@@ -7,11 +7,10 @@ import { useNavigate } from 'react-router-dom';
 import { setCookie } from '../../Authorization/CookieContainer';
 
 
-const LoginContainer = ({setUserAccessToken, setUserEmail}) => {
+const LoginContainer = ({setUserAccessToken, setUserNickname}) => {
 
     // variable
     const today = new Date()
-    const expireDate = today.setDate(today.getDate() + 7); // 7일 뒤
 
     // state
     const [loginFailure, setLoginFailure] = useState(false)
@@ -53,7 +52,8 @@ const LoginContainer = ({setUserAccessToken, setUserEmail}) => {
             setUserAccessToken(accessToken)
 
             // When login succeeds
-            setUserEmail(data.email)
+            setUserNickname(result.nickname)
+            console.log(result.nickname)
             setLoginFailure(false)
 
             // 로그인 성공 시 홈 화면으로 이동

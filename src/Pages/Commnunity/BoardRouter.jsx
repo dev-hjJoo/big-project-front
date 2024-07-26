@@ -4,7 +4,7 @@ import BoardList from './BoardList';
 import BoardDetail from './BoardDetail';
 import BoardWriteContainer from './BoardWriteContainer';
 
-const BoardRouter = ({userAccessToken}) => {
+const BoardRouter = ({userAccessToken, userNickname}) => {
     return (
         <>
             <Link to='/community'>
@@ -17,7 +17,7 @@ const BoardRouter = ({userAccessToken}) => {
                 <Route path="/" element={<Navigate to="list" />} />
                 <Route path='list' element={<BoardList userAccessToken={userAccessToken}/>} />
                 <Route path='write' element={<BoardWriteContainer userAccessToken={userAccessToken}/>} />
-                <Route path='detail/:id' element={<BoardDetail userAccessToken={userAccessToken}/>} />
+                <Route path='detail/:id' element={<BoardDetail userAccessToken={userAccessToken} userNickname={userNickname}/>} />
             </Routes> 
         </>
     );
