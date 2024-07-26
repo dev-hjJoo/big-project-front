@@ -33,6 +33,15 @@ const Chatbot = ({ userAccessToken, selectedNation = 'korea' }) => {
         getSessionListAPI()
     }, [userAccessToken])
 
+
+    // Variables
+    const initialChatLog = [{
+        id: 0,
+        sender: 0,
+        message: "안녕하세요. 전세계 어디에서나 일하고 싶은 당신을 위한, 글로-발 워커입니다.\n질문할 내용이 있으신가요?",
+        send_at: new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' })
+    }]
+
     // Functions
     const loadUserInput = e => {
         setUserInput(e.target.value)
@@ -103,7 +112,7 @@ const Chatbot = ({ userAccessToken, selectedNation = 'korea' }) => {
                     Authorization: `Bearer ${userAccessToken}`
                 },
             }).then((response) => {
-                setSessionList(response.data)
+                setSessionList(response.data.reverse())
             })
         }
 
@@ -156,14 +165,9 @@ const Chatbot = ({ userAccessToken, selectedNation = 'korea' }) => {
 
                 setSessionID(result.session_id)
                 if (result.messages == null || result.messages.length == 0) {
-                    setChatLog([{
-                        id: 0,
-                        sender: 0,
-                        message: "안녕하세요. 전세계 어디에서나 일하고 싶은 당신을 위한, 글로-발 워커입니다.\n질문할 내용이 있으신가요?",
-                        send_at: new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' })
-                    }])
+                    setChatLog([...initialChatLog])
                 } else {
-                    setChatLog(result.messages)
+                    setChatLog([...initialChatLog, ...result.messages])
                 }
             })
         }
