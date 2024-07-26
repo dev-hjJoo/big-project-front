@@ -1,16 +1,22 @@
 # Glawbal worker
+> 전세계 어디에서나 일하고 싶은 당신을 위한, 글로-발 워커!
+
 <img src="public/thumbnail.jpg" width=200/>
 
-> 전세계 어디에서나 일하고 싶은 당신을 위한, 글로-발 워커!
 * 전세계 외국인 근로자를 위한 RAG 기반 AI 법률 탐색 서비스
 * RAG-based AI legal recommendation service for foreign workers around the world
 
 ## 1. Introduction
-<img src="public/preview-home.png" width=400/> <img src="public/preview-login.png" width=400/>
-<img src="public/preview-chat1.png" width=400/> <img src="public/preview-chat2.png" width=400/>
-
 * 이 Repository는 KT AIVLE SCHOOL 5기 AI트랙 19조의 빅프로젝트 코드 중 FE 파트의 내용을 포함하고 있습니다.
 * 본 코드는 FE 코드로, React.js 기반으로 작성되었습니다.
+
+<img src="public/preview-home.png" width=300/> <img src="public/preview-login.png" width=300/>
+<img src="public/preview-faq.png" width=300/> <img src="public/preview-community.png" width=300/>
+
+
+### AX
+<img src="public/preview-chat1.png" width=200/> <img src="public/preview-chat2.png" width=200/> <img src="public/preview-ocr.png" width=200/>
+
 
 ## 2. How to use?
 1. **Node.js 설치**
