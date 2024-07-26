@@ -10,12 +10,12 @@
 * 이 Repository는 KT AIVLE SCHOOL 5기 AI트랙 19조의 빅프로젝트 코드 중 FE 파트의 내용을 포함하고 있습니다.
 * 본 코드는 FE 코드로, React.js 기반으로 작성되었습니다.
 
-<img src="public/preview-home.png" width=50%/> <img src="public/preview-login.png" width=50%/>
-<img src="public/preview-faq.png" width=50%/> <img src="public/preview-community.png" width=50%/>
+<img src="public/preview-home.png" width=40%/> <img src="public/preview-login.png" width=40%/>
+<img src="public/preview-faq.png" width=40%/> <img src="public/preview-community.png" width=40%/>
 
 
 ### AX
-<img src="public/preview-chat1.png" width=33%/> <img src="public/preview-chat2.png" width=33%/> <img src="public/preview-ocr.png" width=33%/>
+<img src="public/preview-chat1.png" width=30%/> <img src="public/preview-chat2.png" width=30%/> <img src="public/preview-ocr.png" width=30%/>
 
 
 ## 2. How to use?
