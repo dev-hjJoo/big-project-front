@@ -14,7 +14,7 @@ const BoardDetail = ({userAccessToken, userNickname}) => {
     const { id } = useParams(); // URL 파라미터에서 게시글 ID를 가져옴
     const navigate = useNavigate(); // 페이지 이동을 위한 네비게이트 객체
     const [post, setPost] = useState({ comments: [] }); // 게시글 상태
-    const [commentContent, setCommentContent] = useState(''); // 댓글 내용 상태
+    const [commentContent, setCommentContent] = useState(''); // 댓글 내용 상태]
 
 
     const [isEditing, setIsEditing] = useState(false); // 수정 모드 상태
@@ -84,10 +84,7 @@ const BoardDetail = ({userAccessToken, userNickname}) => {
                     created_at: response.data.created_at,
                     updated_at: response.data.updated_at
                 };
-                setPost(prevPost => ({
-                    ...prevPost,
-                    comments: [...prevPost.comments, addedComment] // 상태에 새로운 댓글 추가
-                }));
+                fetchPost()
                 setCommentContent(''); // 댓글 입력 필드 초기화
             }).catch(error => {
                 console.error('댓글을 추가하는 중 오류 발생:', error); // 오류 처리
