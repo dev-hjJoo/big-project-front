@@ -113,6 +113,16 @@
         display: flex;
         flex-direction: column;
         align-items: center; 
+
+        .moreInfo {
+            color: var(--clr-highlight);
+            padding-top: var(--padding-3);
+            padding-bottom: var(--padding-1);
+            text-align: end;
+            width: 100%;
+            font-weight: bold;
+            cursor: pointer;
+        }
     }
     
     .chatLog .contents span {

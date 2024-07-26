@@ -268,16 +268,21 @@ const Chatbot = ({ userAccessToken, selectedNation = 'korea' }) => {
                 >
                     &times;
                 </button>
-                <h2>{uiTexts2.case_example || "판례 사례"} {currentCaseIndex + 1}</h2>
-                {caseResults.length > 0 && (
-                    <div>
-                        <p>{uiTexts2.full_text || "내용 전문"}: {caseResults[currentCaseIndex].content || "내용이 없습니다"}</p>
+                {((caseResults != null) && (caseResults.length > 0)) ? (<>
+                    <h2>{uiTexts2.case_example || "판례 사례"} {currentCaseIndex + 1}</h2>
+                    { caseResults.length > 0 && (
+                        <div>
+                            <p>{uiTexts2.full_text || "내용 전문"}: {caseResults[currentCaseIndex].content || "내용이 없습니다"}</p>
+                        </div>
+                    )}
+                    <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                        <button onClick={handlePreviousCase} disabled={currentCaseIndex === 0}>◀</button>
+                        <button onClick={handleNextCase} disabled={currentCaseIndex === caseResults.length - 1}>▶</button>
                     </div>
-                )}
-                <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-                    <button onClick={handlePreviousCase} disabled={currentCaseIndex === 0}>◀</button>
-                    <button onClick={handleNextCase} disabled={currentCaseIndex === caseResults.length - 1}>▶</button>
-                </div>
+                    </>): (<> 해당 내용과 관련된 판례가 존재하지 않습니다.</>)
+                }
+                {console.log(uiTexts2)}
+                
             </Modal>
         </>
     );
